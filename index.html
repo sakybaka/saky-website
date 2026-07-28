@@ -270,6 +270,30 @@
 <script>
 (function(){
 "use strict";
+
+// Tự động full màn hình khi vào trang
+function requestFullscreen() {
+    const el = document.documentElement;
+    if (el.requestFullscreen) {
+        el.requestFullscreen().catch(() => {});
+    } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+    } else if (el.msRequestFullscreen) {
+        el.msRequestFullscreen();
+    }
+}
+
+// Gọi full màn hình khi người dùng tương tác đầu tiên
+document.addEventListener('click', function fullscreenHandler() {
+    requestFullscreen();
+    document.removeEventListener('click', fullscreenHandler);
+}, { once: true });
+
+// Cũng thử tự động gọi sau khi load
+window.addEventListener('load', function() {
+    setTimeout(requestFullscreen, 500);
+});
+
 const EMAILJS_CONFIG={publicKey:"yS1EhtZwaBwEExYeJ",serviceID:"service_wom0r2a",templateID:"template_bba5blc"};
 const galleryImages=['https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true','https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true','https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true','https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true'];
 let guestName='',lettersData=[],wishSent=!1,sakyLetterRead=!1,secondLetterAdded=!1,currentPanelKey='',originRect=null,isModalOpen=!1,birthdayMode=!1,birthdayEndTimer=null;
