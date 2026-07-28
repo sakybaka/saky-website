@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* Toàn bộ CSS giữ nguyên như bản trước, không thay đổi */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -212,8 +211,28 @@
     .btn-primary:active {
       transform: translateY(0px) scale(.98);
     }
+    .btn-secondary {
+      width: 100%;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 14px;
+      font-family: inherit;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--text-dark);
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      transition: transform .2s ease, background .2s ease;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.85);
+      transform: translateY(-2px);
+    }
     .app {
       position: relative;
+      z-index: 5;
       width: 100%;
       min-height: 100vh;
       display: flex;
@@ -327,12 +346,12 @@
       background: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.4);
+      transform: translateX(8px);
+      opacity: 0.7;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
                   background 0.2s ease,
                   box-shadow 0.2s ease,
                   opacity 0.3s ease;
-      transform: translateX(8px);
-      opacity: 0.7;
     }
     .menu-items.open .menu-item {
       transform: translateX(0);
@@ -422,6 +441,8 @@
       gap: 10px;
       cursor: pointer;
       user-select: none;
+      position: relative;
+      z-index: 6;
     }
     .cake {
       font-size: clamp(64px, 14vw, 108px);
@@ -543,6 +564,7 @@
       font-size: 16px;
       color: var(--text-soft);
       transition: transform .2s ease, background .2s ease;
+      z-index: 5;
     }
     .modal-close:hover {
       transform: rotate(90deg);
@@ -559,16 +581,20 @@
       margin-bottom: 20px;
     }
     .profile-avatar {
-      width: 84px;
-      height: 84px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
       margin: 0 auto 14px;
+      overflow: hidden;
       box-shadow: 0 10px 24px rgba(247, 201, 72, 0.35);
+      flex-shrink: 0;
+      border: 3px solid var(--glass-border);
+    }
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
     .profile-name {
       text-align: center;
@@ -579,12 +605,12 @@
       text-align: center;
       font-size: 13px;
       color: var(--text-soft);
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
     .profile-line {
       display: flex;
       justify-content: space-between;
-      padding: 12px 0;
+      padding: 10px 0;
       font-size: 13.5px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
@@ -594,6 +620,26 @@
     .profile-line span:last-child {
       font-weight: 600;
     }
+    .profile-line .highlight {
+      color: var(--gold-3);
+    }
+    .profile-bio {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      color: var(--text-dark);
+      line-height: 1.6;
+      text-align: center;
+      font-style: italic;
+    }
+    .profile-bio .quote-icon {
+      color: var(--gold-3);
+      font-size: 16px;
+    }
+
     .wish-form {
       display: flex;
       flex-direction: column;
@@ -657,7 +703,7 @@
       background: linear-gradient(135deg, #c9b6ff, #a78bfa);
     }
 
-    /* ========== RECORD PLAYER – DẠNG THANH NGANG ========== */
+    /* ========== RECORD PLAYER ========== */
     .record-player {
       position: fixed;
       bottom: 30px;
@@ -992,6 +1038,10 @@
         right: 16px;
         width: auto;
         bottom: 100px;
+      }
+      .profile-avatar {
+        width: 80px;
+        height: 80px;
       }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -1383,14 +1433,34 @@
 
       // ===== NỘI DUNG PANEL =====
       function profileContent() {
+        const birthDate = new Date(2010, 6, 31);
+        const now = new Date();
+        let age = now.getFullYear() - birthDate.getFullYear();
+        const m = now.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && now.getDate() < birthDate.getDate())) age--;
+
         return `
-          <div class="profile-avatar">🥳</div>
+          <div class="profile-avatar">
+            <img src="https://github.com/sakybaka/saky-website/blob/main/ZD.png?raw=true" alt="Avatar của Võ Thiên An" />
+          </div>
           <div class="profile-name">Võ Thiên An</div>
-          <div class="profile-role">Nhân vật chính của bữa tiệc hôm nay</div>
-          <div class="profile-line"><span>Ngày đặc biệt</span><span>31 · 07</span></div>
-          <div class="profile-line"><span>Lời chúc đã nhận</span><span id="wishCountStat">${wishes.length}</span></div>
-          <div class="profile-line"><span>Khách đang xem</span><span>${escapeHtml(guestName)}</span></div>
-          <p style="margin-top:16px;font-size:12.5px;color:var(--text-soft);text-align:center;">✏️ Sửa tên & thông tin trong hàm <code>profileContent()</code></p>
+          <div class="profile-role">⭐ Nhân vật chính của bữa tiệc hôm nay</div>
+
+          <div class="profile-line"><span>🎂 Ngày sinh</span><span class="highlight">31 · 07 · 2010</span></div>
+          <div class="profile-line"><span>🎈 Tuổi</span><span>${age}</span></div>
+          <div class="profile-line"><span>♌ Cung hoàng đạo</span><span>Sư Tử (Leo)</span></div>
+          <div class="profile-line"><span>💌 Lời chúc đã nhận</span><span id="wishCountStat">${wishes.length}</span></div>
+          <div class="profile-line"><span>👤 Khách đang xem</span><span>${escapeHtml(guestName)}</span></div>
+
+          <div class="profile-bio">
+            <span class="quote-icon">💬</span> "Sống là để tỏa sáng, và hôm nay là ngày của tớ!"
+            <br><span style="font-size:12px;color:var(--text-soft);">✨ Sở thích: Nghe nhạc, chơi game, du lịch & khám phá những điều mới mẻ ✨</span>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+            <span style="background:rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,0.5);">🎮 Gamer</span>
+            <span style="background:rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,0.5);">🎵 Music Lover</span>
+            <span style="background:rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,0.5);">📸 Travel</span>
+          </div>
         `;
       }
 
@@ -1401,21 +1471,24 @@
       function galleryContent() {
         return `
           <div class="gallery">
-            <div class="gallery-card g1">Khoảnh khắc 1</div>
-            <div class="gallery-card g2">Khoảnh khắc 2</div>
-            <div class="gallery-card g3">Khoảnh khắc 3</div>
-            <div class="gallery-card g4">Khoảnh khắc 4</div>
+            <div class="gallery-card g1">🎂 Kỷ niệm 1</div>
+            <div class="gallery-card g2">🎈 Kỷ niệm 2</div>
+            <div class="gallery-card g3">🎁 Kỷ niệm 3</div>
+            <div class="gallery-card g4">🌟 Kỷ niệm 4</div>
           </div>
           <p style="margin-top:16px;font-size:12.5px;color:var(--text-soft);text-align:center;">📷 Thay các khối màu bằng ảnh thật: <code>background: url('anh.jpg')</code></p>
         `;
       }
 
-      // Chỉ sửa hàm donateContent: xóa dòng "Donate for Saky" bên trong nội dung
       function donateContent() {
         return `
           <div style="text-align:center;padding:10px 0;">
             <div style="background:var(--glass);border-radius:20px;padding:12px;border:1px solid var(--glass-border);">
               <img src="Donate.png" alt="donate" style="width:100%;border-radius:16px;display:block;" />
+              <p style="margin-top:10px;font-size:13px;color:var(--text-soft);">(ảnh thẻ ngân hàng)</p>
+            </div>
+          </div>
+        `;
       }
 
       function cakeFormContent() {
@@ -1433,7 +1506,6 @@
         profile: { title: 'Hồ Sơ Của Tớ', sub: 'Vài điều nho nhỏ về nhân vật chính hôm nay', render: profileContent },
         wishes: { title: 'Lời Chúc Từ Mọi Người', sub: `${wishes.length} lời chúc đã gửi đến`, render: wishesContent },
         gallery: { title: 'Khoảnh Khắc Đáng Nhớ', sub: 'Những kỷ niệm đẹp nhất', render: galleryContent },
-        // Giữ nguyên tiêu đề và phụ đề, nhưng nội dung bên trong đã xóa dòng "Donate for Saky" và "Cảm ơn bạn..."
         donate: { title: '💖 Donate for Saky', sub: 'Cảm ơn bạn đã ủng hộ!', render: donateContent },
         cake: { title: 'Gửi Lời Chúc 💌', sub: 'Viết vài dòng thật ấm áp nhé', render: cakeFormContent }
       };
@@ -1472,7 +1544,7 @@
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             const w = Math.min(480, window.innerWidth * 0.9);
-            const h = Math.min(560, window.innerHeight * 0.82);
+            const h = Math.min(580, window.innerHeight * 0.82);
             modalPanel.style.transition =
               'left .6s cubic-bezier(0.34, 1.56, 0.64, 1), top .6s cubic-bezier(0.34, 1.56, 0.64, 1), width .6s cubic-bezier(0.34, 1.56, 0.64, 1), height .6s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius .5s ease';
             modalPanel.style.left = (window.innerWidth / 2 - w / 2) + 'px';
@@ -1525,7 +1597,6 @@
         item.addEventListener('click', function(e) {
           const panel = this.dataset.panel;
           openPanel(panel, this);
-          // Đóng accordion sau khi chọn
           isOpen = false;
           menuItems.classList.remove('open');
           menuArrow.classList.remove('open');
