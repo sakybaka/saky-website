@@ -561,15 +561,12 @@
       background: linear-gradient(135deg, #c9b6ff, #a78bfa);
     }
 
-    /* ========== RECORD PLAYER – PHONG CÁCH APPLE MUSIC / SPOTIFY ========== */
+    /* ========== RECORD PLAYER – DẠNG THANH NGANG ========== */
     .record-player {
       position: fixed;
       bottom: 30px;
       left: 30px;
       z-index: 25;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       cursor: pointer;
       user-select: none;
     }
@@ -579,140 +576,206 @@
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 24px;
-      padding: 16px 20px 18px 20px;
+      padding: 12px 18px 12px 14px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), inset 0 1px 1px rgba(255, 255, 255, 0.9);
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      position: relative;
+      gap: 16px;
       transition: transform 0.2s ease;
+      min-width: 300px;
+      max-width: 420px;
     }
     .record-box:hover {
       transform: scale(1.02);
     }
+    /* Đĩa nhỏ bên trái */
     .record-disc-wrap {
       position: relative;
-      width: 130px;
-      height: 130px;
-      margin-bottom: 4px;
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
     }
     .record-disc {
-      width: 130px;
-      height: 130px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #3a3a3a, #111 80%, #222);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 -4px 12px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 -2px 8px rgba(0, 0, 0, 0.6);
       animation: spin-disc 4s linear infinite;
       position: relative;
-      border: 3px solid #888;
+      border: 2px solid #888;
     }
     .record-disc::after {
       content: '';
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 24px;
-      height: 24px;
+      width: 16px;
+      height: 16px;
       background: radial-gradient(circle, #d4c4a0, #a08870);
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
     }
     .record-disc .label {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: radial-gradient(circle, #f7c948, #d4a830);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 700;
       color: #3a2a1a;
-      box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.6);
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6);
       opacity: 0.9;
       pointer-events: none;
       font-family: 'Poppins', sans-serif;
     }
     .record-arm {
       position: absolute;
-      top: -12px;
-      right: -20px;
-      width: 12px;
-      height: 62px;
+      top: -8px;
+      right: -12px;
+      width: 8px;
+      height: 40px;
       background: linear-gradient(135deg, #c0a88a, #8a705a);
-      border-radius: 6px 6px 0 0;
+      border-radius: 4px 4px 0 0;
       transform-origin: bottom center;
-      transform: rotate(-25deg) translateX(8px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transform: rotate(-25deg) translateX(6px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       border: 1px solid #d4b89a;
       z-index: 2;
     }
     .record-arm::after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -6px;
       left: 50%;
-      width: 22px;
-      height: 22px;
+      width: 16px;
+      height: 16px;
       background: radial-gradient(circle, #d4b08a, #8a6a50);
       border-radius: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
       border: 1px solid #b8956a;
     }
     .record-arm .needle {
       position: absolute;
-      top: -4px;
+      top: -2px;
       left: 50%;
-      width: 3px;
-      height: 14px;
+      width: 2px;
+      height: 10px;
       background: #d0c0b0;
       transform: translateX(-50%) rotate(8deg);
       border-radius: 2px;
-      box-shadow: 0 0 6px rgba(255, 215, 140, 0.3);
+      box-shadow: 0 0 4px rgba(255, 215, 140, 0.3);
     }
     @keyframes spin-disc {
       to {
         transform: rotate(360deg);
       }
     }
-    .record-status {
-      font-size: 12px;
+
+    /* Phần thông tin & điều khiển bên phải */
+    .record-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
+    .record-title {
+      font-size: 14px;
+      font-weight: 600;
       color: var(--text-dark);
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(8px);
-      padding: 4px 14px;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.7);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .record-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       margin-top: 4px;
-      font-weight: 500;
-      letter-spacing: 0.2px;
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    }
+    .record-controls button {
+      background: rgba(255, 255, 255, 0.5);
+      border: none;
+      border-radius: 30px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-dark);
+      transition: background 0.2s, transform 0.2s;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+    .record-controls button:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: scale(1.05);
+    }
+    .record-controls .play-btn {
+      width: 36px;
+      height: 36px;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+    .record-controls .play-btn:hover {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    .record-status-text {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-left: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 80px;
+    }
+    /* Nút mở album (danh sách bài hát) */
+    .record-album-btn {
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 30px;
+      padding: 2px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--text-soft);
+      backdrop-filter: blur(4px);
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .record-album-btn:hover {
+      background: rgba(255, 255, 255, 0.7);
     }
 
-    /* album panel (giữ nguyên) */
+    /* Album panel (popup danh sách) */
     .album-panel {
       position: fixed;
-      bottom: 190px;
+      bottom: 120px;
       left: 30px;
       z-index: 26;
-      width: 320px;
-      max-height: 380px;
+      width: 280px;
+      max-height: 300px;
       background: var(--glass-strong);
       backdrop-filter: blur(30px) saturate(200%);
       border: 1px solid var(--glass-border);
-      border-radius: 24px;
+      border-radius: 20px;
       box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-      padding: 20px 18px;
+      padding: 16px 16px 12px;
       transform: translateY(20px) scale(0.95);
       opacity: 0;
       visibility: hidden;
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease, visibility 0.4s ease;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s ease;
       overflow-y: auto;
       pointer-events: none;
     }
@@ -723,8 +786,8 @@
       pointer-events: auto;
     }
     .album-panel h4 {
-      font-size: 16px;
-      margin-bottom: 12px;
+      font-size: 15px;
+      margin-bottom: 10px;
       font-weight: 700;
       display: flex;
       justify-content: space-between;
@@ -733,44 +796,24 @@
     .album-panel .song-item {
       display: flex;
       justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      font-size: 14px;
+      padding: 8px 4px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      font-size: 13px;
       cursor: pointer;
       transition: background 0.2s;
+      border-radius: 8px;
     }
     .album-panel .song-item:hover {
       background: rgba(255, 255, 255, 0.3);
-      border-radius: 10px;
-      padding-left: 6px;
-      padding-right: 6px;
+      padding-left: 8px;
+      padding-right: 8px;
     }
     .album-panel .song-item.active {
       color: var(--gold-3);
       font-weight: 600;
     }
-    .album-panel .controls {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      margin-top: 14px;
-    }
-    .album-panel .controls button {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 40px;
-      padding: 8px 18px;
-      font-size: 14px;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: transform 0.2s;
-      font-weight: 600;
-    }
-    .album-panel .controls button:hover {
-      transform: scale(1.05);
-    }
 
-    /* canvas particle */
+    /* Canvas particle */
     #mcCanvas {
       position: fixed;
       inset: 0;
@@ -804,25 +847,56 @@
         padding: 24px 18px 18px;
       }
       .record-player {
-        bottom: 20px;
+        bottom: 16px;
         left: 16px;
+        right: 16px;
+      }
+      .record-box {
+        min-width: unset;
+        width: 100%;
+        padding: 10px 12px;
+        gap: 12px;
       }
       .record-disc-wrap {
-        width: 100px;
-        height: 100px;
+        width: 56px;
+        height: 56px;
       }
       .record-disc {
-        width: 100px;
-        height: 100px;
+        width: 56px;
+        height: 56px;
       }
       .record-arm {
-        height: 56px;
-        right: -16px;
+        height: 32px;
+        right: -8px;
+        top: -6px;
+      }
+      .record-arm::after {
+        width: 12px;
+        height: 12px;
+        bottom: -4px;
+      }
+      .record-controls button {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+      }
+      .record-controls .play-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+      }
+      .record-title {
+        font-size: 12px;
+      }
+      .record-status-text {
+        max-width: 60px;
+        font-size: 10px;
       }
       .album-panel {
-        width: 260px;
         left: 16px;
-        bottom: 150px;
+        right: 16px;
+        width: auto;
+        bottom: 100px;
       }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -889,9 +963,10 @@
     <div class="modal-close" id="modalClose">✕</div>
   </div>
 
-  <!-- RECORD PLAYER (mới) -->
+  <!-- ===== RECORD PLAYER – THANH NGANG ===== -->
   <div class="record-player" id="recordPlayer">
     <div class="record-box">
+      <!-- Đĩa nhỏ bên trái -->
       <div class="record-disc-wrap">
         <div class="record-disc" id="recordDisc">
           <div class="label">🎵</div>
@@ -900,32 +975,41 @@
           <div class="needle"></div>
         </div>
       </div>
-      <div class="record-status" id="recordStatus">▶ Play</div>
+
+      <!-- Thông tin và điều khiển bên phải -->
+      <div class="record-info">
+        <div class="record-title" id="recordTitle">Bunny Girl Senpai</div>
+        <div class="record-controls">
+          <button id="prevBtn" title="Bài trước">⏮</button>
+          <button class="play-btn" id="playBtn" title="Phát/Tạm dừng">⏸</button>
+          <button id="nextBtn" title="Bài tiếp">⏭</button>
+          <button id="muteBtn" title="Tắt/Bật âm thanh">🔊</button>
+          <span class="record-status-text" id="recordStatus">Đang phát</span>
+          <button class="record-album-btn" id="albumToggleBtn">📋</button>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Album panel (danh sách bài hát) -->
   <div class="album-panel" id="albumPanel">
-    <h4>📀 Album <span style="font-size:12px;font-weight:400;color:var(--text-soft);">2 bài</span></h4>
+    <h4>📀 Danh sách phát</h4>
     <div id="songList"></div>
-    <div class="controls">
-      <button id="prevSong">⏮</button>
-      <button id="playPauseBtn">⏸</button>
-      <button id="nextSong">⏭</button>
-    </div>
   </div>
 
-  <!-- Audio (thay link nhạc của bạn vào đây) -->
+  <!-- Audio (đã sửa link đúng) -->
   <audio id="audio1" preload="auto">
-  <source src="https://github.com/sakybaka/saky-website/blob/main/YTSave_YouTube_KHUC-HAT-MUNG-SINH-NHAT-PHAN-DINH-TUNG-O_Media_Wu8NeFXaoOc_009_128k.mp3" type="audio/mpeg">
-</audio>
-<audio id="audio2" preload="auto">
-  <source src="https://github.com/sakybaka/saky-website/blob/main/YTSave_YouTube_KHUC-HAT-MUNG-SINH-NHAT-PHAN-DINH-TUNG-O_Media_Wu8NeFXaoOc_009_128k.mp3" type="audio/mpeg">
-</audio>
+    <source src="https://sakybaka.github.io/saky-website/YTSave_YouTube_bunny-girl-senpai-lofi-fukashigi-no-cart_Media_lCOeLfkY4P0_009_128k.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio2" preload="auto">
+    <source src="https://sakybaka.github.io/saky-website/YTSave_YouTube_KHUC-HAT-MUNG-SINH-NHAT-PHAN-DINH-TUNG-O_Media_Wu8NeFXaoOc_009_128k.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     (function() {
       "use strict";
 
+      // ===== CỔNG VÀO =====
       const gate = document.getElementById('gate');
       const guestNameInput = document.getElementById('guestNameInput');
       const enterBtn = document.getElementById('enterBtn');
@@ -940,6 +1024,7 @@
       enterBtn.addEventListener('click', enterParty);
       guestNameInput.addEventListener('keydown', e => { if (e.key === 'Enter') enterParty(); });
 
+      // ===== MINECRAFT PARTICLES =====
       const canvas = document.getElementById('mcCanvas');
       const ctx = canvas.getContext('2d');
       let W, H;
@@ -1002,7 +1087,6 @@
           this.speedX = (Math.random() - 0.5) * 0.6;
           this.opacity = 0.7 + Math.random() * 0.3;
           this.color = ['#ff4d6d', '#ff6b8a', '#ff8fa3', '#ffb3c1'][Math.floor(Math.random() * 4)];
-          this.drift = (Math.random() - 0.5) * 20;
           this.phase = Math.random() * Math.PI * 2;
         }
         update() {
@@ -1081,6 +1165,7 @@
         }
       });
 
+      // ===== ĐẾM NGƯỢC =====
       const TARGET = new Date(2026, 6, 31, 0, 0, 0);
       const cdDays = document.getElementById('cdDays');
       const cdHours = document.getElementById('cdHours');
@@ -1118,6 +1203,7 @@
       updateCountdown();
       setInterval(updateCountdown, 1000);
 
+      // ===== PHÁO HOA =====
       let fireworkParticles = [];
 
       function spawnFirework(x, y) {
@@ -1177,6 +1263,7 @@
         }, 7000);
       }
 
+      // ===== LỜI CHÚC =====
       let wishes = [
         { name: 'Ban Tổ Chức', msg: 'Chúc bạn một tuổi mới thật nhiều niềm vui và may mắn! 🎉' }
       ];
@@ -1194,6 +1281,7 @@
         return div.innerHTML;
       }
 
+      // ===== NỘI DUNG PANEL =====
       function profileContent() {
         return `
           <div class="profile-avatar">🥳</div>
@@ -1254,6 +1342,7 @@
         cake: { title: 'Gửi Lời Chúc 💌', sub: 'Viết vài dòng thật ấm áp nhé', render: cakeFormContent }
       };
 
+      // ===== MODAL =====
       const modalOverlay = document.getElementById('modalOverlay');
       const modalPanel = document.getElementById('modalPanel');
       const modalInner = document.getElementById('modalInner');
@@ -1347,12 +1436,12 @@
         });
       }
 
-      // ===== RECORD PLAYER =====
+      // ===== RECORD PLAYER – THANH NGANG =====
       const audio1 = document.getElementById('audio1');
       const audio2 = document.getElementById('audio2');
       const songs = [
         { name: 'Bunny Girl Senpai', src: audio1 },
-        { name: 'Nhạc PĐT', src: audio2 }
+        { name: 'Khúc Hát Mừng Sinh Nhật', src: audio2 }
       ];
       let currentSongIndex = 0;
       let isPlaying = false;
@@ -1360,12 +1449,15 @@
       let recordPlayerInitialized = false;
 
       const recordDisc = document.getElementById('recordDisc');
+      const recordTitle = document.getElementById('recordTitle');
       const recordStatus = document.getElementById('recordStatus');
+      const playBtn = document.getElementById('playBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const muteBtn = document.getElementById('muteBtn');
+      const albumToggleBtn = document.getElementById('albumToggleBtn');
       const albumPanel = document.getElementById('albumPanel');
       const songListEl = document.getElementById('songList');
-      const playPauseBtn = document.getElementById('playPauseBtn');
-      const prevBtn = document.getElementById('prevSong');
-      const nextBtn = document.getElementById('nextSong');
 
       function renderSongList() {
         songListEl.innerHTML = songs.map((s, idx) =>
@@ -1380,6 +1472,7 @@
             if (idx !== currentSongIndex) {
               currentSongIndex = idx;
               playSong();
+              albumPanel.classList.remove('open');
             }
           });
         });
@@ -1417,19 +1510,21 @@
         playSong();
       }
 
-      function updateUI() {
-        const song = songs[currentSongIndex];
-        recordStatus.textContent = isPlaying ? '▶ ' + song.name : '⏸ ' + song.name;
-        playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
-        renderSongList();
-        recordDisc.style.animationPlayState = isPlaying ? 'running' : 'paused';
-      }
-
       function toggleMute() {
         isMuted = !isMuted;
         const song = songs[currentSongIndex];
         song.src.volume = isMuted ? 0 : 1;
-        recordStatus.textContent = isMuted ? '🔇 Muted' : (isPlaying ? '▶ ' + song.name : '⏸ ' + song.name);
+        muteBtn.textContent = isMuted ? '🔇' : '🔊';
+        updateUI();
+      }
+
+      function updateUI() {
+        const song = songs[currentSongIndex];
+        recordTitle.textContent = song.name;
+        recordStatus.textContent = isPlaying ? 'Đang phát' : 'Tạm dừng';
+        playBtn.textContent = isPlaying ? '⏸' : '▶';
+        recordDisc.style.animationPlayState = isPlaying ? 'running' : 'paused';
+        renderSongList();
       }
 
       function initRecordPlayer() {
@@ -1438,15 +1533,30 @@
         songs.forEach(s => s.src.load());
         playSong();
 
+        // Sự kiện nút
+        playBtn.addEventListener('click', (e) => { e.stopPropagation();
+          togglePlayPause(); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation();
+          prevSong(); });
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation();
+          nextSong(); });
+        muteBtn.addEventListener('click', (e) => { e.stopPropagation();
+          toggleMute(); });
+        albumToggleBtn.addEventListener('click', (e) => { e.stopPropagation();
+          albumPanel.classList.toggle('open'); });
+
+        // Double click lên toàn bộ record-box để mute (giữ nguyên tính năng)
+        const player = document.getElementById('recordPlayer');
         let clickCount = 0;
         let clickTimer = null;
-        const player = document.getElementById('recordPlayer');
         player.addEventListener('click', (e) => {
-          e.stopPropagation();
+          // Bỏ qua nếu click vào các nút con đã xử lý riêng
+          if (e.target.closest('button')) return;
           clickCount++;
           if (clickCount === 1) {
             clickTimer = setTimeout(() => {
               clickCount = 0;
+              // Click đơn: mở/đóng album
               albumPanel.classList.toggle('open');
             }, 250);
           } else if (clickCount >= 2) {
@@ -1456,15 +1566,9 @@
           }
         });
 
-        playPauseBtn.addEventListener('click', (e) => { e.stopPropagation();
-          togglePlayPause(); });
-        prevBtn.addEventListener('click', (e) => { e.stopPropagation();
-          prevSong(); });
-        nextBtn.addEventListener('click', (e) => { e.stopPropagation();
-          nextSong(); });
-
+        // Đóng album khi click ra ngoài
         document.addEventListener('click', (e) => {
-          if (!albumPanel.contains(e.target) && e.target !== player && !player.contains(e.target)) {
+          if (!albumPanel.contains(e.target) && e.target !== player && !player.contains(e.target) && e.target !== albumToggleBtn) {
             albumPanel.classList.remove('open');
           }
         });
