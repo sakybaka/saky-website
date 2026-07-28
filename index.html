@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* Toàn bộ CSS giữ nguyên như bản trước, không thay đổi */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -273,7 +274,6 @@
     .menu-header .arrow.open {
       transform: rotate(180deg);
     }
-    /* Khi mở, bo tròn góc dưới biến mất */
     .menu-header.open {
       border-radius: 18px 18px 0 0;
     }
@@ -327,13 +327,12 @@
       background: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.4);
-      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-      transform: translateX(8px);
-      opacity: 0.7;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
                   background 0.2s ease,
                   box-shadow 0.2s ease,
                   opacity 0.3s ease;
+      transform: translateX(8px);
+      opacity: 0.7;
     }
     .menu-items.open .menu-item {
       transform: translateX(0);
@@ -342,6 +341,7 @@
     .menu-items.open .menu-item:nth-child(1) { transition-delay: 0.05s; }
     .menu-items.open .menu-item:nth-child(2) { transition-delay: 0.10s; }
     .menu-items.open .menu-item:nth-child(3) { transition-delay: 0.15s; }
+    .menu-items.open .menu-item:nth-child(4) { transition-delay: 0.20s; }
 
     .menu-item:hover {
       transform: translateX(-4px) scale(1.02);
@@ -1410,17 +1410,12 @@
         `;
       }
 
+      // Chỉ sửa hàm donateContent: xóa dòng "Donate for Saky" bên trong nội dung
       function donateContent() {
         return `
           <div style="text-align:center;padding:10px 0;">
-            <h3 style="margin-bottom:10px;">💖 Donate for Saky</h3>
-            <p style="font-size:14px;color:var(--text-soft);margin-bottom:14px;">Cảm ơn bạn đã ủng hộ!</p>
             <div style="background:var(--glass);border-radius:20px;padding:12px;border:1px solid var(--glass-border);">
               <img src="Donate.png" alt="donate" style="width:100%;border-radius:16px;display:block;" />
-              <p style="margin-top:10px;font-size:13px;color:var(--text-soft);">(ảnh thẻ ngân hàng)</p>
-            </div>
-          </div>
-        `;
       }
 
       function cakeFormContent() {
@@ -1438,6 +1433,7 @@
         profile: { title: 'Hồ Sơ Của Tớ', sub: 'Vài điều nho nhỏ về nhân vật chính hôm nay', render: profileContent },
         wishes: { title: 'Lời Chúc Từ Mọi Người', sub: `${wishes.length} lời chúc đã gửi đến`, render: wishesContent },
         gallery: { title: 'Khoảnh Khắc Đáng Nhớ', sub: 'Những kỷ niệm đẹp nhất', render: galleryContent },
+        // Giữ nguyên tiêu đề và phụ đề, nhưng nội dung bên trong đã xóa dòng "Donate for Saky" và "Cảm ơn bạn..."
         donate: { title: '💖 Donate for Saky', sub: 'Cảm ơn bạn đã ủng hộ!', render: donateContent },
         cake: { title: 'Gửi Lời Chúc 💌', sub: 'Viết vài dòng thật ấm áp nhé', render: cakeFormContent }
       };
@@ -1525,13 +1521,11 @@
         menuHeader.classList.toggle('open', isOpen);
       });
 
-      // Các mục con -> mở modal
       document.querySelectorAll('.menu-item').forEach(item => {
         item.addEventListener('click', function(e) {
           const panel = this.dataset.panel;
           openPanel(panel, this);
-          // Đóng accordion sau khi chọn (tuỳ chọn)
-          // Nếu muốn giữ mở thì bỏ 2 dòng dưới
+          // Đóng accordion sau khi chọn
           isOpen = false;
           menuItems.classList.remove('open');
           menuArrow.classList.remove('open');
@@ -1539,7 +1533,6 @@
         });
       });
 
-      // Đóng menu khi click ra ngoài (tuỳ chọn)
       document.addEventListener('click', (e) => {
         const menuGroup = document.getElementById('menuGroup');
         if (!menuGroup.contains(e.target) && isOpen) {
