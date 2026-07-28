@@ -8,15 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ============================================================
-       RESET & NỀN
-       ============================================================ */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
     :root {
       --glass: rgba(255, 255, 255, 0.45);
       --glass-strong: rgba(255, 255, 255, 0.75);
@@ -31,7 +27,6 @@
       --radius-lg: 28px;
       --radius-md: 20px;
     }
-
     html,
     body {
       height: 100%;
@@ -40,7 +35,6 @@
       overflow-x: hidden;
       background: #fbf5f0;
     }
-
     body {
       min-height: 100vh;
       position: relative;
@@ -48,8 +42,6 @@
       align-items: center;
       justify-content: center;
     }
-
-    /* ---------- NỀN GRADIENT + BLOB ---------- */
     .bg {
       position: fixed;
       inset: 0;
@@ -97,7 +89,6 @@
       background: #e8dcff;
       animation-delay: -18s;
     }
-
     @keyframes drift {
       0%,
       100% {
@@ -110,35 +101,20 @@
         transform: translate(-30px, 25px) scale(0.95);
       }
     }
-
-    /* ============================================================
-       LỚP KÍNH DÙNG CHUNG (Liquid Glass)
-       ============================================================ */
     .glass {
       background: var(--glass);
       backdrop-filter: blur(24px) saturate(200%);
       -webkit-backdrop-filter: blur(24px) saturate(200%);
       border: 1px solid var(--glass-border);
-      box-shadow:
-        var(--shadow-soft),
-        inset 0 1px 1px rgba(255, 255, 255, 0.9),
-        inset 0 -1px 12px rgba(255, 255, 255, 0.4);
+      box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 -1px 12px rgba(255, 255, 255, 0.4);
     }
-
     .glass-strong {
       background: var(--glass-strong);
       backdrop-filter: blur(30px) saturate(220%);
       -webkit-backdrop-filter: blur(30px) saturate(220%);
       border: 1px solid var(--glass-border);
-      box-shadow:
-        var(--shadow-strong),
-        inset 0 1px 1px rgba(255, 255, 255, 0.95),
-        inset 0 -1px 16px rgba(255, 255, 255, 0.5);
+      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 16px rgba(255, 255, 255, 0.5);
     }
-
-    /* ============================================================
-       CỔNG VÀO
-       ============================================================ */
     .gate {
       position: fixed;
       inset: 0;
@@ -156,7 +132,6 @@
       visibility: hidden;
       pointer-events: none;
     }
-
     .gate-card {
       width: min(420px, 88vw);
       padding: 48px 36px 38px;
@@ -164,7 +139,6 @@
       text-align: center;
       animation: pop-in .7s cubic-bezier(0.2, 0.9, 0.25, 1.2);
     }
-
     @keyframes pop-in {
       from {
         opacity: 0;
@@ -175,11 +149,9 @@
         transform: translateY(0) scale(1);
       }
     }
-
     .gate-emoji {
       font-size: 52px;
       margin-bottom: 6px;
-      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .08));
     }
     .gate-card h1 {
       font-size: 22px;
@@ -192,7 +164,6 @@
       color: var(--text-soft);
       margin-bottom: 22px;
     }
-
     .field {
       width: 100%;
       padding: 14px 18px;
@@ -214,13 +185,11 @@
       border-color: var(--gold-2);
       box-shadow: 0 0 0 4px rgba(247, 201, 72, 0.25);
     }
-
     textarea.field {
       resize: none;
       min-height: 96px;
       font-family: inherit;
     }
-
     .btn-primary {
       width: 100%;
       padding: 14px 20px;
@@ -242,10 +211,6 @@
     .btn-primary:active {
       transform: translateY(0px) scale(.98);
     }
-
-    /* ============================================================
-       ỨNG DỤNG CHÍNH
-       ============================================================ */
     .app {
       position: relative;
       width: 100%;
@@ -254,8 +219,6 @@
       align-items: center;
       justify-content: center;
     }
-
-    /* ---- STACK NÚT GÓC TRÊN PHẢI (3 + donate) ---- */
     .stack {
       position: fixed;
       top: 26px;
@@ -266,7 +229,6 @@
       gap: 14px;
       align-items: flex-end;
     }
-
     .stack-btn {
       width: 220px;
       padding: 15px 20px;
@@ -298,8 +260,6 @@
       opacity: 0;
       pointer-events: none;
     }
-
-    /* ---- KHU VỰC CHÍNH GIỮA ---- */
     .hero {
       display: flex;
       flex-direction: column;
@@ -308,12 +268,10 @@
       padding: 20px 20px 60px;
       text-align: center;
     }
-
     .headline-wrap {
       overflow: visible;
       perspective: 600px;
     }
-
     .gold-text {
       font-family: 'Great Vibes', cursive;
       font-weight: 400;
@@ -326,17 +284,10 @@
       color: transparent;
       display: inline-block;
       clip-path: inset(0 100% 0 0);
-      animation:
-        draw 2.4s cubic-bezier(.65, 0, .35, 1) .3s forwards,
-        shine 5s linear 2.7s infinite;
+      animation: draw 2.4s cubic-bezier(.65, 0, .35, 1) .3s forwards, shine 5s linear 2.7s infinite;
       transform: rotateX(3deg) scale(1.02);
-      text-shadow:
-        0 2px 4px rgba(201, 154, 46, 0.2),
-        0 8px 20px rgba(201, 154, 46, 0.15),
-        0 -2px 6px rgba(255, 255, 255, 0.6);
-      /* 3D & nét hơn */
+      text-shadow: 0 2px 4px rgba(201, 154, 46, 0.2), 0 8px 20px rgba(201, 154, 46, 0.15), 0 -2px 6px rgba(255, 255, 255, 0.6);
     }
-
     @keyframes draw {
       to {
         clip-path: inset(0 0% 0 0);
@@ -350,15 +301,14 @@
         background-position: 300% 50%;
       }
     }
-
     .subtitle {
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: 500;
       color: var(--text-soft);
-      letter-spacing: .5px;
+      letter-spacing: .3px;
       opacity: 0;
       animation: fade-up .8s ease 2.6s forwards;
     }
-
     @keyframes fade-up {
       from {
         opacity: 0;
@@ -369,8 +319,6 @@
         transform: translateY(0);
       }
     }
-
-    /* ---- BÁNH KEM GIỮA MÀN (click mở modal gửi lời chúc) ---- */
     .cake-wrap {
       display: flex;
       flex-direction: column;
@@ -379,7 +327,6 @@
       cursor: pointer;
       user-select: none;
     }
-
     .cake {
       font-size: clamp(64px, 14vw, 108px);
       filter: drop-shadow(0 18px 30px rgba(160, 120, 90, 0.28));
@@ -392,7 +339,6 @@
     .cake-wrap:active .cake {
       transform: scale(.96);
     }
-
     @keyframes bob {
       0%,
       100% {
@@ -402,7 +348,6 @@
         transform: translateY(-10px);
       }
     }
-
     .cake-hint {
       font-size: 13px;
       color: var(--text-soft);
@@ -412,15 +357,12 @@
       backdrop-filter: blur(14px);
       border: 1px solid var(--glass-border);
     }
-
-    /* ---- ĐẾM NGƯỢC ---- */
     .countdown {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
       justify-content: center;
     }
-
     .cd-box {
       width: 76px;
       padding: 14px 0 10px;
@@ -430,7 +372,6 @@
       align-items: center;
       gap: 2px;
     }
-
     .cd-num {
       font-size: 26px;
       font-weight: 800;
@@ -444,14 +385,11 @@
       color: var(--text-soft);
     }
     .cd-target {
-      font-size: 12px;
+      font-size: 14px;
+      font-weight: 500;
       color: var(--text-soft);
       margin-top: 2px;
     }
-
-    /* ============================================================
-       MODAL (Liquid Glass, spring animation)
-       ============================================================ */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -467,7 +405,6 @@
       opacity: 1;
       visibility: visible;
     }
-
     .modal-panel {
       position: fixed;
       z-index: 41;
@@ -480,18 +417,12 @@
       -webkit-backdrop-filter: blur(28px) saturate(200%);
       border: 1px solid var(--glass-border);
       box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-      transition: left .6s cubic-bezier(0.34, 1.56, 0.64, 1),
-        top .6s cubic-bezier(0.34, 1.56, 0.64, 1),
-        width .6s cubic-bezier(0.34, 1.56, 0.64, 1),
-        height .6s cubic-bezier(0.34, 1.56, 0.64, 1),
-        border-radius .5s ease,
-        opacity .4s ease;
+      transition: left .6s cubic-bezier(0.34, 1.56, 0.64, 1), top .6s cubic-bezier(0.34, 1.56, 0.64, 1), width .6s cubic-bezier(0.34, 1.56, 0.64, 1), height .6s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius .5s ease, opacity .4s ease;
     }
     .modal-panel.show {
       opacity: 1;
       visibility: visible;
     }
-
     .modal-inner {
       height: 100%;
       display: flex;
@@ -499,7 +430,6 @@
       padding: 28px 26px 22px;
       overflow-y: auto;
     }
-
     .modal-close {
       position: absolute;
       top: 16px;
@@ -522,7 +452,6 @@
       transform: rotate(90deg);
       background: rgba(255, 255, 255, 0.85);
     }
-
     .modal-title {
       font-size: 20px;
       font-weight: 700;
@@ -533,7 +462,6 @@
       color: var(--text-soft);
       margin-bottom: 20px;
     }
-
     .profile-avatar {
       width: 84px;
       height: 84px;
@@ -570,7 +498,6 @@
     .profile-line span:last-child {
       font-weight: 600;
     }
-
     .wish-form {
       display: flex;
       flex-direction: column;
@@ -605,7 +532,6 @@
       font-size: 13px;
       padding: 20px 0;
     }
-
     .gallery {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -634,41 +560,65 @@
     .g4 {
       background: linear-gradient(135deg, #c9b6ff, #a78bfa);
     }
-
-    /* ============================================================
-       ĐĨA THAN (góc dưới trái)
-       ============================================================ */
+    /* record player cổ điển */
     .record-player {
       position: fixed;
       bottom: 30px;
       left: 30px;
       z-index: 25;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
       cursor: pointer;
       user-select: none;
     }
-
+    .record-box {
+      background: rgba(40, 30, 25, 0.75);
+      backdrop-filter: blur(12px);
+      border: 2px solid #b8956a;
+      border-radius: 20px;
+      padding: 16px 20px 20px 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 215, 140, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .record-box::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 215, 140, 0.15);
+      pointer-events: none;
+    }
+    .record-disc-wrap {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin-bottom: 6px;
+    }
     .record-disc {
-      width: 100px;
-      height: 100px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #3a3a3a, #111 80%, #222);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 -4px 12px rgba(0, 0, 0, 0.8);
-      position: relative;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), inset 0 -4px 12px rgba(0, 0, 0, 0.8);
       animation: spin-disc 4s linear infinite;
-      transition: transform 0.2s;
-      border: 2px solid #555;
+      position: relative;
+      border: 3px solid #6a5a4a;
     }
     .record-disc::after {
       content: '';
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 18px;
-      height: 18px;
-      background: radial-gradient(circle, #ccc, #888);
+      width: 22px;
+      height: 22px;
+      background: radial-gradient(circle, #d4c4a0, #a08870);
       border-radius: 50%;
       transform: translate(-50%, -50%);
       box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
@@ -678,65 +628,80 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 50px;
-      height: 50px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      background: radial-gradient(circle, #f7c948, #e0a830);
+      background: radial-gradient(circle, #f7c948, #d4a830);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 700;
       color: #3a2a1a;
       box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6);
       opacity: 0.9;
       pointer-events: none;
+      font-family: 'Poppins', sans-serif;
     }
     .record-arm {
-      width: 12px;
-      height: 60px;
-      background: linear-gradient(135deg, #888, #444);
-      border-radius: 6px 6px 0 0;
+      position: absolute;
+      top: -18px;
+      right: -24px;
+      width: 14px;
+      height: 70px;
+      background: linear-gradient(135deg, #b8956a, #7a5f45);
+      border-radius: 8px 8px 0 0;
       transform-origin: bottom center;
-      transform: rotate(-20deg) translateX(10px);
-      position: relative;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
+      transform: rotate(-30deg) translateX(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      border: 1px solid #c9a87a;
+      z-index: 2;
     }
     .record-arm::after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 50%;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, #aaa, #555);
+      width: 28px;
+      height: 28px;
+      background: radial-gradient(circle, #d4b08a, #8a6a50);
       border-radius: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      border: 1px solid #b8956a;
     }
-
+    .record-arm .needle {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      width: 4px;
+      height: 16px;
+      background: #c0b0a0;
+      transform: translateX(-50%) rotate(8deg);
+      border-radius: 2px;
+      box-shadow: 0 0 6px rgba(255, 215, 140, 0.3);
+    }
     @keyframes spin-disc {
       to {
         transform: rotate(360deg);
       }
     }
-
-    .record-player .status {
+    .record-status {
       font-size: 12px;
-      color: var(--text-soft);
-      background: var(--glass);
-      backdrop-filter: blur(12px);
-      padding: 6px 14px;
+      color: #eeddcc;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 4px 14px;
       border-radius: 30px;
-      border: 1px solid var(--glass-border);
-      white-space: nowrap;
+      border: 1px solid rgba(255, 215, 140, 0.2);
+      backdrop-filter: blur(4px);
+      margin-top: 4px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
     }
-
-    /* ---- ALBUM PANEL (trượt từ dưới trái) ---- */
+    /* album panel */
     .album-panel {
       position: fixed;
-      bottom: 140px;
+      bottom: 190px;
       left: 30px;
       z-index: 26;
       width: 320px;
@@ -750,8 +715,7 @@
       transform: translateY(20px) scale(0.95);
       opacity: 0;
       visibility: hidden;
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-        opacity 0.4s ease, visibility 0.4s ease;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease, visibility 0.4s ease;
       overflow-y: auto;
       pointer-events: none;
     }
@@ -808,48 +772,15 @@
     .album-panel .controls button:hover {
       transform: scale(1.05);
     }
-
-    /* ============================================================
-       BÁNH KEM MINECRAFT THEO CHUỘT
-       ============================================================ */
-    .minecraft-cake {
-      position: fixed;
-      pointer-events: none;
-      z-index: 50;
-      font-size: 56px;
-      transform: translate(-50%, -50%);
-      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
-      transition: none;
-      image-rendering: pixelated;
-      /* tạo hiệu ứng khối */;
-    }
-    .minecraft-cake::before {
-      content: '🎂';
-      display: block;
-      filter: drop-shadow(0 4px 0 #8a6a4a) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
-      transform: scale(1);
-    }
-    /* thêm hiệu ứng pixel cho bánh */
-    .minecraft-cake.pixelated {
-      image-rendering: crisp-edges;
-      image-rendering: pixelated;
-    }
-
-    /* ============================================================
-       CANVAS MINECRAFT PARTICLES & PHÁO HOA
-       ============================================================ */
+    /* canvas particle */
     #mcCanvas {
       position: fixed;
       inset: 0;
       z-index: 4;
-      pointer-events: none;
+      pointer-events: auto;
       width: 100vw;
       height: 100vh;
     }
-
-    /* ============================================================
-       RESPONSIVE
-       ============================================================ */
     @media (max-width: 640px) {
       .stack {
         top: 16px;
@@ -877,20 +808,24 @@
         bottom: 20px;
         left: 16px;
       }
+      .record-disc-wrap {
+        width: 100px;
+        height: 100px;
+      }
       .record-disc {
-        width: 70px;
-        height: 70px;
+        width: 100px;
+        height: 100px;
+      }
+      .record-arm {
+        height: 56px;
+        right: -18px;
       }
       .album-panel {
         width: 260px;
         left: 16px;
-        bottom: 100px;
-      }
-      .minecraft-cake {
-        font-size: 40px;
+        bottom: 150px;
       }
     }
-
     @media (prefers-reduced-motion: reduce) {
       * {
         animation-duration: .01ms !important;
@@ -902,17 +837,14 @@
 </head>
 <body>
 
-  <!-- ====== NỀN ====== -->
   <div class="bg"></div>
   <div class="blob blob1"></div>
   <div class="blob blob2"></div>
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 
-  <!-- ====== CANVAS PARTICLES (Minecraft) ====== -->
   <canvas id="mcCanvas"></canvas>
 
-  <!-- ====== CỔNG VÀO ====== -->
   <div class="gate" id="gate">
     <div class="gate-card glass-strong">
       <div class="gate-emoji">🎉</div>
@@ -923,10 +855,7 @@
     </div>
   </div>
 
-  <!-- ====== ỨNG DỤNG CHÍNH ====== -->
   <div class="app" id="app">
-
-    <!-- STACK NÚT (4 cái) -->
     <div class="stack" id="stack">
       <button class="stack-btn" data-panel="profile" style="--i:0"><span class="ico">👤</span> Hồ Sơ Của Tớ</button>
       <button class="stack-btn" data-panel="wishes" style="--i:1"><span class="ico">💌</span> Lời Chúc</button>
@@ -934,12 +863,11 @@
       <button class="stack-btn" data-panel="donate" style="--i:3"><span class="ico">💖</span> Donate for Saky</button>
     </div>
 
-    <!-- NỘI DUNG CHÍNH -->
     <main class="hero">
       <div class="headline-wrap">
         <h1 class="gold-text">Chúc Mừng Sinh Nhật</h1>
       </div>
-      <p class="subtitle">Hôm nay là ngày đặc biệt — cùng đếm ngược nhé 🎈</p>
+      <p class="subtitle">🎈 Đếm ngược tới sinh nhật của Võ Thiên An 🎈</p>
 
       <div class="cake-wrap" id="cakeBtn">
         <div class="cake">🎂</div>
@@ -956,20 +884,24 @@
     </main>
   </div>
 
-  <!-- ====== MODAL ====== -->
   <div class="modal-overlay" id="modalOverlay"></div>
   <div class="modal-panel" id="modalPanel">
     <div class="modal-inner" id="modalInner"></div>
     <div class="modal-close" id="modalClose">✕</div>
   </div>
 
-  <!-- ====== ĐĨA THAN + ALBUM ====== -->
   <div class="record-player" id="recordPlayer">
-    <div class="record-disc" id="recordDisc">
-      <div class="label">🎵</div>
+    <div class="record-box">
+      <div class="record-disc-wrap">
+        <div class="record-disc" id="recordDisc">
+          <div class="label">🎵</div>
+        </div>
+        <div class="record-arm">
+          <div class="needle"></div>
+        </div>
+      </div>
+      <div class="record-status" id="recordStatus">▶ Play</div>
     </div>
-    <div class="record-arm"></div>
-    <span class="status" id="recordStatus">▶ Play</span>
   </div>
 
   <div class="album-panel" id="albumPanel">
@@ -982,12 +914,7 @@
     </div>
   </div>
 
-  <!-- ====== BÁNH KEM MINECRAFT THEO CHUỘT ====== -->
-  <div class="minecraft-cake pixelated" id="minecraftCake">🎂</div>
-
-  <!-- ====== AUDIO (ẩn) ====== -->
   <audio id="audio1" preload="auto">
-    <!-- Thay src bằng link nhạc thật -->
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
   </audio>
   <audio id="audio2" preload="auto">
@@ -998,9 +925,6 @@
     (function() {
       "use strict";
 
-      /* ===========================================================
-         1) CỔNG VÀO
-         =========================================================== */
       const gate = document.getElementById('gate');
       const guestNameInput = document.getElementById('guestNameInput');
       const enterBtn = document.getElementById('enterBtn');
@@ -1015,9 +939,6 @@
       enterBtn.addEventListener('click', enterParty);
       guestNameInput.addEventListener('keydown', e => { if (e.key === 'Enter') enterParty(); });
 
-      /* ===========================================================
-         2) MINECRAFT PARTICLES (Canvas)
-         =========================================================== */
       const canvas = document.getElementById('mcCanvas');
       const ctx = canvas.getContext('2d');
       let W, H;
@@ -1029,7 +950,6 @@
       window.addEventListener('resize', resizeCanvas);
       resizeCanvas();
 
-      // Pixel art heart (8x8)
       const heartPixels = [
         [0, 0, 1, 0, 0, 1, 0, 0],
         [0, 1, 1, 1, 1, 1, 1, 0],
@@ -1053,7 +973,6 @@
         }
       }
 
-      // Bubble Minecraft: khối vuông trong suốt viền trắng
       function drawMinecraftBubble(ctx, x, y, size) {
         const half = size / 2;
         ctx.shadowColor = 'rgba(255,255,255,0.6)';
@@ -1063,14 +982,12 @@
         ctx.lineWidth = 2;
         ctx.fillRect(x - half, y - half, size, size);
         ctx.strokeRect(x - half, y - half, size, size);
-        // highlight
         ctx.shadowBlur = 0;
         ctx.fillStyle = 'rgba(255,255,255,0.4)';
         ctx.fillRect(x - half + 4, y - half + 4, size * 0.3, size * 0.2);
         ctx.shadowColor = 'transparent';
       }
 
-      // Particle class
       class MCParticle {
         constructor() {
           this.reset();
@@ -1080,7 +997,7 @@
           this.x = Math.random() * W;
           this.y = -40 - Math.random() * 120;
           this.size = 14 + Math.random() * 22;
-          this.speedY = 0.6 + Math.random() * 1.2;
+          this.speedY = 0.6 + Math.random() * 0.8;
           this.speedX = (Math.random() - 0.5) * 0.6;
           this.opacity = 0.7 + Math.random() * 0.3;
           this.color = ['#ff4d6d', '#ff6b8a', '#ff8fa3', '#ffb3c1'][Math.floor(Math.random() * 4)];
@@ -1108,28 +1025,99 @@
 
       let particles = [];
       const MAX_PARTICLES = 45;
+      let speedMultiplier = 1;
+      let speedBoostTimer = 0;
 
       function startMinecraftParticles() {
-        if (particles.length) return;
-        for (let i = 0; i < MAX_PARTICLES; i++) {
-          const p = new MCParticle();
-          p.y = Math.random() * H;
-          particles.push(p);
+        if (particles.length === 0) {
+          for (let i = 0; i < MAX_PARTICLES; i++) {
+            const p = new MCParticle();
+            p.y = Math.random() * H;
+            particles.push(p);
+          }
         }
-        animateParticles();
+        drawFrame();
       }
 
-      function animateParticles() {
+      function drawFrame() {
         ctx.clearRect(0, 0, W, H);
         for (const p of particles) {
-          p.update();
+          let spd = p.speedY;
+          if (speedBoostTimer > 0) {
+            spd *= 2.5;
+          }
+          p.y += spd;
+          p.x += p.speedX + Math.sin(p.phase) * 0.15;
+          p.phase += 0.02;
+          if (p.y > H + 60) p.reset();
+          if (p.x < -60) p.x = W + 40;
+          if (p.x > W + 60) p.x = -40;
           p.draw(ctx);
         }
-        requestAnimationFrame(animateParticles);
+        if (speedBoostTimer > 0) {
+          speedBoostTimer -= 1 / 60;
+          if (speedBoostTimer < 0) speedBoostTimer = 0;
+        }
+        requestAnimationFrame(drawFrame);
       }
 
-      // ===== PHÁO HOA =====
-      let fireworksActive = false;
+      canvas.addEventListener('click', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        let hit = false;
+        for (const p of particles) {
+          if (p.type === 'heart') {
+            const hx = p.x - p.size / 2;
+            const hy = p.y - p.size / 2;
+            if (mx >= hx && mx <= hx + p.size && my >= hy && my <= hy + p.size) {
+              hit = true;
+              break;
+            }
+          }
+        }
+        if (hit) {
+          speedBoostTimer = 1.2;
+        }
+      });
+
+      const TARGET = new Date(2026, 6, 31, 0, 0, 0);
+      const cdDays = document.getElementById('cdDays');
+      const cdHours = document.getElementById('cdHours');
+      const cdMins = document.getElementById('cdMins');
+      const cdSecs = document.getElementById('cdSecs');
+      const cdTarget = document.getElementById('cdTarget');
+      cdTarget.textContent = '🎯 31/07/' + TARGET.getFullYear();
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+      let countdownReachedZero = false;
+
+      function updateCountdown() {
+        const diff = TARGET - new Date();
+        if (diff <= 0) {
+          cdDays.textContent = '00';
+          cdHours.textContent = '00';
+          cdMins.textContent = '00';
+          cdSecs.textContent = '00';
+          cdTarget.textContent = '🎉 Chúc mừng sinh nhật! 🎉';
+          if (!countdownReachedZero) {
+            countdownReachedZero = true;
+            triggerFireworks();
+          }
+          return;
+        }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        cdDays.textContent = pad(d);
+        cdHours.textContent = pad(h);
+        cdMins.textContent = pad(m);
+        cdSecs.textContent = pad(s);
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
       let fireworkParticles = [];
 
       function spawnFirework(x, y) {
@@ -1150,32 +1138,19 @@
         }
       }
 
-      function launchFirework() {
-        if (fireworksActive) return;
-        fireworksActive = true;
-        // bắn nhiều quả pháo
-        for (let i = 0; i < 8; i++) {
+      function triggerFireworks() {
+        for (let i = 0; i < 10; i++) {
           setTimeout(() => {
             const x = W * (0.1 + Math.random() * 0.8);
             const y = H * (0.1 + Math.random() * 0.6);
             spawnFirework(x, y);
-          }, i * 300);
+          }, i * 250);
         }
-        // duy trì pháo hoa trong vài giây
-        let frames = 0;
-        const maxFrames = 300;
-
-        function drawFireworks() {
-          if (!fireworksActive) return;
-          ctx.clearRect(0, 0, W, H);
-          // vẽ lại particles nền? chúng ta sẽ vẽ chồng lên nhưng tạm thời clear để pháo hoa nổi bật
-          // nhưng vẫn giữ particles nền? để đơn giản ta vẽ pháo hoa lên trên particles
-          // ta sẽ vẽ particles nền trước
-          for (const p of particles) {
-            p.update();
-            p.draw(ctx);
+        let fwInterval = setInterval(() => {
+          if (fireworkParticles.length === 0) {
+            clearInterval(fwInterval);
+            return;
           }
-
           for (let i = fireworkParticles.length - 1; i >= 0; i--) {
             const fp = fireworkParticles[i];
             fp.x += fp.vx;
@@ -1196,178 +1171,12 @@
             ctx.shadowBlur = 0;
           }
           ctx.globalAlpha = 1;
-          frames++;
-          if (fireworkParticles.length > 0 || frames < maxFrames) {
-            requestAnimationFrame(drawFireworks);
-          } else {
-            fireworksActive = false;
-            // resume particles animation
-            animateParticles();
-          }
-        }
-        // dừng animateParticles tạm thời
-        // nhưng vì chúng ta đã gọi animateParticles liên tục, ta sẽ vẽ pháo hoa chồng lên
-        // bằng cách gọi drawFireworks thay vì animateParticles
-        // ta sẽ dùng một flag để animateParticles dừng lại
-        // nhưng đơn giản ta hủy requestAnimationFrame hiện tại và bắt đầu vẽ pháo hoa
-        // ta sẽ override bằng cách gọi drawFireworks và không gọi animateParticles nữa.
-        // Ta có thể dùng một biến để kiểm soát
-        // Tạm thời ta dừng animateParticles bằng cách không gọi nó nữa, nhưng nó đang chạy vòng lặp.
-        // Cách tốt là tạo một vòng lặp riêng cho pháo hoa và tắt vòng lặp particles.
-        // Để đơn giản, ta sẽ vẽ pháo hoa lên trên canvas mà không xóa particles nền? Vẫn xóa và vẽ lại.
-        // Ta sẽ dùng một biến toàn cục để biết có pháo hoa không.
-        // Trong animateParticles, nếu fireworksActive thì không vẽ particles? Thực tế ta muốn hiển thị cả hai.
-        // Nhưng để rõ ràng, ta sẽ tạm dừng vòng lặp particles và chỉ vẽ pháo hoa.
-        // Ta sẽ bắt đầu một vòng lặp mới.
-        // Thay đổi: trong hàm animateParticles, kiểm tra nếu fireworksActive thì return.
-        // Và gọi drawFireworks.
-        // Ta sẽ override.
-        // Để đơn giản, ta sẽ gọi drawFireworks và không cần animateParticles.
-        // Ta sẽ dùng một biến để ngăn animateParticles chạy.
-        window.__fireworksActive = true;
-        drawFireworks();
-        // sau khi kết thúc, set lại false và khởi động lại animateParticles
-        // Nhưng drawFireworks sẽ tự gọi chính nó, khi kết thúc sẽ set lại và gọi animateParticles.
-        // Ta cần sửa logic.
-        // Tôi sẽ viết lại phần này gọn hơn:
-        // Khi countdown về 0, gọi launchFireworks()
-        // launchFireworks sẽ tạo các hạt và bắt đầu vòng lặp riêng.
-        // Trong vòng lặp đó, vẽ particles nền + pháo hoa.
-        // Ta sẽ không dùng animateParticles nữa, mà dùng một hàm render kết hợp.
-        // Vì vậy tôi sẽ tái cấu trúc: có một hàm render chính.
-      }
-
-      // Chúng ta sẽ tích hợp pháo hoa vào vòng lặp chính.
-      // Tôi sẽ viết lại vòng lặp particles để hỗ trợ pháo hoa.
-      // Dùng một hàm drawFrame.
-      let fireworkMode = false;
-
-      function drawFrame() {
-        ctx.clearRect(0, 0, W, H);
-        // Vẽ particles nền
-        for (const p of particles) {
-          p.update();
-          p.draw(ctx);
-        }
-        // Vẽ pháo hoa nếu có
-        for (let i = fireworkParticles.length - 1; i >= 0; i--) {
-          const fp = fireworkParticles[i];
-          fp.x += fp.vx;
-          fp.y += fp.vy;
-          fp.vy += 0.04;
-          fp.life -= fp.decay;
-          if (fp.life <= 0) {
-            fireworkParticles.splice(i, 1);
-            continue;
-          }
-          ctx.globalAlpha = fp.life;
-          ctx.fillStyle = fp.color;
-          ctx.shadowColor = fp.color;
-          ctx.shadowBlur = 12;
-          ctx.beginPath();
-          ctx.arc(fp.x, fp.y, fp.size * fp.life, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-        ctx.globalAlpha = 1;
-        if (fireworkParticles.length > 0 || fireworkMode) {
-          requestAnimationFrame(drawFrame);
-        } else {
-          // Nếu không có pháo hoa, tiếp tục vòng lặp bình thường
-          if (!fireworkMode) requestAnimationFrame(drawFrame);
-        }
-      }
-
-      // Sửa hàm animateParticles thành drawFrame
-      function startRenderLoop() {
-        if (!window._renderLoop) {
-          window._renderLoop = true;
-          drawFrame();
-        }
-      }
-
-      // Thay thế animateParticles bằng startRenderLoop
-      function startMinecraftParticles() {
-        if (particles.length === 0) {
-          for (let i = 0; i < MAX_PARTICLES; i++) {
-            const p = new MCParticle();
-            p.y = Math.random() * H;
-            particles.push(p);
-          }
-        }
-        startRenderLoop();
-      }
-
-      // Hàm kích hoạt pháo hoa
-      function triggerFireworks() {
-        if (fireworkMode) return;
-        fireworkMode = true;
-        // bắn nhiều quả
-        for (let i = 0; i < 10; i++) {
-          setTimeout(() => {
-            const x = W * (0.1 + Math.random() * 0.8);
-            const y = H * (0.1 + Math.random() * 0.6);
-            spawnFirework(x, y);
-          }, i * 250);
-        }
-        // tự động tắt sau 6 giây
+        }, 30);
         setTimeout(() => {
-          fireworkMode = false;
-          if (fireworkParticles.length === 0) {
-            // không cần làm gì
-          }
-        }, 6000);
-        // nếu vòng lặp đang chạy, nó sẽ tiếp tục vẽ pháo hoa cho đến khi hết
-        startRenderLoop();
+          clearInterval(fwInterval);
+        }, 7000);
       }
 
-      window.triggerFireworks = triggerFireworks;
-
-      /* ===========================================================
-         3) ĐẾM NGƯỢC & PHÁO HOA
-         =========================================================== */
-      const TARGET = new Date(2026, 6, 31, 0, 0, 0);
-      const cdDays = document.getElementById('cdDays');
-      const cdHours = document.getElementById('cdHours');
-      const cdMins = document.getElementById('cdMins');
-      const cdSecs = document.getElementById('cdSecs');
-      const cdTarget = document.getElementById('cdTarget');
-      cdTarget.textContent = 'Hướng tới 31/07/' + TARGET.getFullYear();
-
-      function pad(n) { return String(n).padStart(2, '0'); }
-
-      let countdownReachedZero = false;
-
-      function updateCountdown() {
-        const diff = TARGET - new Date();
-        if (diff <= 0) {
-          cdDays.textContent = '00';
-          cdHours.textContent = '00';
-          cdMins.textContent = '00';
-          cdSecs.textContent = '00';
-          cdTarget.textContent = '🎉 Chúc mừng sinh nhật! 🎉';
-          if (!countdownReachedZero) {
-            countdownReachedZero = true;
-            // Kích hoạt pháo hoa
-            if (window.triggerFireworks) window.triggerFireworks();
-          }
-          return;
-        }
-        const d = Math.floor(diff / 86400000);
-        const h = Math.floor((diff % 86400000) / 3600000);
-        const m = Math.floor((diff % 3600000) / 60000);
-        const s = Math.floor((diff % 60000) / 1000);
-        cdDays.textContent = pad(d);
-        cdHours.textContent = pad(h);
-        cdMins.textContent = pad(m);
-        cdSecs.textContent = pad(s);
-      }
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-
-      /* ===========================================================
-         4) LỜI CHÚC
-         =========================================================== */
       let wishes = [
         { name: 'Ban Tổ Chức', msg: 'Chúc bạn một tuổi mới thật nhiều niềm vui và may mắn! 🎉' }
       ];
@@ -1385,13 +1194,10 @@
         return div.innerHTML;
       }
 
-      /* ===========================================================
-         5) NỘI DUNG PANEL
-         =========================================================== */
       function profileContent() {
         return `
           <div class="profile-avatar">🥳</div>
-          <div class="profile-name">Tên Bạn Ở Đây</div>
+          <div class="profile-name">Võ Thiên An</div>
           <div class="profile-role">Nhân vật chính của bữa tiệc hôm nay</div>
           <div class="profile-line"><span>Ngày đặc biệt</span><span>31 · 07</span></div>
           <div class="profile-line"><span>Lời chúc đã nhận</span><span id="wishCountStat">${wishes.length}</span></div>
@@ -1421,9 +1227,9 @@
           <div style="text-align:center;padding:10px 0;">
             <h3 style="margin-bottom:10px;">💖 Donate for Saky</h3>
             <p style="font-size:14px;color:var(--text-soft);margin-bottom:14px;">Cảm ơn bạn đã ủng hộ!</p>
-            <div style="background:var(--glass);border-radius:20px;padding:20px;border:1px solid var(--glass-border);">
-              <img src="https://via.placeholder.com/300x200?text=Your+Image+Here" alt="donate" style="width:100%;border-radius:16px;display:block;" />
-              <p style="margin-top:10px;font-size:13px;color:var(--text-soft);">(Thay ảnh tại đây)</p>
+            <div style="background:var(--glass);border-radius:20px;padding:12px;border:1px solid var(--glass-border);">
+              <img src="1785221638086_831476079308259756_2958523869644547115_b346f454b7fde7f4003d7c251e9e4021.jpg" alt="donate" style="width:100%;border-radius:16px;display:block;" />
+              <p style="margin-top:10px;font-size:13px;color:var(--text-soft);">(ảnh thẻ ngân hàng)</p>
             </div>
           </div>
         `;
@@ -1448,9 +1254,6 @@
         cake: { title: 'Gửi Lời Chúc 💌', sub: 'Viết vài dòng thật ấm áp nhé', render: cakeFormContent }
       };
 
-      /* ===========================================================
-         6) MODAL (spring animation)
-         =========================================================== */
       const modalOverlay = document.getElementById('modalOverlay');
       const modalPanel = document.getElementById('modalPanel');
       const modalInner = document.getElementById('modalInner');
@@ -1539,20 +1342,17 @@
           wishes.unshift({ name, msg });
           msgInput.value = '';
           document.getElementById('cakeWishList').innerHTML = renderWishList();
-          // cập nhật số lượng ở profile
           const stat = document.getElementById('wishCountStat');
           if (stat) stat.textContent = wishes.length;
         });
       }
 
-      /* ===========================================================
-         7) ĐĨA THAN & ALBUM
-         =========================================================== */
+      // RECORD PLAYER
       const audio1 = document.getElementById('audio1');
       const audio2 = document.getElementById('audio2');
       const songs = [
-        { name: 'Bài hát 1', src: audio1 },
-        { name: 'Bài hát 2', src: audio2 }
+        { name: 'Bunny Girl Senpai', src: audio1 },
+        { name: 'Nhạc PĐT', src: audio2 }
       ];
       let currentSongIndex = 0;
       let isPlaying = false;
@@ -1587,7 +1387,6 @@
 
       function playSong() {
         const song = songs[currentSongIndex];
-        // dừng tất cả
         songs.forEach(s => s.src.pause());
         song.src.currentTime = 0;
         song.src.volume = isMuted ? 0 : 1;
@@ -1623,11 +1422,7 @@
         recordStatus.textContent = isPlaying ? '▶ ' + song.name : '⏸ ' + song.name;
         playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
         renderSongList();
-        if (isPlaying) {
-          recordDisc.style.animationPlayState = 'running';
-        } else {
-          recordDisc.style.animationPlayState = 'paused';
-        }
+        recordDisc.style.animationPlayState = isPlaying ? 'running' : 'paused';
       }
 
       function toggleMute() {
@@ -1640,12 +1435,9 @@
       function initRecordPlayer() {
         if (recordPlayerInitialized) return;
         recordPlayerInitialized = true;
-        // load nhạc
         songs.forEach(s => s.src.load());
-        // chọn bài đầu
         playSong();
 
-        // Sự kiện đĩa
         let clickCount = 0;
         let clickTimer = null;
         const player = document.getElementById('recordPlayer');
@@ -1655,18 +1447,15 @@
           if (clickCount === 1) {
             clickTimer = setTimeout(() => {
               clickCount = 0;
-              // click đơn: mở album
               albumPanel.classList.toggle('open');
             }, 250);
           } else if (clickCount >= 2) {
             clearTimeout(clickTimer);
             clickCount = 0;
-            // double click: tắt/mở nhạc (mute)
             toggleMute();
           }
         });
 
-        // Nút điều khiển album
         playPauseBtn.addEventListener('click', (e) => { e.stopPropagation();
           togglePlayPause(); });
         prevBtn.addEventListener('click', (e) => { e.stopPropagation();
@@ -1674,51 +1463,24 @@
         nextBtn.addEventListener('click', (e) => { e.stopPropagation();
           nextSong(); });
 
-        // Đóng album khi click ra ngoài
         document.addEventListener('click', (e) => {
           if (!albumPanel.contains(e.target) && e.target !== player && !player.contains(e.target)) {
             albumPanel.classList.remove('open');
           }
         });
 
-        // Cập nhật UI khi nhạc kết thúc
         songs.forEach(s => s.src.addEventListener('ended', nextSong));
-
         updateUI();
       }
 
-      // Khởi tạo record player khi vào party (gọi từ enterParty)
       window.initRecordPlayer = initRecordPlayer;
 
-      /* ===========================================================
-         8) BÁNH KEM MINECRAFT THEO CHUỘT
-         =========================================================== */
-      const minecraftCake = document.getElementById('minecraftCake');
-      document.addEventListener('mousemove', (e) => {
-        minecraftCake.style.left = e.clientX + 'px';
-        minecraftCake.style.top = e.clientY + 'px';
-      });
-
-      /* ===========================================================
-         9) KHỞI ĐỘNG
-         =========================================================== */
-      // startMinecraftParticles sẽ được gọi sau khi gate đóng
-      // initRecordPlayer sẽ được gọi sau khi gate đóng
-
-      // Nếu người dùng đã nhập tên và bấm enter, gate đóng và gọi các hàm.
-
-      // Hỗ trợ tải lại: nếu gate đã ẩn (do cache) thì vẫn chạy
       if (gate.classList.contains('hidden')) {
         startMinecraftParticles();
         initRecordPlayer();
       }
 
-      /* ===========================================================
-         10) RESIZE CANVAS
-         =========================================================== */
-      window.addEventListener('resize', () => {
-        resizeCanvas();
-      });
+      window.addEventListener('resize', resizeCanvas);
 
     })();
   </script>
