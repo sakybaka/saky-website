@@ -560,7 +560,8 @@
     .g4 {
       background: linear-gradient(135deg, #c9b6ff, #a78bfa);
     }
-    /* record player cổ điển */
+
+    /* ========== RECORD PLAYER – PHONG CÁCH APPLE MUSIC / SPOTIFY ========== */
     .record-player {
       position: fixed;
       bottom: 30px;
@@ -573,63 +574,57 @@
       user-select: none;
     }
     .record-box {
-      background: rgba(40, 30, 25, 0.75);
-      backdrop-filter: blur(12px);
-      border: 2px solid #b8956a;
-      border-radius: 20px;
-      padding: 16px 20px 20px 20px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 215, 140, 0.3);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 24px;
+      padding: 16px 20px 18px 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), inset 0 1px 1px rgba(255, 255, 255, 0.9);
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
+      transition: transform 0.2s ease;
     }
-    .record-box::before {
-      content: '';
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      right: 6px;
-      bottom: 6px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 215, 140, 0.15);
-      pointer-events: none;
+    .record-box:hover {
+      transform: scale(1.02);
     }
     .record-disc-wrap {
       position: relative;
       width: 130px;
       height: 130px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .record-disc {
       width: 130px;
       height: 130px;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #3a3a3a, #111 80%, #222);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), inset 0 -4px 12px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 -4px 12px rgba(0, 0, 0, 0.6);
       animation: spin-disc 4s linear infinite;
       position: relative;
-      border: 3px solid #6a5a4a;
+      border: 3px solid #888;
     }
     .record-disc::after {
       content: '';
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       background: radial-gradient(circle, #d4c4a0, #a08870);
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
     }
     .record-disc .label {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 56px;
-      height: 56px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: radial-gradient(circle, #f7c948, #d4a830);
       display: flex;
@@ -638,45 +633,45 @@
       font-size: 14px;
       font-weight: 700;
       color: #3a2a1a;
-      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6);
+      box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.6);
       opacity: 0.9;
       pointer-events: none;
       font-family: 'Poppins', sans-serif;
     }
     .record-arm {
       position: absolute;
-      top: -18px;
-      right: -24px;
-      width: 14px;
-      height: 70px;
-      background: linear-gradient(135deg, #b8956a, #7a5f45);
-      border-radius: 8px 8px 0 0;
+      top: -12px;
+      right: -20px;
+      width: 12px;
+      height: 62px;
+      background: linear-gradient(135deg, #c0a88a, #8a705a);
+      border-radius: 6px 6px 0 0;
       transform-origin: bottom center;
-      transform: rotate(-30deg) translateX(10px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-      border: 1px solid #c9a87a;
+      transform: rotate(-25deg) translateX(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border: 1px solid #d4b89a;
       z-index: 2;
     }
     .record-arm::after {
       content: '';
       position: absolute;
-      bottom: -10px;
+      bottom: -8px;
       left: 50%;
-      width: 28px;
-      height: 28px;
+      width: 22px;
+      height: 22px;
       background: radial-gradient(circle, #d4b08a, #8a6a50);
       border-radius: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
       border: 1px solid #b8956a;
     }
     .record-arm .needle {
       position: absolute;
-      top: -6px;
+      top: -4px;
       left: 50%;
-      width: 4px;
-      height: 16px;
-      background: #c0b0a0;
+      width: 3px;
+      height: 14px;
+      background: #d0c0b0;
       transform: translateX(-50%) rotate(8deg);
       border-radius: 2px;
       box-shadow: 0 0 6px rgba(255, 215, 140, 0.3);
@@ -688,17 +683,19 @@
     }
     .record-status {
       font-size: 12px;
-      color: #eeddcc;
-      background: rgba(0, 0, 0, 0.4);
+      color: var(--text-dark);
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
       padding: 4px 14px;
       border-radius: 30px;
-      border: 1px solid rgba(255, 215, 140, 0.2);
-      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       margin-top: 4px;
       font-weight: 500;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
     }
-    /* album panel */
+
+    /* album panel (giữ nguyên) */
     .album-panel {
       position: fixed;
       bottom: 190px;
@@ -772,6 +769,7 @@
     .album-panel .controls button:hover {
       transform: scale(1.05);
     }
+
     /* canvas particle */
     #mcCanvas {
       position: fixed;
@@ -781,6 +779,7 @@
       width: 100vw;
       height: 100vh;
     }
+
     @media (max-width: 640px) {
       .stack {
         top: 16px;
@@ -818,7 +817,7 @@
       }
       .record-arm {
         height: 56px;
-        right: -18px;
+        right: -16px;
       }
       .album-panel {
         width: 260px;
@@ -890,6 +889,7 @@
     <div class="modal-close" id="modalClose">✕</div>
   </div>
 
+  <!-- RECORD PLAYER (mới) -->
   <div class="record-player" id="recordPlayer">
     <div class="record-box">
       <div class="record-disc-wrap">
@@ -914,11 +914,12 @@
     </div>
   </div>
 
+  <!-- Audio (thay link nhạc của bạn vào đây) -->
   <audio id="audio1" preload="auto">
-    <source src="https://www.youtube.com/watch?v=PKZJXtBOf4g&list=RDPKZJXtBOf4g&start_radio=1&t=1622s" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
   </audio>
   <audio id="audio2" preload="auto">
-    <source src="https://youtu.be/PKZJXtBOf4g?si=W3_NAL0mW9573wRH" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
   </audio>
 
   <script>
@@ -1025,7 +1026,6 @@
 
       let particles = [];
       const MAX_PARTICLES = 45;
-      let speedMultiplier = 1;
       let speedBoostTimer = 0;
 
       function startMinecraftParticles() {
@@ -1347,7 +1347,7 @@
         });
       }
 
-      // RECORD PLAYER
+      // ===== RECORD PLAYER =====
       const audio1 = document.getElementById('audio1');
       const audio2 = document.getElementById('audio2');
       const songs = [
