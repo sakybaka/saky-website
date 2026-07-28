@@ -1,435 +1,920 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chúc Mừng Sinh Nhật 🎂</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  /* ============================================================
-     THIẾT KẾ: Liquid Glass (kiểu iOS 26)
-     - Nền pastel nhiều lớp blob trôi nhẹ
-     - Mọi khối UI: kính mờ (backdrop-filter blur) + viền sáng + bóng mềm
-     - Chữ vàng script "uốn lượn" tự vẽ từ trái sang phải
-     - 3 nút xếp chồng góc phải trên -> khi bấm trượt ra giữa & phóng to
-     - Bánh kem giữa màn -> bấm mở form gửi lời chúc kiểu liquid glass
-     - Hiệu ứng trái tim & bong bóng trắng rơi nhẹ nhàng
-     ============================================================ */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chúc Mừng Sinh Nhật 🎂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       RESET & NỀN
+       ============================================================ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  :root{
-    --glass: rgba(255,255,255,0.5);
-    --glass-strong: rgba(255,255,255,0.72);
-    --glass-border: rgba(255,255,255,0.85);
-    --text-dark: #3a3540;
-    --text-soft: #6b6470;
-    --gold-1:#fdf1c8;
-    --gold-2:#f7c948;
-    --gold-3:#c99a2e;
-    --shadow-soft: 0 8px 32px rgba(140,120,160,0.18);
-    --shadow-strong: 0 20px 60px rgba(140,120,160,0.28);
-    --radius-lg: 28px;
-    --radius-md: 20px;
-  }
+    :root {
+      --glass: rgba(255, 255, 255, 0.45);
+      --glass-strong: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --text-dark: #2a2530;
+      --text-soft: #6b6470;
+      --gold-1: #fdf1c8;
+      --gold-2: #f7c948;
+      --gold-3: #c99a2e;
+      --shadow-soft: 0 8px 32px rgba(140, 120, 160, 0.18);
+      --shadow-strong: 0 20px 60px rgba(140, 120, 160, 0.30);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+    }
 
-  *{ box-sizing:border-box; margin:0; padding:0; }
+    html,
+    body {
+      height: 100%;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      background: #fbf5f0;
+    }
 
-  html,body{
-    height:100%;
-    font-family:'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-    color:var(--text-dark);
-    overflow-x:hidden;
-  }
+    body {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  body{
-    min-height:100vh;
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
+    /* ---------- NỀN GRADIENT + BLOB ---------- */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background: linear-gradient(135deg, #fffaf5 0%, #fff0f5 45%, #f2f0ff 100%);
+    }
+    .blob {
+      position: fixed;
+      z-index: -2;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: .55;
+      pointer-events: none;
+      animation: drift 22s ease-in-out infinite;
+    }
+    .blob1 {
+      width: 520px;
+      height: 520px;
+      top: -160px;
+      left: -140px;
+      background: #ffd6e8;
+      animation-delay: 0s;
+    }
+    .blob2 {
+      width: 480px;
+      height: 480px;
+      bottom: -180px;
+      right: -140px;
+      background: #d8e8ff;
+      animation-delay: -6s;
+    }
+    .blob3 {
+      width: 420px;
+      height: 420px;
+      top: 30%;
+      right: 10%;
+      background: #fff2cf;
+      animation-delay: -12s;
+    }
+    .blob4 {
+      width: 360px;
+      height: 360px;
+      bottom: 10%;
+      left: 5%;
+      background: #e8dcff;
+      animation-delay: -18s;
+    }
 
-  /* ---------- NỀN GRADIENT NHIỀU LỚP (kiểu iOS 26 wallpaper) ---------- */
-  .bg{
-    position:fixed; inset:0; z-index:-3;
-    background: linear-gradient(135deg,#fffaf5 0%, #fff0f5 45%, #f2f0ff 100%);
-  }
-  .blob{
-    position:fixed; z-index:-2;
-    border-radius:50%;
-    filter: blur(70px);
-    opacity:.55;
-    pointer-events:none;
-    animation: drift 22s ease-in-out infinite;
-  }
-  .blob1{ width:520px; height:520px; top:-160px; left:-140px; background:#ffd6e8; animation-delay:0s; }
-  .blob2{ width:480px; height:480px; bottom:-180px; right:-140px; background:#d8e8ff; animation-delay:-6s; }
-  .blob3{ width:420px; height:420px; top:30%; right:10%; background:#fff2cf; animation-delay:-12s; }
-  .blob4{ width:360px; height:360px; bottom:10%; left:5%; background:#e8dcff; animation-delay:-18s; }
+    @keyframes drift {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(40px, -30px) scale(1.08);
+      }
+      66% {
+        transform: translate(-30px, 25px) scale(0.95);
+      }
+    }
 
-  @keyframes drift{
-    0%,100%{ transform:translate(0,0) scale(1); }
-    33%{ transform:translate(40px,-30px) scale(1.08); }
-    66%{ transform:translate(-30px,25px) scale(0.95); }
-  }
+    /* ============================================================
+       LỚP KÍNH DÙNG CHUNG (Liquid Glass)
+       ============================================================ */
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      box-shadow:
+        var(--shadow-soft),
+        inset 0 1px 1px rgba(255, 255, 255, 0.9),
+        inset 0 -1px 12px rgba(255, 255, 255, 0.4);
+    }
 
-  /* ---------- HẠT TRÔI: trái tim & bong bóng trắng ---------- */
-  .ambient{ position:fixed; inset:0; z-index:5; pointer-events:none; overflow:hidden; }
-  .particle{ position:absolute; top:-10vh; will-change:transform,opacity; }
-  @keyframes fall{
-    from{ transform: translateY(-10vh) translateX(0) rotate(0deg); opacity:0; }
-    10%{ opacity:1; }
-    90%{ opacity:.85; }
-    to{ transform: translateY(115vh) translateX(var(--drift)) rotate(var(--spin)); opacity:0; }
-  }
+    .glass-strong {
+      background: var(--glass-strong);
+      backdrop-filter: blur(30px) saturate(220%);
+      -webkit-backdrop-filter: blur(30px) saturate(220%);
+      border: 1px solid var(--glass-border);
+      box-shadow:
+        var(--shadow-strong),
+        inset 0 1px 1px rgba(255, 255, 255, 0.95),
+        inset 0 -1px 16px rgba(255, 255, 255, 0.5);
+    }
 
-  /* ============================================================
-     LỚP KÍNH DÙNG CHUNG
-     ============================================================ */
-  .glass{
-    background: var(--glass);
-    backdrop-filter: blur(22px) saturate(180%);
-    -webkit-backdrop-filter: blur(22px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    box-shadow:
-      var(--shadow-soft),
-      inset 0 1px 1px rgba(255,255,255,0.9),
-      inset 0 -1px 12px rgba(255,255,255,0.4);
-  }
+    /* ============================================================
+       CỔNG VÀO
+       ============================================================ */
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.20);
+      backdrop-filter: blur(30px) saturate(150%);
+      -webkit-backdrop-filter: blur(30px) saturate(150%);
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    .gate.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-  /* ============================================================
-     CỔNG VÀO: nhập tên trước khi vào tiệc
-     ============================================================ */
-  .gate{
-    position:fixed; inset:0; z-index:100;
-    display:flex; align-items:center; justify-content:center;
-    background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(30px) saturate(150%);
-    -webkit-backdrop-filter: blur(30px) saturate(150%);
-    transition: opacity .6s ease, visibility .6s ease;
-  }
-  .gate.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+    .gate-card {
+      width: min(420px, 88vw);
+      padding: 48px 36px 38px;
+      border-radius: var(--radius-lg);
+      text-align: center;
+      animation: pop-in .7s cubic-bezier(0.2, 0.9, 0.25, 1.2);
+    }
 
-  .gate-card{
-    width:min(420px, 88vw);
-    padding:48px 36px 38px;
-    border-radius: var(--radius-lg);
-    text-align:center;
-    animation: pop-in .7s cubic-bezier(.2,.9,.25,1.2);
-  }
-  @keyframes pop-in{
-    from{ opacity:0; transform: translateY(24px) scale(.94); }
-    to{ opacity:1; transform: translateY(0) scale(1); }
-  }
-  .gate-emoji{ font-size:52px; margin-bottom:6px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.08)); }
-  .gate-card h1{
-    font-size:22px; font-weight:700; margin-bottom:6px; color:var(--text-dark);
-  }
-  .gate-card p{ font-size:14px; color:var(--text-soft); margin-bottom:22px; }
+    @keyframes pop-in {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(.94);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-  .field{
-    width:100%;
-    padding:14px 18px;
-    border-radius:16px;
-    border:1px solid rgba(255,255,255,0.9);
-    background: rgba(255,255,255,0.55);
-    backdrop-filter: blur(10px);
-    font-family:inherit;
-    font-size:15px;
-    color:var(--text-dark);
-    outline:none;
-    transition: box-shadow .25s ease, border-color .25s ease;
-    margin-bottom:16px;
-  }
-  .field::placeholder{ color:#a49dab; }
-  .field:focus{ border-color: var(--gold-2); box-shadow:0 0 0 4px rgba(247,201,72,0.25); }
+    .gate-emoji {
+      font-size: 52px;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .08));
+    }
+    .gate-card h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-dark);
+    }
+    .gate-card p {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 22px;
+    }
 
-  textarea.field{ resize:none; min-height:96px; font-family:inherit; }
+    .field {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(10px);
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--text-dark);
+      outline: none;
+      transition: box-shadow .25s ease, border-color .25s ease;
+      margin-bottom: 16px;
+    }
+    .field::placeholder {
+      color: #a49dab;
+    }
+    .field:focus {
+      border-color: var(--gold-2);
+      box-shadow: 0 0 0 4px rgba(247, 201, 72, 0.25);
+    }
 
-  .btn-primary{
-    width:100%;
-    padding:14px 20px;
-    border:none;
-    border-radius:16px;
-    font-family:inherit;
-    font-weight:600;
-    font-size:15px;
-    color:#4a3a1a;
-    cursor:pointer;
-    background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-    box-shadow: 0 10px 24px rgba(247,201,72,0.4), inset 0 1px 1px rgba(255,255,255,0.8);
-    transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
-  }
-  .btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 16px 32px rgba(247,201,72,0.5); }
-  .btn-primary:active{ transform: translateY(0px) scale(.98); }
+    textarea.field {
+      resize: none;
+      min-height: 96px;
+      font-family: inherit;
+    }
 
-  /* ============================================================
-     ỨNG DỤNG CHÍNH
-     ============================================================ */
-  .app{
-    position:relative;
-    width:100%;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
+    .btn-primary {
+      width: 100%;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 16px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 15px;
+      color: #4a3a1a;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      box-shadow: 0 10px 24px rgba(247, 201, 72, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+      transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(247, 201, 72, 0.5);
+    }
+    .btn-primary:active {
+      transform: translateY(0px) scale(.98);
+    }
 
-  /* ---- 3 nút xếp chồng góc trên phải ---- */
-  .stack{
-    position:fixed;
-    top:26px; right:26px;
-    z-index:30;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    align-items:flex-end;
-  }
-  .stack-btn{
-    width:220px;
-    padding:15px 20px;
-    border-radius:18px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-family:inherit;
-    font-weight:600;
-    font-size:14px;
-    color:var(--text-dark);
-    text-align:left;
-    cursor:pointer;
-    transform: translateX(calc(var(--i) * 6px)) rotate(calc(var(--i) * -1.6deg));
-    transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, opacity .3s ease;
-  }
-  .stack-btn:hover{
-    transform: translateY(-4px) translateX(calc(var(--i) * 6px)) rotate(0deg) scale(1.03);
-    box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255,255,255,0.9);
-  }
-  .stack-btn .ico{ font-size:18px; }
-  .stack-btn.launching{ opacity:0; pointer-events:none; }
+    /* ============================================================
+       ỨNG DỤNG CHÍNH
+       ============================================================ */
+    .app {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  /* ---- Khu vực chính giữa ---- */
-  .hero{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:26px;
-    padding: 20px 20px 60px;
-    text-align:center;
-  }
+    /* ---- STACK NÚT GÓC TRÊN PHẢI (3 + donate) ---- */
+    .stack {
+      position: fixed;
+      top: 26px;
+      right: 26px;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-end;
+    }
 
-  .headline-wrap{ overflow:visible; }
-  .gold-text{
-    font-family:'Great Vibes', cursive;
-    font-weight:400;
-    font-size: clamp(2.6rem, 8vw, 5.4rem);
-    line-height:1.1;
-    background: linear-gradient(90deg, var(--gold-3), var(--gold-2) 25%, #fff6d8 50%, var(--gold-2) 75%, var(--gold-3));
-    background-size: 300% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    filter: drop-shadow(0 4px 18px rgba(201,154,46,0.25));
-    display:inline-block;
-    clip-path: inset(0 100% 0 0);
-    animation:
-      draw 2.4s cubic-bezier(.65,0,.35,1) .3s forwards,
-      shine 5s linear 2.7s infinite;
-  }
-  @keyframes draw{ to{ clip-path: inset(0 0% 0 0); } }
-  @keyframes shine{ 0%{ background-position:0% 50%; } 100%{ background-position:300% 50%; } }
+    .stack-btn {
+      width: 220px;
+      padding: 15px 20px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-dark);
+      text-align: left;
+      cursor: pointer;
+      transform: translateX(calc(var(--i) * 6px)) rotate(calc(var(--i) * -1.6deg));
+      transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, opacity .3s ease;
+      background: var(--glass);
+      backdrop-filter: blur(24px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    }
+    .stack-btn:hover {
+      transform: translateY(-4px) translateX(calc(var(--i) * 6px)) rotate(0deg) scale(1.03);
+      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    }
+    .stack-btn .ico {
+      font-size: 18px;
+    }
+    .stack-btn.launching {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-  .subtitle{
-    font-size:15px;
-    color:var(--text-soft);
-    letter-spacing:.5px;
-    opacity:0;
-    animation: fade-up .8s ease 2.6s forwards;
-  }
-  @keyframes fade-up{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:translateY(0);} }
+    /* ---- KHU VỰC CHÍNH GIỮA ---- */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 26px;
+      padding: 20px 20px 60px;
+      text-align: center;
+    }
 
-  /* ---- Bánh kem giữa màn ---- */
-  .cake-wrap{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-    cursor:pointer;
-    user-select:none;
-  }
-  .cake{
-    font-size: clamp(64px, 14vw, 108px);
-    filter: drop-shadow(0 18px 30px rgba(160,120,90,0.28));
-    animation: bob 3.2s ease-in-out infinite;
-    transition: transform .3s cubic-bezier(.2,.8,.2,1);
-  }
-  .cake-wrap:hover .cake{ transform: scale(1.08) rotate(-2deg); }
-  .cake-wrap:active .cake{ transform: scale(.96); }
-  @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-10px);} }
-  .cake-hint{
-    font-size:13px;
-    color:var(--text-soft);
-    padding:8px 16px;
-    border-radius:999px;
-    background: var(--glass);
-    backdrop-filter: blur(14px);
-    border:1px solid var(--glass-border);
-  }
+    .headline-wrap {
+      overflow: visible;
+      perspective: 600px;
+    }
 
-  /* ---- Đếm ngược ---- */
-  .countdown{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .cd-box{
-    width:76px;
-    padding:14px 0 10px;
-    border-radius:18px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:2px;
-  }
-  .cd-num{ font-size:26px; font-weight:800; color:var(--text-dark); font-variant-numeric: tabular-nums; }
-  .cd-label{ font-size:10px; letter-spacing:.6px; text-transform:uppercase; color:var(--text-soft); }
-  .cd-target{ font-size:12px; color:var(--text-soft); margin-top:2px; }
+    .gold-text {
+      font-family: 'Great Vibes', cursive;
+      font-weight: 400;
+      font-size: clamp(3.2rem, 10vw, 6.2rem);
+      line-height: 1.1;
+      background: linear-gradient(90deg, var(--gold-3), var(--gold-2) 25%, #fff6d8 50%, var(--gold-2) 75%, var(--gold-3));
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      clip-path: inset(0 100% 0 0);
+      animation:
+        draw 2.4s cubic-bezier(.65, 0, .35, 1) .3s forwards,
+        shine 5s linear 2.7s infinite;
+      transform: rotateX(3deg) scale(1.02);
+      text-shadow:
+        0 2px 4px rgba(201, 154, 46, 0.2),
+        0 8px 20px rgba(201, 154, 46, 0.15),
+        0 -2px 6px rgba(255, 255, 255, 0.6);
+      /* 3D & nét hơn */
+    }
 
-  /* ============================================================
-     MODAL: từ nút bay trượt ra giữa & phóng to (Liquid Glass)
-     ============================================================ */
-  .modal-overlay{
-    position:fixed; inset:0;
-    background: rgba(120,110,140,0.18);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    z-index:40;
-    opacity:0; visibility:hidden;
-    transition: opacity .4s ease, visibility .4s ease;
-  }
-  .modal-overlay.show{ opacity:1; visibility:visible; }
+    @keyframes draw {
+      to {
+        clip-path: inset(0 0% 0 0);
+      }
+    }
+    @keyframes shine {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 300% 50%;
+      }
+    }
 
-  .modal-panel{
-    position:fixed;
-    z-index:41;
-    border-radius:20px;
-    overflow:hidden;
-    opacity:0;
-    visibility:hidden;
-    background: var(--glass-strong);
-    backdrop-filter: blur(28px) saturate(190%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255,255,255,0.9);
-  }
-  .modal-panel.show{ opacity:1; visibility:visible; }
+    .subtitle {
+      font-size: 15px;
+      color: var(--text-soft);
+      letter-spacing: .5px;
+      opacity: 0;
+      animation: fade-up .8s ease 2.6s forwards;
+    }
 
-  .modal-inner{
-    height:100%;
-    display:flex;
-    flex-direction:column;
-    padding:28px 26px 22px;
-    overflow-y:auto;
-  }
-  .modal-close{
-    position:absolute; top:16px; right:16px;
-    width:34px; height:34px;
-    border-radius:50%;
-    border:1px solid var(--glass-border);
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(10px);
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-    font-size:16px;
-    color:var(--text-soft);
-    transition: transform .2s ease, background .2s ease;
-  }
-  .modal-close:hover{ transform: rotate(90deg); background: rgba(255,255,255,0.85); }
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  .modal-title{ font-size:20px; font-weight:700; margin-bottom:4px; }
-  .modal-sub{ font-size:13px; color:var(--text-soft); margin-bottom:20px; }
+    /* ---- BÁNH KEM GIỮA MÀN (click mở modal gửi lời chúc) ---- */
+    .cake-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
 
-  /* Hồ sơ */
-  .profile-avatar{
-    width:84px; height:84px; border-radius:50%;
-    background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-    display:flex; align-items:center; justify-content:center;
-    font-size:36px;
-    margin: 0 auto 14px;
-    box-shadow: 0 10px 24px rgba(247,201,72,0.35);
-  }
-  .profile-name{ text-align:center; font-size:18px; font-weight:700; }
-  .profile-role{ text-align:center; font-size:13px; color:var(--text-soft); margin-bottom:18px; }
-  .profile-line{
-    display:flex; justify-content:space-between;
-    padding:12px 0; font-size:13.5px;
-    border-bottom:1px solid rgba(0,0,0,0.06);
-  }
-  .profile-line span:first-child{ color:var(--text-soft); }
-  .profile-line span:last-child{ font-weight:600; }
+    .cake {
+      font-size: clamp(64px, 14vw, 108px);
+      filter: drop-shadow(0 18px 30px rgba(160, 120, 90, 0.28));
+      animation: bob 3.2s ease-in-out infinite;
+      transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+    }
+    .cake-wrap:hover .cake {
+      transform: scale(1.08) rotate(-2deg);
+    }
+    .cake-wrap:active .cake {
+      transform: scale(.96);
+    }
 
-  /* Lời chúc */
-  .wish-form{ display:flex; flex-direction:column; gap:10px; margin-bottom:18px; }
-  .wish-list{ display:flex; flex-direction:column; gap:10px; }
-  .wish-item{
-    padding:14px 16px;
-    border-radius:16px;
-    background: rgba(255,255,255,0.55);
-    border:1px solid rgba(255,255,255,0.8);
-  }
-  .wish-name{ font-size:13px; font-weight:700; margin-bottom:4px; color:var(--gold-3); }
-  .wish-msg{ font-size:13.5px; color:var(--text-dark); line-height:1.5; }
-  .wish-empty{ text-align:center; color:var(--text-soft); font-size:13px; padding:20px 0; }
+    @keyframes bob {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
 
-  /* Khoảnh khắc / album */
-  .gallery{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:12px;
-  }
-  .gallery-card{
-    aspect-ratio: 1;
-    border-radius:16px;
-    display:flex; align-items:flex-end;
-    padding:10px;
-    font-size:12px; font-weight:600; color:#fff;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.25);
-  }
-  .g1{ background: linear-gradient(135deg,#ffb6c1,#ff8fab); }
-  .g2{ background: linear-gradient(135deg,#a8d8ff,#7cb9ff); }
-  .g3{ background: linear-gradient(135deg,#ffe08a,#ffc857); }
-  .g4{ background: linear-gradient(135deg,#c9b6ff,#a78bfa); }
+    .cake-hint {
+      font-size: 13px;
+      color: var(--text-soft);
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+    }
 
-  /* ---------- Responsive ---------- */
-  @media (max-width: 640px){
-    .stack{ top:16px; right:16px; }
-    .stack-btn{ width:180px; padding:12px 16px; font-size:13px; }
-    .cd-box{ width:64px; padding:10px 0 8px; }
-    .cd-num{ font-size:20px; }
-    .gallery{ grid-template-columns: 1fr 1fr; }
-    .modal-inner{ padding:24px 18px 18px; }
-  }
+    /* ---- ĐẾM NGƯỢC ---- */
+    .countdown {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
-  }
-</style>
+    .cd-box {
+      width: 76px;
+      padding: 14px 0 10px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .cd-num {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-dark);
+      font-variant-numeric: tabular-nums;
+    }
+    .cd-label {
+      font-size: 10px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+    .cd-target {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-top: 2px;
+    }
+
+    /* ============================================================
+       MODAL (Liquid Glass, spring animation)
+       ============================================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(120, 110, 140, 0.20);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 40;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .4s ease, visibility .4s ease;
+    }
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-panel {
+      position: fixed;
+      z-index: 41;
+      border-radius: 20px;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      background: var(--glass-strong);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      transition: left .6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        top .6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        width .6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        height .6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        border-radius .5s ease,
+        opacity .4s ease;
+    }
+    .modal-panel.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-inner {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 26px 22px;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--text-soft);
+      transition: transform .2s ease, background .2s ease;
+    }
+    .modal-close:hover {
+      transform: rotate(90deg);
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .modal-sub {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 20px;
+    }
+
+    .profile-avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 14px;
+      box-shadow: 0 10px 24px rgba(247, 201, 72, 0.35);
+    }
+    .profile-name {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .profile-role {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 18px;
+    }
+    .profile-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      font-size: 13.5px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .profile-line span:first-child {
+      color: var(--text-soft);
+    }
+    .profile-line span:last-child {
+      font-weight: 600;
+    }
+
+    .wish-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .wish-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wish-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    .wish-name {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--gold-3);
+    }
+    .wish-msg {
+      font-size: 13.5px;
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+    .wish-empty {
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 13px;
+      padding: 20px 0;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .gallery-card {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+    .g1 {
+      background: linear-gradient(135deg, #ffb6c1, #ff8fab);
+    }
+    .g2 {
+      background: linear-gradient(135deg, #a8d8ff, #7cb9ff);
+    }
+    .g3 {
+      background: linear-gradient(135deg, #ffe08a, #ffc857);
+    }
+    .g4 {
+      background: linear-gradient(135deg, #c9b6ff, #a78bfa);
+    }
+
+    /* ============================================================
+       ĐĨA THAN (góc dưới trái)
+       ============================================================ */
+    .record-player {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 25;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .record-disc {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #3a3a3a, #111 80%, #222);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 -4px 12px rgba(0, 0, 0, 0.8);
+      position: relative;
+      animation: spin-disc 4s linear infinite;
+      transition: transform 0.2s;
+      border: 2px solid #555;
+    }
+    .record-disc::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle, #ccc, #888);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+    }
+    .record-disc .label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f7c948, #e0a830);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #3a2a1a;
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .record-arm {
+      width: 12px;
+      height: 60px;
+      background: linear-gradient(135deg, #888, #444);
+      border-radius: 6px 6px 0 0;
+      transform-origin: bottom center;
+      transform: rotate(-20deg) translateX(10px);
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .record-arm::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #aaa, #555);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    @keyframes spin-disc {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .record-player .status {
+      font-size: 12px;
+      color: var(--text-soft);
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      padding: 6px 14px;
+      border-radius: 30px;
+      border: 1px solid var(--glass-border);
+      white-space: nowrap;
+    }
+
+    /* ---- ALBUM PANEL (trượt từ dưới trái) ---- */
+    .album-panel {
+      position: fixed;
+      bottom: 140px;
+      left: 30px;
+      z-index: 26;
+      width: 320px;
+      max-height: 380px;
+      background: var(--glass-strong);
+      backdrop-filter: blur(30px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      padding: 20px 18px;
+      transform: translateY(20px) scale(0.95);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.4s ease, visibility 0.4s ease;
+      overflow-y: auto;
+      pointer-events: none;
+    }
+    .album-panel.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .album-panel h4 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .album-panel .song-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .album-panel .song-item:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+    .album-panel .song-item.active {
+      color: var(--gold-3);
+      font-weight: 600;
+    }
+    .album-panel .controls {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+    .album-panel .controls button {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      padding: 8px 18px;
+      font-size: 14px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s;
+      font-weight: 600;
+    }
+    .album-panel .controls button:hover {
+      transform: scale(1.05);
+    }
+
+    /* ============================================================
+       BÁNH KEM MINECRAFT THEO CHUỘT
+       ============================================================ */
+    .minecraft-cake {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+      font-size: 56px;
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.3));
+      transition: none;
+      image-rendering: pixelated;
+      /* tạo hiệu ứng khối */;
+    }
+    .minecraft-cake::before {
+      content: '🎂';
+      display: block;
+      filter: drop-shadow(0 4px 0 #8a6a4a) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
+      transform: scale(1);
+    }
+    /* thêm hiệu ứng pixel cho bánh */
+    .minecraft-cake.pixelated {
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+    }
+
+    /* ============================================================
+       CANVAS MINECRAFT PARTICLES & PHÁO HOA
+       ============================================================ */
+    #mcCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 640px) {
+      .stack {
+        top: 16px;
+        right: 16px;
+      }
+      .stack-btn {
+        width: 180px;
+        padding: 12px 16px;
+        font-size: 13px;
+      }
+      .cd-box {
+        width: 64px;
+        padding: 10px 0 8px;
+      }
+      .cd-num {
+        font-size: 20px;
+      }
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+      }
+      .modal-inner {
+        padding: 24px 18px 18px;
+      }
+      .record-player {
+        bottom: 20px;
+        left: 16px;
+      }
+      .record-disc {
+        width: 70px;
+        height: 70px;
+      }
+      .album-panel {
+        width: 260px;
+        left: 16px;
+        bottom: 100px;
+      }
+      .minecraft-cake {
+        font-size: 40px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- ====== NỀN ====== -->
   <div class="bg"></div>
   <div class="blob blob1"></div>
   <div class="blob blob2"></div>
   <div class="blob blob3"></div>
   <div class="blob blob4"></div>
 
-  <div class="ambient" id="ambient"></div>
+  <!-- ====== CANVAS PARTICLES (Minecraft) ====== -->
+  <canvas id="mcCanvas"></canvas>
 
-  <!-- ============ CỔNG VÀO ============ -->
+  <!-- ====== CỔNG VÀO ====== -->
   <div class="gate" id="gate">
-    <div class="gate-card glass">
+    <div class="gate-card glass-strong">
       <div class="gate-emoji">🎉</div>
       <h1>Chào mừng đến bữa tiệc!</h1>
       <p>Nhập tên của bạn để bước vào nhé</p>
@@ -438,15 +923,18 @@
     </div>
   </div>
 
-  <!-- ============ ỨNG DỤNG CHÍNH ============ -->
+  <!-- ====== ỨNG DỤNG CHÍNH ====== -->
   <div class="app" id="app">
 
+    <!-- STACK NÚT (4 cái) -->
     <div class="stack" id="stack">
-      <button class="stack-btn glass" data-panel="profile" style="--i:0"><span class="ico">👤</span> Hồ Sơ Của Tớ</button>
-      <button class="stack-btn glass" data-panel="wishes" style="--i:1"><span class="ico">💌</span> Lời Chúc</button>
-      <button class="stack-btn glass" data-panel="gallery" style="--i:2"><span class="ico">📸</span> Khoảnh Khắc</button>
+      <button class="stack-btn" data-panel="profile" style="--i:0"><span class="ico">👤</span> Hồ Sơ Của Tớ</button>
+      <button class="stack-btn" data-panel="wishes" style="--i:1"><span class="ico">💌</span> Lời Chúc</button>
+      <button class="stack-btn" data-panel="gallery" style="--i:2"><span class="ico">📸</span> Khoảnh Khắc</button>
+      <button class="stack-btn" data-panel="donate" style="--i:3"><span class="ico">💖</span> Donate for Saky</button>
     </div>
 
+    <!-- NỘI DUNG CHÍNH -->
     <main class="hero">
       <div class="headline-wrap">
         <h1 class="gold-text">Chúc Mừng Sinh Nhật</h1>
@@ -468,296 +956,771 @@
     </main>
   </div>
 
+  <!-- ====== MODAL ====== -->
   <div class="modal-overlay" id="modalOverlay"></div>
   <div class="modal-panel" id="modalPanel">
     <div class="modal-inner" id="modalInner"></div>
     <div class="modal-close" id="modalClose">✕</div>
   </div>
 
-<script>
-(function(){
-  "use strict";
+  <!-- ====== ĐĨA THAN + ALBUM ====== -->
+  <div class="record-player" id="recordPlayer">
+    <div class="record-disc" id="recordDisc">
+      <div class="label">🎵</div>
+    </div>
+    <div class="record-arm"></div>
+    <span class="status" id="recordStatus">▶ Play</span>
+  </div>
 
-  /* =========================================================
-     1) CỔNG VÀO — nhập tên trước khi vào
-     ========================================================= */
-  const gate = document.getElementById('gate');
-  const guestNameInput = document.getElementById('guestNameInput');
-  const enterBtn = document.getElementById('enterBtn');
-  let guestName = '';
+  <div class="album-panel" id="albumPanel">
+    <h4>📀 Album <span style="font-size:12px;font-weight:400;color:var(--text-soft);">2 bài</span></h4>
+    <div id="songList"></div>
+    <div class="controls">
+      <button id="prevSong">⏮</button>
+      <button id="playPauseBtn">⏸</button>
+      <button id="nextSong">⏭</button>
+    </div>
+  </div>
 
-  function enterParty(){
-    guestName = guestNameInput.value.trim() || 'Bạn';
-    gate.classList.add('hidden');
-    startAmbientParticles();
-  }
-  enterBtn.addEventListener('click', enterParty);
-  guestNameInput.addEventListener('keydown', e => { if(e.key === 'Enter') enterParty(); });
+  <!-- ====== BÁNH KEM MINECRAFT THEO CHUỘT ====== -->
+  <div class="minecraft-cake pixelated" id="minecraftCake">🎂</div>
 
-  /* =========================================================
-     2) HẠT TRÔI — trái tim & bong bóng trắng rơi nhẹ nhàng
-     ========================================================= */
-  const ambient = document.getElementById('ambient');
-  const HEART = ['💗','💕','🤍'];
-  let particleTimer = null;
+  <!-- ====== AUDIO (ẩn) ====== -->
+  <audio id="audio1" preload="auto">
+    <!-- Thay src bằng link nhạc thật -->
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio2" preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+  </audio>
 
-  function spawnParticle(){
-    const el = document.createElement('div');
-    el.className = 'particle';
-    const isHeart = Math.random() < 0.45;
-    const size = isHeart ? (14 + Math.random()*14) : (8 + Math.random()*14);
-    const left = Math.random()*100;
-    const duration = 9 + Math.random()*8;
-    const drift = (Math.random()*140 - 70) + 'px';
-    const spin = (Math.random()*140 - 70) + 'deg';
+  <script>
+    (function() {
+      "use strict";
 
-    el.style.left = left + 'vw';
-    el.style.setProperty('--drift', drift);
-    el.style.setProperty('--spin', spin);
-    el.style.animation = `fall ${duration}s linear forwards`;
+      /* ===========================================================
+         1) CỔNG VÀO
+         =========================================================== */
+      const gate = document.getElementById('gate');
+      const guestNameInput = document.getElementById('guestNameInput');
+      const enterBtn = document.getElementById('enterBtn');
+      let guestName = '';
 
-    if(isHeart){
-      el.textContent = HEART[Math.floor(Math.random()*HEART.length)];
-      el.style.fontSize = size + 'px';
-      el.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.08))';
-    } else {
-      el.style.width = size + 'px';
-      el.style.height = size + 'px';
-      el.style.borderRadius = '50%';
-      el.style.background = 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.35))';
-      el.style.border = '1px solid rgba(255,255,255,0.8)';
-      el.style.boxShadow = '0 2px 10px rgba(255,255,255,0.5)';
-    }
+      function enterParty() {
+        guestName = guestNameInput.value.trim() || 'Bạn';
+        gate.classList.add('hidden');
+        startMinecraftParticles();
+        initRecordPlayer();
+      }
+      enterBtn.addEventListener('click', enterParty);
+      guestNameInput.addEventListener('keydown', e => { if (e.key === 'Enter') enterParty(); });
 
-    ambient.appendChild(el);
-    setTimeout(() => el.remove(), duration * 1000 + 200);
-  }
+      /* ===========================================================
+         2) MINECRAFT PARTICLES (Canvas)
+         =========================================================== */
+      const canvas = document.getElementById('mcCanvas');
+      const ctx = canvas.getContext('2d');
+      let W, H;
 
-  function startAmbientParticles(){
-    if(particleTimer) return;
-    for(let i=0;i<6;i++) setTimeout(spawnParticle, i*300);
-    particleTimer = setInterval(spawnParticle, 650);
-  }
+      function resizeCanvas() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
 
-  /* =========================================================
-     3) ĐẾM NGƯỢC — đến 31/07
-     ========================================================= */
-  // 🎯 Đổi ngày mục tiêu ở đây nếu cần
-  const TARGET = new Date(2026, 6, 31, 0, 0, 0); // Tháng 7 = index 6
+      // Pixel art heart (8x8)
+      const heartPixels = [
+        [0, 0, 1, 0, 0, 1, 0, 0],
+        [0, 1, 1, 1, 1, 1, 1, 0],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [0, 1, 1, 1, 1, 1, 1, 0],
+        [0, 0, 1, 1, 1, 1, 0, 0],
+        [0, 0, 0, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0]
+      ];
 
-  const cdDays = document.getElementById('cdDays');
-  const cdHours = document.getElementById('cdHours');
-  const cdMins = document.getElementById('cdMins');
-  const cdSecs = document.getElementById('cdSecs');
-  const cdTarget = document.getElementById('cdTarget');
+      function drawHeart(ctx, x, y, size, color) {
+        const px = size / 8;
+        for (let row = 0; row < 8; row++) {
+          for (let col = 0; col < 8; col++) {
+            if (heartPixels[row][col]) {
+              ctx.fillStyle = color;
+              ctx.fillRect(x + col * px, y + row * px, px, px);
+            }
+          }
+        }
+      }
 
-  cdTarget.textContent = 'Hướng tới 31/07/' + TARGET.getFullYear();
+      // Bubble Minecraft: khối vuông trong suốt viền trắng
+      function drawMinecraftBubble(ctx, x, y, size) {
+        const half = size / 2;
+        ctx.shadowColor = 'rgba(255,255,255,0.6)';
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = 'rgba(255,255,255,0.25)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+        ctx.lineWidth = 2;
+        ctx.fillRect(x - half, y - half, size, size);
+        ctx.strokeRect(x - half, y - half, size, size);
+        // highlight
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.fillRect(x - half + 4, y - half + 4, size * 0.3, size * 0.2);
+        ctx.shadowColor = 'transparent';
+      }
 
-  function pad(n){ return String(n).padStart(2,'0'); }
+      // Particle class
+      class MCParticle {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.type = Math.random() < 0.5 ? 'heart' : 'bubble';
+          this.x = Math.random() * W;
+          this.y = -40 - Math.random() * 120;
+          this.size = 14 + Math.random() * 22;
+          this.speedY = 0.6 + Math.random() * 1.2;
+          this.speedX = (Math.random() - 0.5) * 0.6;
+          this.opacity = 0.7 + Math.random() * 0.3;
+          this.color = ['#ff4d6d', '#ff6b8a', '#ff8fa3', '#ffb3c1'][Math.floor(Math.random() * 4)];
+          this.drift = (Math.random() - 0.5) * 20;
+          this.phase = Math.random() * Math.PI * 2;
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX + Math.sin(this.phase) * 0.15;
+          this.phase += 0.02;
+          if (this.y > H + 60) this.reset();
+          if (this.x < -60) this.x = W + 40;
+          if (this.x > W + 60) this.x = -40;
+        }
+        draw(ctx) {
+          ctx.globalAlpha = this.opacity;
+          if (this.type === 'heart') {
+            drawHeart(ctx, this.x - this.size / 2, this.y - this.size / 2, this.size, this.color);
+          } else {
+            drawMinecraftBubble(ctx, this.x, this.y, this.size);
+          }
+          ctx.globalAlpha = 1;
+        }
+      }
 
-  function updateCountdown(){
-    const diff = TARGET - new Date();
-    if(diff <= 0){
-      cdDays.textContent = '00'; cdHours.textContent = '00';
-      cdMins.textContent = '00'; cdSecs.textContent = '00';
-      cdTarget.textContent = '🎉 Chúc mừng sinh nhật! 🎉';
-      return;
-    }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    cdDays.textContent = pad(d);
-    cdHours.textContent = pad(h);
-    cdMins.textContent = pad(m);
-    cdSecs.textContent = pad(s);
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+      let particles = [];
+      const MAX_PARTICLES = 45;
 
-  /* =========================================================
-     4) LỜI CHÚC — lưu tạm trong phiên làm việc
-     ========================================================= */
-  let wishes = [
-    { name: 'Ban Tổ Chức', msg: 'Chúc bạn một tuổi mới thật nhiều niềm vui và may mắn! 🎉' }
-  ];
+      function startMinecraftParticles() {
+        if (particles.length) return;
+        for (let i = 0; i < MAX_PARTICLES; i++) {
+          const p = new MCParticle();
+          p.y = Math.random() * H;
+          particles.push(p);
+        }
+        animateParticles();
+      }
 
-  function renderWishList(){
-    if(wishes.length === 0) return '<div class="wish-empty">Chưa có lời chúc nào — hãy là người đầu tiên! 💌</div>';
-    return wishes.map(w => `
-      <div class="wish-item">
-        <div class="wish-name">${escapeHtml(w.name)}</div>
-        <div class="wish-msg">${escapeHtml(w.msg)}</div>
-      </div>
-    `).join('');
-  }
+      function animateParticles() {
+        ctx.clearRect(0, 0, W, H);
+        for (const p of particles) {
+          p.update();
+          p.draw(ctx);
+        }
+        requestAnimationFrame(animateParticles);
+      }
 
-  function escapeHtml(str){
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
+      // ===== PHÁO HOA =====
+      let fireworksActive = false;
+      let fireworkParticles = [];
 
-  /* =========================================================
-     5) NỘI DUNG PANEL (Hồ sơ / Lời chúc / Khoảnh khắc / Gửi lời chúc)
-     ========================================================= */
-  function profileContent(){
-    return `
-      <div class="profile-avatar">🥳</div>
-      <div class="profile-name">Tên Bạn Ở Đây</div>
-      <div class="profile-role">Nhân vật chính của bữa tiệc hôm nay</div>
-      <div class="profile-line"><span>Ngày đặc biệt</span><span>31 · 07</span></div>
-      <div class="profile-line"><span>Lời chúc đã nhận</span><span id="wishCountStat">${wishes.length}</span></div>
-      <div class="profile-line"><span>Khách đang xem</span><span>${escapeHtml(guestName)}</span></div>
-      <p style="margin-top:16px;font-size:12.5px;color:var(--text-soft);text-align:center;">
-        ✏️ Sửa tên & thông tin trong hàm <code>profileContent()</code> ở file HTML.
-      </p>
-    `;
-  }
+      function spawnFirework(x, y) {
+        const colors = ['#ff0', '#f0f', '#0ff', '#f44', '#4f4', '#44f', '#ff8', '#f8f', '#8ff'];
+        for (let i = 0; i < 60; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 2 + Math.random() * 6;
+          fireworkParticles.push({
+            x,
+            y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1,
+            life: 1,
+            decay: 0.008 + Math.random() * 0.015,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            size: 3 + Math.random() * 4
+          });
+        }
+      }
 
-  function wishesContent(){
-    return `
-      <div class="wish-list" id="wishListView">${renderWishList()}</div>
-    `;
-  }
+      function launchFirework() {
+        if (fireworksActive) return;
+        fireworksActive = true;
+        // bắn nhiều quả pháo
+        for (let i = 0; i < 8; i++) {
+          setTimeout(() => {
+            const x = W * (0.1 + Math.random() * 0.8);
+            const y = H * (0.1 + Math.random() * 0.6);
+            spawnFirework(x, y);
+          }, i * 300);
+        }
+        // duy trì pháo hoa trong vài giây
+        let frames = 0;
+        const maxFrames = 300;
 
-  function galleryContent(){
-    return `
-      <div class="gallery">
-        <div class="gallery-card g1">Khoảnh khắc 1</div>
-        <div class="gallery-card g2">Khoảnh khắc 2</div>
-        <div class="gallery-card g3">Khoảnh khắc 3</div>
-        <div class="gallery-card g4">Khoảnh khắc 4</div>
-      </div>
-      <p style="margin-top:16px;font-size:12.5px;color:var(--text-soft);text-align:center;">
-        📷 Thay các khối màu bằng ảnh thật: <code>background: url('anh.jpg')</code>
-      </p>
-    `;
-  }
+        function drawFireworks() {
+          if (!fireworksActive) return;
+          ctx.clearRect(0, 0, W, H);
+          // vẽ lại particles nền? chúng ta sẽ vẽ chồng lên nhưng tạm thời clear để pháo hoa nổi bật
+          // nhưng vẫn giữ particles nền? để đơn giản ta vẽ pháo hoa lên trên particles
+          // ta sẽ vẽ particles nền trước
+          for (const p of particles) {
+            p.update();
+            p.draw(ctx);
+          }
 
-  function cakeFormContent(){
-    return `
-      <div class="wish-form">
-        <input class="field" id="cakeNameInput" type="text" placeholder="Tên của bạn" value="${escapeHtml(guestName)}" maxlength="30" style="margin-bottom:0;" />
-        <textarea class="field" id="cakeMsgInput" placeholder="Viết lời chúc của bạn..." maxlength="200" style="margin-bottom:0;"></textarea>
-        <button class="btn-primary" id="cakeSubmitBtn">Gửi Lời Chúc 🎂</button>
-      </div>
-      <div class="wish-list" id="cakeWishList">${renderWishList()}</div>
-    `;
-  }
+          for (let i = fireworkParticles.length - 1; i >= 0; i--) {
+            const fp = fireworkParticles[i];
+            fp.x += fp.vx;
+            fp.y += fp.vy;
+            fp.vy += 0.04;
+            fp.life -= fp.decay;
+            if (fp.life <= 0) {
+              fireworkParticles.splice(i, 1);
+              continue;
+            }
+            ctx.globalAlpha = fp.life;
+            ctx.fillStyle = fp.color;
+            ctx.shadowColor = fp.color;
+            ctx.shadowBlur = 12;
+            ctx.beginPath();
+            ctx.arc(fp.x, fp.y, fp.size * fp.life, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+          ctx.globalAlpha = 1;
+          frames++;
+          if (fireworkParticles.length > 0 || frames < maxFrames) {
+            requestAnimationFrame(drawFireworks);
+          } else {
+            fireworksActive = false;
+            // resume particles animation
+            animateParticles();
+          }
+        }
+        // dừng animateParticles tạm thời
+        // nhưng vì chúng ta đã gọi animateParticles liên tục, ta sẽ vẽ pháo hoa chồng lên
+        // bằng cách gọi drawFireworks thay vì animateParticles
+        // ta sẽ dùng một flag để animateParticles dừng lại
+        // nhưng đơn giản ta hủy requestAnimationFrame hiện tại và bắt đầu vẽ pháo hoa
+        // ta sẽ override bằng cách gọi drawFireworks và không gọi animateParticles nữa.
+        // Ta có thể dùng một biến để kiểm soát
+        // Tạm thời ta dừng animateParticles bằng cách không gọi nó nữa, nhưng nó đang chạy vòng lặp.
+        // Cách tốt là tạo một vòng lặp riêng cho pháo hoa và tắt vòng lặp particles.
+        // Để đơn giản, ta sẽ vẽ pháo hoa lên trên canvas mà không xóa particles nền? Vẫn xóa và vẽ lại.
+        // Ta sẽ dùng một biến toàn cục để biết có pháo hoa không.
+        // Trong animateParticles, nếu fireworksActive thì không vẽ particles? Thực tế ta muốn hiển thị cả hai.
+        // Nhưng để rõ ràng, ta sẽ tạm dừng vòng lặp particles và chỉ vẽ pháo hoa.
+        // Ta sẽ bắt đầu một vòng lặp mới.
+        // Thay đổi: trong hàm animateParticles, kiểm tra nếu fireworksActive thì return.
+        // Và gọi drawFireworks.
+        // Ta sẽ override.
+        // Để đơn giản, ta sẽ gọi drawFireworks và không cần animateParticles.
+        // Ta sẽ dùng một biến để ngăn animateParticles chạy.
+        window.__fireworksActive = true;
+        drawFireworks();
+        // sau khi kết thúc, set lại false và khởi động lại animateParticles
+        // Nhưng drawFireworks sẽ tự gọi chính nó, khi kết thúc sẽ set lại và gọi animateParticles.
+        // Ta cần sửa logic.
+        // Tôi sẽ viết lại phần này gọn hơn:
+        // Khi countdown về 0, gọi launchFireworks()
+        // launchFireworks sẽ tạo các hạt và bắt đầu vòng lặp riêng.
+        // Trong vòng lặp đó, vẽ particles nền + pháo hoa.
+        // Ta sẽ không dùng animateParticles nữa, mà dùng một hàm render kết hợp.
+        // Vì vậy tôi sẽ tái cấu trúc: có một hàm render chính.
+      }
 
-  const PANELS = {
-    profile: { title: 'Hồ Sơ Của Tớ', sub: 'Vài điều nho nhỏ về nhân vật chính hôm nay', render: profileContent },
-    wishes:  { title: 'Lời Chúc Từ Mọi Người', sub: `${wishes.length} lời chúc đã gửi đến`, render: wishesContent },
-    gallery: { title: 'Khoảnh Khắc Đáng Nhớ', sub: 'Những kỷ niệm đẹp nhất', render: galleryContent },
-    cake:    { title: 'Gửi Lời Chúc 💌', sub: 'Viết vài dòng thật ấm áp nhé', render: cakeFormContent }
-  };
+      // Chúng ta sẽ tích hợp pháo hoa vào vòng lặp chính.
+      // Tôi sẽ viết lại vòng lặp particles để hỗ trợ pháo hoa.
+      // Dùng một hàm drawFrame.
+      let fireworkMode = false;
 
-  /* =========================================================
-     6) MODAL: hiệu ứng FLIP — bay từ nút ra giữa & phóng to
-     ========================================================= */
-  const modalOverlay = document.getElementById('modalOverlay');
-  const modalPanel = document.getElementById('modalPanel');
-  const modalInner = document.getElementById('modalInner');
-  const modalClose = document.getElementById('modalClose');
-  let originRect = null;
-  let originEl = null;
+      function drawFrame() {
+        ctx.clearRect(0, 0, W, H);
+        // Vẽ particles nền
+        for (const p of particles) {
+          p.update();
+          p.draw(ctx);
+        }
+        // Vẽ pháo hoa nếu có
+        for (let i = fireworkParticles.length - 1; i >= 0; i--) {
+          const fp = fireworkParticles[i];
+          fp.x += fp.vx;
+          fp.y += fp.vy;
+          fp.vy += 0.04;
+          fp.life -= fp.decay;
+          if (fp.life <= 0) {
+            fireworkParticles.splice(i, 1);
+            continue;
+          }
+          ctx.globalAlpha = fp.life;
+          ctx.fillStyle = fp.color;
+          ctx.shadowColor = fp.color;
+          ctx.shadowBlur = 12;
+          ctx.beginPath();
+          ctx.arc(fp.x, fp.y, fp.size * fp.life, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+        ctx.globalAlpha = 1;
+        if (fireworkParticles.length > 0 || fireworkMode) {
+          requestAnimationFrame(drawFrame);
+        } else {
+          // Nếu không có pháo hoa, tiếp tục vòng lặp bình thường
+          if (!fireworkMode) requestAnimationFrame(drawFrame);
+        }
+      }
 
-  function openPanel(key, triggerEl){
-    const panel = PANELS[key];
-    originEl = triggerEl;
-    originRect = triggerEl.getBoundingClientRect();
+      // Sửa hàm animateParticles thành drawFrame
+      function startRenderLoop() {
+        if (!window._renderLoop) {
+          window._renderLoop = true;
+          drawFrame();
+        }
+      }
 
-    modalInner.innerHTML = `
-      <div class="modal-title">${panel.title}</div>
-      <div class="modal-sub">${panel.sub}</div>
-      ${panel.render()}
-    `;
+      // Thay thế animateParticles bằng startRenderLoop
+      function startMinecraftParticles() {
+        if (particles.length === 0) {
+          for (let i = 0; i < MAX_PARTICLES; i++) {
+            const p = new MCParticle();
+            p.y = Math.random() * H;
+            particles.push(p);
+          }
+        }
+        startRenderLoop();
+      }
 
-    if(key === 'cake') wireCakeForm();
+      // Hàm kích hoạt pháo hoa
+      function triggerFireworks() {
+        if (fireworkMode) return;
+        fireworkMode = true;
+        // bắn nhiều quả
+        for (let i = 0; i < 10; i++) {
+          setTimeout(() => {
+            const x = W * (0.1 + Math.random() * 0.8);
+            const y = H * (0.1 + Math.random() * 0.6);
+            spawnFirework(x, y);
+          }, i * 250);
+        }
+        // tự động tắt sau 6 giây
+        setTimeout(() => {
+          fireworkMode = false;
+          if (fireworkParticles.length === 0) {
+            // không cần làm gì
+          }
+        }, 6000);
+        // nếu vòng lặp đang chạy, nó sẽ tiếp tục vẽ pháo hoa cho đến khi hết
+        startRenderLoop();
+      }
 
-    // vị trí ban đầu = đúng vị trí & kích thước của nút/bánh
-    modalPanel.style.transition = 'none';
-    modalPanel.style.left = originRect.left + 'px';
-    modalPanel.style.top = originRect.top + 'px';
-    modalPanel.style.width = originRect.width + 'px';
-    modalPanel.style.height = originRect.height + 'px';
-    modalPanel.style.borderRadius = '18px';
-    modalPanel.classList.add('show');
-    modalOverlay.classList.add('show');
-    if(triggerEl.classList) triggerEl.classList.add('launching');
+      window.triggerFireworks = triggerFireworks;
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const w = Math.min(480, window.innerWidth * 0.9);
-        const h = Math.min(560, window.innerHeight * 0.82);
-        modalPanel.style.transition = 'left .55s cubic-bezier(.2,.85,.25,1), top .55s cubic-bezier(.2,.85,.25,1), width .55s cubic-bezier(.2,.85,.25,1), height .55s cubic-bezier(.2,.85,.25,1), border-radius .5s ease';
-        modalPanel.style.left = (window.innerWidth/2 - w/2) + 'px';
-        modalPanel.style.top = (window.innerHeight/2 - h/2) + 'px';
-        modalPanel.style.width = w + 'px';
-        modalPanel.style.height = h + 'px';
-        modalPanel.style.borderRadius = '26px';
+      /* ===========================================================
+         3) ĐẾM NGƯỢC & PHÁO HOA
+         =========================================================== */
+      const TARGET = new Date(2026, 6, 31, 0, 0, 0);
+      const cdDays = document.getElementById('cdDays');
+      const cdHours = document.getElementById('cdHours');
+      const cdMins = document.getElementById('cdMins');
+      const cdSecs = document.getElementById('cdSecs');
+      const cdTarget = document.getElementById('cdTarget');
+      cdTarget.textContent = 'Hướng tới 31/07/' + TARGET.getFullYear();
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      let countdownReachedZero = false;
+
+      function updateCountdown() {
+        const diff = TARGET - new Date();
+        if (diff <= 0) {
+          cdDays.textContent = '00';
+          cdHours.textContent = '00';
+          cdMins.textContent = '00';
+          cdSecs.textContent = '00';
+          cdTarget.textContent = '🎉 Chúc mừng sinh nhật! 🎉';
+          if (!countdownReachedZero) {
+            countdownReachedZero = true;
+            // Kích hoạt pháo hoa
+            if (window.triggerFireworks) window.triggerFireworks();
+          }
+          return;
+        }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        cdDays.textContent = pad(d);
+        cdHours.textContent = pad(h);
+        cdMins.textContent = pad(m);
+        cdSecs.textContent = pad(s);
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      /* ===========================================================
+         4) LỜI CHÚC
+         =========================================================== */
+      let wishes = [
+        { name: 'Ban Tổ Chức', msg: 'Chúc bạn một tuổi mới thật nhiều niềm vui và may mắn! 🎉' }
+      ];
+
+      function renderWishList() {
+        if (wishes.length === 0) return '<div class="wish-empty">Chưa có lời chúc nào — hãy là người đầu tiên! 💌</div>';
+        return wishes.map(w =>
+          `<div class="wish-item"><div class="wish-name">${escapeHtml(w.name)}</div><div class="wish-msg">${escapeHtml(w.msg)}</div></div>`
+        ).join('');
+      }
+
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      /* ===========================================================
+         5) NỘI DUNG PANEL
+         =========================================================== */
+      function profileContent() {
+        return `
+          <div class="profile-avatar">🥳</div>
+          <div class="profile-name">Tên Bạn Ở Đây</div>
+          <div class="profile-role">Nhân vật chính của bữa tiệc hôm nay</div>
+          <div class="profile-line"><span>Ngày đặc biệt</span><span>31 · 07</span></div>
+          <div class="profile-line"><span>Lời chúc đã nhận</span><span id="wishCountStat">${wishes.length}</span></div>
+          <div class="profile-line"><span>Khách đang xem</span><span>${escapeHtml(guestName)}</span></div>
+          <p style="margin-top:16px;font-size:12.5px;color:var(--text-soft);text-align:center;">✏️ Sửa tên & thông tin trong hàm <code>profileContent()</code></p>
+        `;
+      }
+
+      function wishesContent() {
+        return `<div class="wish-list" id="wishListView">${renderWishList()}</div>`;
+      }
+
+      function galleryContent() {
+        return `
+          <div class="gallery">
+            <div class="gallery-card g1">Khoảnh khắc 1</div>
+            <div class="gallery-card g2">Khoảnh khắc 2</div>
+            <div class="gallery-card g3">Khoảnh khắc 3</div>
+            <div class="gallery-card g4">Khoảnh khắc 4</div>
+          </div>
+          <p style="margin-top:16px;font-size:12.5px;color:var(--text-soft);text-align:center;">📷 Thay các khối màu bằng ảnh thật: <code>background: url('anh.jpg')</code></p>
+        `;
+      }
+
+      function donateContent() {
+        return `
+          <div style="text-align:center;padding:10px 0;">
+            <h3 style="margin-bottom:10px;">💖 Donate for Saky</h3>
+            <p style="font-size:14px;color:var(--text-soft);margin-bottom:14px;">Cảm ơn bạn đã ủng hộ!</p>
+            <div style="background:var(--glass);border-radius:20px;padding:20px;border:1px solid var(--glass-border);">
+              <img src="https://via.placeholder.com/300x200?text=Your+Image+Here" alt="donate" style="width:100%;border-radius:16px;display:block;" />
+              <p style="margin-top:10px;font-size:13px;color:var(--text-soft);">(Thay ảnh tại đây)</p>
+            </div>
+          </div>
+        `;
+      }
+
+      function cakeFormContent() {
+        return `
+          <div class="wish-form">
+            <input class="field" id="cakeNameInput" type="text" placeholder="Tên của bạn" value="${escapeHtml(guestName)}" maxlength="30" style="margin-bottom:0;" />
+            <textarea class="field" id="cakeMsgInput" placeholder="Viết lời chúc của bạn..." maxlength="200" style="margin-bottom:0;"></textarea>
+            <button class="btn-primary" id="cakeSubmitBtn">Gửi Lời Chúc 🎂</button>
+          </div>
+          <div class="wish-list" id="cakeWishList">${renderWishList()}</div>
+        `;
+      }
+
+      const PANELS = {
+        profile: { title: 'Hồ Sơ Của Tớ', sub: 'Vài điều nho nhỏ về nhân vật chính hôm nay', render: profileContent },
+        wishes: { title: 'Lời Chúc Từ Mọi Người', sub: `${wishes.length} lời chúc đã gửi đến`, render: wishesContent },
+        gallery: { title: 'Khoảnh Khắc Đáng Nhớ', sub: 'Những kỷ niệm đẹp nhất', render: galleryContent },
+        donate: { title: '💖 Donate for Saky', sub: 'Cảm ơn bạn đã ủng hộ!', render: donateContent },
+        cake: { title: 'Gửi Lời Chúc 💌', sub: 'Viết vài dòng thật ấm áp nhé', render: cakeFormContent }
+      };
+
+      /* ===========================================================
+         6) MODAL (spring animation)
+         =========================================================== */
+      const modalOverlay = document.getElementById('modalOverlay');
+      const modalPanel = document.getElementById('modalPanel');
+      const modalInner = document.getElementById('modalInner');
+      const modalClose = document.getElementById('modalClose');
+      let originRect = null;
+      let originEl = null;
+
+      function openPanel(key, triggerEl) {
+        const panel = PANELS[key];
+        originEl = triggerEl;
+        originRect = triggerEl.getBoundingClientRect();
+
+        modalInner.innerHTML = `
+          <div class="modal-title">${panel.title}</div>
+          <div class="modal-sub">${panel.sub}</div>
+          ${panel.render()}
+        `;
+
+        if (key === 'cake') wireCakeForm();
+
+        modalPanel.style.transition = 'none';
+        modalPanel.style.left = originRect.left + 'px';
+        modalPanel.style.top = originRect.top + 'px';
+        modalPanel.style.width = originRect.width + 'px';
+        modalPanel.style.height = originRect.height + 'px';
+        modalPanel.style.borderRadius = '18px';
+        modalPanel.classList.add('show');
+        modalOverlay.classList.add('show');
+        if (triggerEl.classList) triggerEl.classList.add('launching');
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            const w = Math.min(480, window.innerWidth * 0.9);
+            const h = Math.min(560, window.innerHeight * 0.82);
+            modalPanel.style.transition =
+              'left .6s cubic-bezier(0.34, 1.56, 0.64, 1), top .6s cubic-bezier(0.34, 1.56, 0.64, 1), width .6s cubic-bezier(0.34, 1.56, 0.64, 1), height .6s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius .5s ease';
+            modalPanel.style.left = (window.innerWidth / 2 - w / 2) + 'px';
+            modalPanel.style.top = (window.innerHeight / 2 - h / 2) + 'px';
+            modalPanel.style.width = w + 'px';
+            modalPanel.style.height = h + 'px';
+            modalPanel.style.borderRadius = '26px';
+          });
+        });
+      }
+
+      function closePanel() {
+        if (!originRect) return;
+        modalPanel.style.transition =
+          'left .5s cubic-bezier(0.4, 0, 0.2, 1), top .5s cubic-bezier(0.4, 0, 0.2, 1), width .5s cubic-bezier(0.4, 0, 0.2, 1), height .5s cubic-bezier(0.4, 0, 0.2, 1), border-radius .4s ease, opacity .4s ease';
+        modalPanel.style.left = originRect.left + 'px';
+        modalPanel.style.top = originRect.top + 'px';
+        modalPanel.style.width = originRect.width + 'px';
+        modalPanel.style.height = originRect.height + 'px';
+        modalPanel.style.borderRadius = '18px';
+        modalPanel.style.opacity = '0';
+        modalOverlay.classList.remove('show');
+
+        setTimeout(() => {
+          modalPanel.classList.remove('show');
+          modalPanel.style.opacity = '';
+          if (originEl && originEl.classList) originEl.classList.remove('launching');
+        }, 420);
+      }
+
+      modalOverlay.addEventListener('click', closePanel);
+      modalClose.addEventListener('click', closePanel);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+
+      document.querySelectorAll('.stack-btn').forEach(btn => {
+        btn.addEventListener('click', () => openPanel(btn.dataset.panel, btn));
       });
-    });
-  }
 
-  function closePanel(){
-    if(!originRect) return;
-    modalPanel.style.transition = 'left .45s cubic-bezier(.4,0,.2,1), top .45s cubic-bezier(.4,0,.2,1), width .45s cubic-bezier(.4,0,.2,1), height .45s cubic-bezier(.4,0,.2,1), border-radius .4s ease, opacity .4s ease';
-    modalPanel.style.left = originRect.left + 'px';
-    modalPanel.style.top = originRect.top + 'px';
-    modalPanel.style.width = originRect.width + 'px';
-    modalPanel.style.height = originRect.height + 'px';
-    modalPanel.style.borderRadius = '18px';
-    modalPanel.style.opacity = '0';
-    modalOverlay.classList.remove('show');
+      document.getElementById('cakeBtn').addEventListener('click', function() {
+        openPanel('cake', this);
+      });
 
-    setTimeout(() => {
-      modalPanel.classList.remove('show');
-      modalPanel.style.opacity = '';
-      if(originEl && originEl.classList) originEl.classList.remove('launching');
-    }, 420);
-  }
+      function wireCakeForm() {
+        const btn = document.getElementById('cakeSubmitBtn');
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+          const nameInput = document.getElementById('cakeNameInput');
+          const msgInput = document.getElementById('cakeMsgInput');
+          const name = nameInput.value.trim() || 'Ẩn danh';
+          const msg = msgInput.value.trim();
+          if (!msg) { msgInput.focus(); return; }
+          wishes.unshift({ name, msg });
+          msgInput.value = '';
+          document.getElementById('cakeWishList').innerHTML = renderWishList();
+          // cập nhật số lượng ở profile
+          const stat = document.getElementById('wishCountStat');
+          if (stat) stat.textContent = wishes.length;
+        });
+      }
 
-  modalOverlay.addEventListener('click', closePanel);
-  modalClose.addEventListener('click', closePanel);
-  document.addEventListener('keydown', e => { if(e.key === 'Escape') closePanel(); });
+      /* ===========================================================
+         7) ĐĨA THAN & ALBUM
+         =========================================================== */
+      const audio1 = document.getElementById('audio1');
+      const audio2 = document.getElementById('audio2');
+      const songs = [
+        { name: 'Bài hát 1', src: audio1 },
+        { name: 'Bài hát 2', src: audio2 }
+      ];
+      let currentSongIndex = 0;
+      let isPlaying = false;
+      let isMuted = false;
+      let recordPlayerInitialized = false;
 
-  /* -- 3 nút xếp chồng góc phải -- */
-  document.querySelectorAll('.stack-btn').forEach(btn => {
-    btn.addEventListener('click', () => openPanel(btn.dataset.panel, btn));
-  });
+      const recordDisc = document.getElementById('recordDisc');
+      const recordStatus = document.getElementById('recordStatus');
+      const albumPanel = document.getElementById('albumPanel');
+      const songListEl = document.getElementById('songList');
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const prevBtn = document.getElementById('prevSong');
+      const nextBtn = document.getElementById('nextSong');
 
-  /* -- bánh kem ở giữa -- */
-  document.getElementById('cakeBtn').addEventListener('click', function(){
-    openPanel('cake', this);
-  });
+      function renderSongList() {
+        songListEl.innerHTML = songs.map((s, idx) =>
+          `<div class="song-item ${idx === currentSongIndex ? 'active' : ''}" data-index="${idx}">
+            <span>${s.name}</span>
+            <span>${idx === currentSongIndex ? '▶' : ''}</span>
+          </div>`
+        ).join('');
+        document.querySelectorAll('.song-item').forEach(el => {
+          el.addEventListener('click', () => {
+            const idx = parseInt(el.dataset.index);
+            if (idx !== currentSongIndex) {
+              currentSongIndex = idx;
+              playSong();
+            }
+          });
+        });
+      }
 
-  /* -- gửi lời chúc từ form trong bánh kem -- */
-  function wireCakeForm(){
-    const btn = document.getElementById('cakeSubmitBtn');
-    if(!btn) return;
-    btn.addEventListener('click', () => {
-      const nameInput = document.getElementById('cakeNameInput');
-      const msgInput = document.getElementById('cakeMsgInput');
-      const name = nameInput.value.trim() || 'Ẩn danh';
-      const msg = msgInput.value.trim();
-      if(!msg) { msgInput.focus(); return; }
-      wishes.unshift({ name, msg });
-      msgInput.value = '';
-      document.getElementById('cakeWishList').innerHTML = renderWishList();
-      spawnConfetti();
-    });
-  }
+      function playSong() {
+        const song = songs[currentSongIndex];
+        // dừng tất cả
+        songs.forEach(s => s.src.pause());
+        song.src.currentTime = 0;
+        song.src.volume = isMuted ? 0 : 1;
+        song.src.play().catch(() => {});
+        isPlaying = true;
+        updateUI();
+      }
 
-  /* =========================================================
-     7) HIỆU ỨNG NHỎ KHI GỬI LỜI CHÚC — thả thêm vài trái tim
-     ========================================================= */
-  function spawnConfetti(){
-    for(let i=0;i<14;i++) setTimeout(spawnParticle, i*60);
-  }
+      function togglePlayPause() {
+        const song = songs[currentSongIndex];
+        if (isPlaying) {
+          song.src.pause();
+          isPlaying = false;
+        } else {
+          song.src.play().catch(() => {});
+          isPlaying = true;
+        }
+        updateUI();
+      }
 
-})();
-</script>
+      function nextSong() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        playSong();
+      }
+
+      function prevSong() {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        playSong();
+      }
+
+      function updateUI() {
+        const song = songs[currentSongIndex];
+        recordStatus.textContent = isPlaying ? '▶ ' + song.name : '⏸ ' + song.name;
+        playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
+        renderSongList();
+        if (isPlaying) {
+          recordDisc.style.animationPlayState = 'running';
+        } else {
+          recordDisc.style.animationPlayState = 'paused';
+        }
+      }
+
+      function toggleMute() {
+        isMuted = !isMuted;
+        const song = songs[currentSongIndex];
+        song.src.volume = isMuted ? 0 : 1;
+        recordStatus.textContent = isMuted ? '🔇 Muted' : (isPlaying ? '▶ ' + song.name : '⏸ ' + song.name);
+      }
+
+      function initRecordPlayer() {
+        if (recordPlayerInitialized) return;
+        recordPlayerInitialized = true;
+        // load nhạc
+        songs.forEach(s => s.src.load());
+        // chọn bài đầu
+        playSong();
+
+        // Sự kiện đĩa
+        let clickCount = 0;
+        let clickTimer = null;
+        const player = document.getElementById('recordPlayer');
+        player.addEventListener('click', (e) => {
+          e.stopPropagation();
+          clickCount++;
+          if (clickCount === 1) {
+            clickTimer = setTimeout(() => {
+              clickCount = 0;
+              // click đơn: mở album
+              albumPanel.classList.toggle('open');
+            }, 250);
+          } else if (clickCount >= 2) {
+            clearTimeout(clickTimer);
+            clickCount = 0;
+            // double click: tắt/mở nhạc (mute)
+            toggleMute();
+          }
+        });
+
+        // Nút điều khiển album
+        playPauseBtn.addEventListener('click', (e) => { e.stopPropagation();
+          togglePlayPause(); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation();
+          prevSong(); });
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation();
+          nextSong(); });
+
+        // Đóng album khi click ra ngoài
+        document.addEventListener('click', (e) => {
+          if (!albumPanel.contains(e.target) && e.target !== player && !player.contains(e.target)) {
+            albumPanel.classList.remove('open');
+          }
+        });
+
+        // Cập nhật UI khi nhạc kết thúc
+        songs.forEach(s => s.src.addEventListener('ended', nextSong));
+
+        updateUI();
+      }
+
+      // Khởi tạo record player khi vào party (gọi từ enterParty)
+      window.initRecordPlayer = initRecordPlayer;
+
+      /* ===========================================================
+         8) BÁNH KEM MINECRAFT THEO CHUỘT
+         =========================================================== */
+      const minecraftCake = document.getElementById('minecraftCake');
+      document.addEventListener('mousemove', (e) => {
+        minecraftCake.style.left = e.clientX + 'px';
+        minecraftCake.style.top = e.clientY + 'px';
+      });
+
+      /* ===========================================================
+         9) KHỞI ĐỘNG
+         =========================================================== */
+      // startMinecraftParticles sẽ được gọi sau khi gate đóng
+      // initRecordPlayer sẽ được gọi sau khi gate đóng
+
+      // Nếu người dùng đã nhập tên và bấm enter, gate đóng và gọi các hàm.
+
+      // Hỗ trợ tải lại: nếu gate đã ẩn (do cache) thì vẫn chạy
+      if (gate.classList.contains('hidden')) {
+        startMinecraftParticles();
+        initRecordPlayer();
+      }
+
+      /* ===========================================================
+         10) RESIZE CANVAS
+         =========================================================== */
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+      });
+
+    })();
+  </script>
 </body>
-</html> 
+</html>
