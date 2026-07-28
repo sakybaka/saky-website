@@ -27,8 +27,7 @@
       --radius-lg: 28px;
       --radius-md: 20px;
     }
-    html,
-    body {
+    html, body {
       height: 100%;
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text-dark);
@@ -57,63 +56,28 @@
       pointer-events: none;
       animation: drift 22s ease-in-out infinite;
     }
-    .blob1 {
-      width: 520px;
-      height: 520px;
-      top: -160px;
-      left: -140px;
-      background: #ffd6e8;
-      animation-delay: 0s;
-    }
-    .blob2 {
-      width: 480px;
-      height: 480px;
-      bottom: -180px;
-      right: -140px;
-      background: #d8e8ff;
-      animation-delay: -6s;
-    }
-    .blob3 {
-      width: 420px;
-      height: 420px;
-      top: 30%;
-      right: 10%;
-      background: #fff2cf;
-      animation-delay: -12s;
-    }
-    .blob4 {
-      width: 360px;
-      height: 360px;
-      bottom: 10%;
-      left: 5%;
-      background: #e8dcff;
-      animation-delay: -18s;
-    }
+    .blob1 { width: 520px; height: 520px; top: -160px; left: -140px; background: #ffd6e8; animation-delay: 0s; }
+    .blob2 { width: 480px; height: 480px; bottom: -180px; right: -140px; background: #d8e8ff; animation-delay: -6s; }
+    .blob3 { width: 420px; height: 420px; top: 30%; right: 10%; background: #fff2cf; animation-delay: -12s; }
+    .blob4 { width: 360px; height: 360px; bottom: 10%; left: 5%; background: #e8dcff; animation-delay: -18s; }
     @keyframes drift {
-      0%,
-      100% {
-        transform: translate(0, 0) scale(1);
-      }
-      33% {
-        transform: translate(40px, -30px) scale(1.08);
-      }
-      66% {
-        transform: translate(-30px, 25px) scale(0.95);
-      }
+      0%, 100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(40px,-30px) scale(1.08); }
+      66% { transform: translate(-30px,25px) scale(0.95); }
     }
     .glass {
       background: var(--glass);
       backdrop-filter: blur(24px) saturate(200%);
       -webkit-backdrop-filter: blur(24px) saturate(200%);
       border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 -1px 12px rgba(255, 255, 255, 0.4);
+      box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255,255,255,0.9), inset 0 -1px 12px rgba(255,255,255,0.4);
     }
     .glass-strong {
       background: var(--glass-strong);
       backdrop-filter: blur(30px) saturate(220%);
       -webkit-backdrop-filter: blur(30px) saturate(220%);
       border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 16px rgba(255, 255, 255, 0.5);
+      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255,255,255,0.95), inset 0 -1px 16px rgba(255,255,255,0.5);
     }
     .gate {
       position: fixed;
@@ -122,144 +86,166 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.20);
+      background: rgba(255,255,255,0.20);
       backdrop-filter: blur(30px) saturate(150%);
       -webkit-backdrop-filter: blur(30px) saturate(150%);
       transition: opacity .6s ease, visibility .6s ease;
     }
-    .gate.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+    .gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     .gate-card {
       width: min(420px, 88vw);
       padding: 48px 36px 38px;
       border-radius: var(--radius-lg);
       text-align: center;
-      animation: pop-in .7s cubic-bezier(0.2, 0.9, 0.25, 1.2);
+      animation: pop-in .7s cubic-bezier(0.2,0.9,0.25,1.2);
     }
     @keyframes pop-in {
-      from {
-        opacity: 0;
-        transform: translateY(24px) scale(.94);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity:0; transform:translateY(24px) scale(.94); }
+      to { opacity:1; transform:translateY(0) scale(1); }
     }
-    .gate-emoji {
-      font-size: 52px;
-      margin-bottom: 6px;
-    }
-    .gate-card h1 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--text-dark);
-    }
-    .gate-card p {
-      font-size: 14px;
-      color: var(--text-soft);
-      margin-bottom: 22px;
-    }
+    .gate-emoji { font-size:52px; margin-bottom:6px; }
+    .gate-card h1 { font-size:22px; font-weight:700; margin-bottom:6px; color:var(--text-dark); }
+    .gate-card p { font-size:14px; color:var(--text-soft); margin-bottom:22px; }
     .field {
-      width: 100%;
-      padding: 14px 18px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      background: rgba(255, 255, 255, 0.55);
+      width:100%; padding:14px 18px; border-radius:16px;
+      border:1px solid rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.55);
       backdrop-filter: blur(10px);
-      font-family: inherit;
-      font-size: 15px;
-      color: var(--text-dark);
-      outline: none;
-      transition: box-shadow .25s ease, border-color .25s ease;
-      margin-bottom: 16px;
+      font-family:inherit; font-size:15px; color:var(--text-dark);
+      outline:none; transition: box-shadow .25s ease, border-color .25s ease;
+      margin-bottom:16px;
     }
-    .field::placeholder {
-      color: #a49dab;
-    }
-    .field:focus {
-      border-color: var(--gold-2);
-      box-shadow: 0 0 0 4px rgba(247, 201, 72, 0.25);
-    }
-    textarea.field {
-      resize: none;
-      min-height: 96px;
-      font-family: inherit;
-    }
+    .field::placeholder { color:#a49dab; }
+    .field:focus { border-color:var(--gold-2); box-shadow:0 0 0 4px rgba(247,201,72,0.25); }
+    textarea.field { resize:none; min-height:96px; font-family:inherit; }
     .btn-primary {
-      width: 100%;
-      padding: 14px 20px;
-      border: none;
-      border-radius: 16px;
-      font-family: inherit;
-      font-weight: 600;
-      font-size: 15px;
-      color: #4a3a1a;
-      cursor: pointer;
+      width:100%; padding:14px 20px; border:none; border-radius:16px;
+      font-family:inherit; font-weight:600; font-size:15px; color:#4a3a1a;
+      cursor:pointer;
       background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-      box-shadow: 0 10px 24px rgba(247, 201, 72, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-      transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease;
+      box-shadow: 0 10px 24px rgba(247,201,72,0.4), inset 0 1px 1px rgba(255,255,255,0.8);
+      transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
     }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 32px rgba(247, 201, 72, 0.5);
-    }
-    .btn-primary:active {
-      transform: translateY(0px) scale(.98);
-    }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 16px 32px rgba(247,201,72,0.5); }
+    .btn-primary:active { transform:translateY(0px) scale(.98); }
     .app {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
+      position:relative;
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    /* ---- DRAWER (kéo từ phải sang) ---- */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      z-index: 30;
       display: flex;
       align-items: center;
-      justify-content: center;
+      pointer-events: none;
+      touch-action: none; /* ngăn scroll khi vuốt */
     }
-    .stack {
-      position: fixed;
-      top: 26px;
-      right: 26px;
-      z-index: 30;
+    .drawer-content {
+      pointer-events: auto;
+      background: var(--glass-strong);
+      backdrop-filter: blur(30px) saturate(200%);
+      -webkit-backdrop-filter: blur(30px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      border-right: none;
+      border-radius: 24px 0 0 24px;
+      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255,255,255,0.9);
+      padding: 20px 16px;
+      width: 220px;
+      height: auto;
+      max-height: 80vh;
+      overflow-y: auto;
+      transform: translateX(calc(100% + 20px));
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+      opacity: 0;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      align-items: flex-end;
+      align-items: stretch;
     }
-    .stack-btn {
-      width: 220px;
-      padding: 15px 20px;
+    .drawer.open .drawer-content {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    /* Phần xử lý vuốt: vùng bắt sự kiện mép phải */
+    .drawer-swipe-area {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 100vh;
+      z-index: 29;
+      pointer-events: none;
+      /* không hiển thị gì, chỉ để bắt sự kiện */
+    }
+    .drawer-swipe-area.active {
+      pointer-events: auto;
+    }
+    /* Nút toggle (vẫn giữ để tiện) */
+    .drawer-toggle {
+      pointer-events: auto;
+      width: 40px;
+      height: 40px;
+      background: var(--glass);
+      backdrop-filter: blur(16px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px 0 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--text-soft);
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, background 0.3s ease;
+      margin-right: -1px;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+    .drawer-toggle:hover {
+      background: rgba(255,255,255,0.7);
+      transform: scale(1.05);
+    }
+    .drawer.open .drawer-toggle {
+      border-radius: 20px 0 0 20px;
+      background: rgba(255,255,255,0.7);
+    }
+    /* Các nút bên trong drawer */
+    .drawer-btn {
+      width: 100%;
+      padding: 14px 18px;
       border-radius: 18px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       font-family: inherit;
       font-weight: 600;
       font-size: 14px;
       color: var(--text-dark);
       text-align: left;
       cursor: pointer;
-      transform: translateX(calc(var(--i) * 6px)) rotate(calc(var(--i) * -1.6deg));
-      transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, opacity .3s ease;
       background: var(--glass);
-      backdrop-filter: blur(24px) saturate(200%);
+      backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255,255,255,0.9);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
-    .stack-btn:hover {
-      transform: translateY(-4px) translateX(calc(var(--i) * 6px)) rotate(0deg) scale(1.03);
-      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    .drawer-btn:hover {
+      transform: translateX(-4px) scale(1.02);
+      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.6);
     }
-    .stack-btn .ico {
-      font-size: 18px;
-    }
-    .stack-btn.launching {
-      opacity: 0;
-      pointer-events: none;
-    }
+    .drawer-btn .ico { font-size:18px; }
+    .drawer-btn.launching { opacity:0.4; pointer-events:none; }
+
+    /* Hero */
     .hero {
       display: flex;
       flex-direction: column;
@@ -268,10 +254,7 @@
       padding: 20px 20px 60px;
       text-align: center;
     }
-    .headline-wrap {
-      overflow: visible;
-      perspective: 600px;
-    }
+    .headline-wrap { overflow:visible; perspective:600px; }
     .gold-text {
       font-family: 'Great Vibes', cursive;
       font-weight: 400;
@@ -284,284 +267,105 @@
       color: transparent;
       display: inline-block;
       clip-path: inset(0 100% 0 0);
-      animation: draw 2.4s cubic-bezier(.65, 0, .35, 1) .3s forwards, shine 5s linear 2.7s infinite;
+      animation: draw 2.4s cubic-bezier(.65,0,.35,1) .3s forwards, shine 5s linear 2.7s infinite;
       transform: rotateX(3deg) scale(1.02);
-      text-shadow: 0 2px 4px rgba(201, 154, 46, 0.2), 0 8px 20px rgba(201, 154, 46, 0.15), 0 -2px 6px rgba(255, 255, 255, 0.6);
+      text-shadow: 0 2px 4px rgba(201,154,46,0.2), 0 8px 20px rgba(201,154,46,0.15), 0 -2px 6px rgba(255,255,255,0.6);
     }
-    @keyframes draw {
-      to {
-        clip-path: inset(0 0% 0 0);
-      }
-    }
-    @keyframes shine {
-      0% {
-        background-position: 0% 50%;
-      }
-      100% {
-        background-position: 300% 50%;
-      }
-    }
+    @keyframes draw { to { clip-path: inset(0 0% 0 0); } }
+    @keyframes shine { 0% { background-position:0% 50%; } 100% { background-position:300% 50%; } }
     .subtitle {
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--text-soft);
-      letter-spacing: .3px;
-      opacity: 0;
-      animation: fade-up .8s ease 2.6s forwards;
+      font-size:16px; font-weight:500; color:var(--text-soft); letter-spacing:.3px;
+      opacity:0; animation: fade-up .8s ease 2.6s forwards;
     }
-    @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes fade-up { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
     .cake-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      user-select: none;
+      display:flex; flex-direction:column; align-items:center; gap:10px;
+      cursor:pointer; user-select:none;
     }
     .cake {
       font-size: clamp(64px, 14vw, 108px);
-      filter: drop-shadow(0 18px 30px rgba(160, 120, 90, 0.28));
+      filter: drop-shadow(0 18px 30px rgba(160,120,90,0.28));
       animation: bob 3.2s ease-in-out infinite;
-      transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+      transition: transform .3s cubic-bezier(.2,.8,.2,1);
     }
-    .cake-wrap:hover .cake {
-      transform: scale(1.08) rotate(-2deg);
-    }
-    .cake-wrap:active .cake {
-      transform: scale(.96);
-    }
-    @keyframes bob {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
+    .cake-wrap:hover .cake { transform: scale(1.08) rotate(-2deg); }
+    .cake-wrap:active .cake { transform: scale(.96); }
+    @keyframes bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
     .cake-hint {
-      font-size: 13px;
-      color: var(--text-soft);
-      padding: 8px 16px;
-      border-radius: 999px;
-      background: var(--glass);
-      backdrop-filter: blur(14px);
-      border: 1px solid var(--glass-border);
+      font-size:13px; color:var(--text-soft); padding:8px 16px; border-radius:999px;
+      background:var(--glass); backdrop-filter:blur(14px); border:1px solid var(--glass-border);
     }
     .countdown {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:center;
     }
     .cd-box {
-      width: 76px;
-      padding: 14px 0 10px;
-      border-radius: 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
+      width:76px; padding:14px 0 10px; border-radius:18px;
+      display:flex; flex-direction:column; align-items:center; gap:2px;
     }
-    .cd-num {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--text-dark);
-      font-variant-numeric: tabular-nums;
-    }
-    .cd-label {
-      font-size: 10px;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text-soft);
-    }
-    .cd-target {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-soft);
-      margin-top: 2px;
-    }
+    .cd-num { font-size:26px; font-weight:800; color:var(--text-dark); font-variant-numeric:tabular-nums; }
+    .cd-label { font-size:10px; letter-spacing:.6px; text-transform:uppercase; color:var(--text-soft); }
+    .cd-target { font-size:14px; font-weight:500; color:var(--text-soft); margin-top:2px; }
+
+    /* Modal */
     .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(120, 110, 140, 0.20);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      z-index: 40;
-      opacity: 0;
-      visibility: hidden;
+      position:fixed; inset:0; background:rgba(120,110,140,0.20); backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px); z-index:40; opacity:0; visibility:hidden;
       transition: opacity .4s ease, visibility .4s ease;
     }
-    .modal-overlay.show {
-      opacity: 1;
-      visibility: visible;
-    }
+    .modal-overlay.show { opacity:1; visibility:visible; }
     .modal-panel {
-      position: fixed;
-      z-index: 41;
-      border-radius: 20px;
-      overflow: hidden;
-      opacity: 0;
-      visibility: hidden;
-      background: var(--glass-strong);
-      backdrop-filter: blur(28px) saturate(200%);
+      position:fixed; z-index:41; border-radius:20px; overflow:hidden;
+      opacity:0; visibility:hidden;
+      background: var(--glass-strong); backdrop-filter: blur(28px) saturate(200%);
       -webkit-backdrop-filter: blur(28px) saturate(200%);
       border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255,255,255,0.9);
       transition: left .6s cubic-bezier(0.34, 1.56, 0.64, 1), top .6s cubic-bezier(0.34, 1.56, 0.64, 1), width .6s cubic-bezier(0.34, 1.56, 0.64, 1), height .6s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius .5s ease, opacity .4s ease;
     }
-    .modal-panel.show {
-      opacity: 1;
-      visibility: visible;
-    }
-    .modal-inner {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: 28px 26px 22px;
-      overflow-y: auto;
-    }
+    .modal-panel.show { opacity:1; visibility:visible; }
+    .modal-inner { height:100%; display:flex; flex-direction:column; padding:28px 26px 22px; overflow-y:auto; }
     .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1px solid var(--glass-border);
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      color: var(--text-soft);
+      position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:50%;
+      border:1px solid var(--glass-border); background:rgba(255,255,255,0.6); backdrop-filter:blur(10px);
+      display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:var(--text-soft);
       transition: transform .2s ease, background .2s ease;
     }
-    .modal-close:hover {
-      transform: rotate(90deg);
-      background: rgba(255, 255, 255, 0.85);
-    }
-    .modal-title {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .modal-sub {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 20px;
-    }
+    .modal-close:hover { transform: rotate(90deg); background:rgba(255,255,255,0.85); }
+    .modal-title { font-size:20px; font-weight:700; margin-bottom:4px; }
+    .modal-sub { font-size:13px; color:var(--text-soft); margin-bottom:20px; }
     .profile-avatar {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      margin: 0 auto 14px;
-      box-shadow: 0 10px 24px rgba(247, 201, 72, 0.35);
+      width:84px; height:84px; border-radius:50%; background:linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      display:flex; align-items:center; justify-content:center; font-size:36px; margin:0 auto 14px;
+      box-shadow: 0 10px 24px rgba(247,201,72,0.35);
     }
-    .profile-name {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 700;
-    }
-    .profile-role {
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 18px;
-    }
+    .profile-name { text-align:center; font-size:18px; font-weight:700; }
+    .profile-role { text-align:center; font-size:13px; color:var(--text-soft); margin-bottom:18px; }
     .profile-line {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      font-size: 13.5px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      display:flex; justify-content:space-between; padding:12px 0; font-size:13.5px;
+      border-bottom:1px solid rgba(0,0,0,0.06);
     }
-    .profile-line span:first-child {
-      color: var(--text-soft);
-    }
-    .profile-line span:last-child {
-      font-weight: 600;
-    }
-    .wish-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-    .wish-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .profile-line span:first-child { color:var(--text-soft); }
+    .profile-line span:last-child { font-weight:600; }
+    .wish-form { display:flex; flex-direction:column; gap:10px; margin-bottom:18px; }
+    .wish-list { display:flex; flex-direction:column; gap:10px; }
     .wish-item {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      padding:14px 16px; border-radius:16px; background:rgba(255,255,255,0.55);
+      border:1px solid rgba(255,255,255,0.8);
     }
-    .wish-name {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: var(--gold-3);
-    }
-    .wish-msg {
-      font-size: 13.5px;
-      color: var(--text-dark);
-      line-height: 1.5;
-    }
-    .wish-empty {
-      text-align: center;
-      color: var(--text-soft);
-      font-size: 13px;
-      padding: 20px 0;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+    .wish-name { font-size:13px; font-weight:700; margin-bottom:4px; color:var(--gold-3); }
+    .wish-msg { font-size:13.5px; color:var(--text-dark); line-height:1.5; }
+    .wish-empty { text-align:center; color:var(--text-soft); font-size:13px; padding:20px 0; }
+    .gallery { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
     .gallery-card {
-      aspect-ratio: 1;
-      border-radius: 16px;
-      display: flex;
-      align-items: flex-end;
-      padding: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #fff;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      aspect-ratio:1; border-radius:16px; display:flex; align-items:flex-end; padding:10px;
+      font-size:12px; font-weight:600; color:#fff; text-shadow:0 2px 6px rgba(0,0,0,0.25);
     }
-    .g1 {
-      background: linear-gradient(135deg, #ffb6c1, #ff8fab);
-    }
-    .g2 {
-      background: linear-gradient(135deg, #a8d8ff, #7cb9ff);
-    }
-    .g3 {
-      background: linear-gradient(135deg, #ffe08a, #ffc857);
-    }
-    .g4 {
-      background: linear-gradient(135deg, #c9b6ff, #a78bfa);
-    }
+    .g1 { background: linear-gradient(135deg, #ffb6c1, #ff8fab); }
+    .g2 { background: linear-gradient(135deg, #a8d8ff, #7cb9ff); }
+    .g3 { background: linear-gradient(135deg, #ffe08a, #ffc857); }
+    .g4 { background: linear-gradient(135deg, #c9b6ff, #a78bfa); }
 
-    /* ========== RECORD PLAYER – DẠNG THANH NGANG ========== */
+    /* RECORD PLAYER thanh ngang */
     .record-player {
       position: fixed;
       bottom: 30px;
@@ -571,13 +375,13 @@
       user-select: none;
     }
     .record-box {
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255,255,255,0.6);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255,255,255,0.85);
       border-radius: 24px;
       padding: 12px 18px 12px 14px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,0.9);
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -586,10 +390,7 @@
       min-width: 300px;
       max-width: 420px;
     }
-    .record-box:hover {
-      transform: scale(1.02);
-    }
-    /* Đĩa nhỏ bên trái */
+    .record-box:hover { transform: scale(1.02); }
     .record-disc-wrap {
       position: relative;
       width: 70px;
@@ -601,7 +402,7 @@
       height: 70px;
       border-radius: 50%;
       background: radial-gradient(circle at 30% 30%, #3a3a3a, #111 80%, #222);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 -2px 8px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4), inset 0 -2px 8px rgba(0,0,0,0.6);
       animation: spin-disc 4s linear infinite;
       position: relative;
       border: 2px solid #888;
@@ -616,7 +417,7 @@
       background: radial-gradient(circle, #d4c4a0, #a08870);
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
     }
     .record-disc .label {
       position: absolute;
@@ -633,7 +434,7 @@
       font-size: 12px;
       font-weight: 700;
       color: #3a2a1a;
-      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6);
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.6);
       opacity: 0.9;
       pointer-events: none;
       font-family: 'Poppins', sans-serif;
@@ -648,7 +449,7 @@
       border-radius: 4px 4px 0 0;
       transform-origin: bottom center;
       transform: rotate(-25deg) translateX(6px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
       border: 1px solid #d4b89a;
       z-index: 2;
     }
@@ -662,7 +463,7 @@
       background: radial-gradient(circle, #d4b08a, #8a6a50);
       border-radius: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
       border: 1px solid #b8956a;
     }
     .record-arm .needle {
@@ -674,15 +475,9 @@
       background: #d0c0b0;
       transform: translateX(-50%) rotate(8deg);
       border-radius: 2px;
-      box-shadow: 0 0 4px rgba(255, 215, 140, 0.3);
+      box-shadow: 0 0 4px rgba(255,215,140,0.3);
     }
-    @keyframes spin-disc {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* Phần thông tin & điều khiển bên phải */
+    @keyframes spin-disc { to { transform: rotate(360deg); } }
     .record-info {
       display: flex;
       flex-direction: column;
@@ -704,7 +499,7 @@
       margin-top: 4px;
     }
     .record-controls button {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255,255,255,0.5);
       border: none;
       border-radius: 30px;
       width: 30px;
@@ -717,21 +512,19 @@
       color: var(--text-dark);
       transition: background 0.2s, transform 0.2s;
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255,255,255,0.6);
     }
     .record-controls button:hover {
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255,255,255,0.8);
       transform: scale(1.05);
     }
     .record-controls .play-btn {
       width: 36px;
       height: 36px;
       font-size: 16px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255,255,255,0.7);
     }
-    .record-controls .play-btn:hover {
-      background: rgba(255, 255, 255, 0.9);
-    }
+    .record-controls .play-btn:hover { background: rgba(255,255,255,0.9); }
     .record-status-text {
       font-size: 11px;
       color: var(--text-soft);
@@ -741,10 +534,9 @@
       text-overflow: ellipsis;
       max-width: 80px;
     }
-    /* Nút mở album (danh sách bài hát) */
     .record-album-btn {
-      background: rgba(255, 255, 255, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.6);
       border-radius: 30px;
       padding: 2px 10px;
       font-size: 12px;
@@ -754,11 +546,7 @@
       transition: background 0.2s;
       white-space: nowrap;
     }
-    .record-album-btn:hover {
-      background: rgba(255, 255, 255, 0.7);
-    }
-
-    /* Album panel (popup danh sách) */
+    .record-album-btn:hover { background: rgba(255,255,255,0.7); }
     .album-panel {
       position: fixed;
       bottom: 120px;
@@ -770,7 +558,7 @@
       backdrop-filter: blur(30px) saturate(200%);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
-      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255,255,255,0.9);
       padding: 16px 16px 12px;
       transform: translateY(20px) scale(0.95);
       opacity: 0;
@@ -797,14 +585,14 @@
       display: flex;
       justify-content: space-between;
       padding: 8px 4px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
       font-size: 13px;
       cursor: pointer;
       transition: background 0.2s;
       border-radius: 8px;
     }
     .album-panel .song-item:hover {
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255,255,255,0.3);
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -813,7 +601,7 @@
       font-weight: 600;
     }
 
-    /* Canvas particle */
+    /* Canvas */
     #mcCanvas {
       position: fixed;
       inset: 0;
@@ -824,87 +612,27 @@
     }
 
     @media (max-width: 640px) {
-      .stack {
-        top: 16px;
-        right: 16px;
-      }
-      .stack-btn {
-        width: 180px;
-        padding: 12px 16px;
-        font-size: 13px;
-      }
-      .cd-box {
-        width: 64px;
-        padding: 10px 0 8px;
-      }
-      .cd-num {
-        font-size: 20px;
-      }
-      .gallery {
-        grid-template-columns: 1fr 1fr;
-      }
-      .modal-inner {
-        padding: 24px 18px 18px;
-      }
-      .record-player {
-        bottom: 16px;
-        left: 16px;
-        right: 16px;
-      }
-      .record-box {
-        min-width: unset;
-        width: 100%;
-        padding: 10px 12px;
-        gap: 12px;
-      }
-      .record-disc-wrap {
-        width: 56px;
-        height: 56px;
-      }
-      .record-disc {
-        width: 56px;
-        height: 56px;
-      }
-      .record-arm {
-        height: 32px;
-        right: -8px;
-        top: -6px;
-      }
-      .record-arm::after {
-        width: 12px;
-        height: 12px;
-        bottom: -4px;
-      }
-      .record-controls button {
-        width: 26px;
-        height: 26px;
-        font-size: 12px;
-      }
-      .record-controls .play-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 14px;
-      }
-      .record-title {
-        font-size: 12px;
-      }
-      .record-status-text {
-        max-width: 60px;
-        font-size: 10px;
-      }
-      .album-panel {
-        left: 16px;
-        right: 16px;
-        width: auto;
-        bottom: 100px;
-      }
+      .drawer-content { width: 180px; padding: 16px 12px; }
+      .drawer-btn { padding: 12px 14px; font-size: 13px; }
+      .drawer-swipe-area { width: 30px; }
+      .cd-box { width:64px; padding:10px 0 8px; }
+      .cd-num { font-size:20px; }
+      .gallery { grid-template-columns:1fr 1fr; }
+      .modal-inner { padding:24px 18px 18px; }
+      .record-player { bottom:16px; left:16px; right:16px; }
+      .record-box { min-width:unset; width:100%; padding:10px 12px; gap:12px; }
+      .record-disc-wrap { width:56px; height:56px; }
+      .record-disc { width:56px; height:56px; }
+      .record-arm { height:32px; right:-8px; top:-6px; }
+      .record-arm::after { width:12px; height:12px; bottom:-4px; }
+      .record-controls button { width:26px; height:26px; font-size:12px; }
+      .record-controls .play-btn { width:30px; height:30px; font-size:14px; }
+      .record-title { font-size:12px; }
+      .record-status-text { max-width:60px; font-size:10px; }
+      .album-panel { left:16px; right:16px; width:auto; bottom:100px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-      }
+      * { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
     }
   </style>
 </head>
@@ -929,12 +657,20 @@
   </div>
 
   <div class="app" id="app">
-    <div class="stack" id="stack">
-      <button class="stack-btn" data-panel="profile" style="--i:0"><span class="ico">👤</span> Hồ Sơ Của Tớ</button>
-      <button class="stack-btn" data-panel="wishes" style="--i:1"><span class="ico">💌</span> Lời Chúc</button>
-      <button class="stack-btn" data-panel="gallery" style="--i:2"><span class="ico">📸</span> Khoảnh Khắc</button>
-      <button class="stack-btn" data-panel="donate" style="--i:3"><span class="ico">💖</span> Donate for Saky</button>
+    <!-- DRAWER (vuốt từ phải) -->
+    <div class="drawer" id="drawer">
+      <div class="drawer-content" id="drawerContent">
+        <button class="drawer-btn" data-panel="profile"><span class="ico">👤</span> Hồ Sơ Của Tớ</button>
+        <button class="drawer-btn" data-panel="wishes"><span class="ico">💌</span> Lời Chúc</button>
+        <button class="drawer-btn" data-panel="gallery"><span class="ico">📸</span> Khoảnh Khắc</button>
+        <button class="drawer-btn" data-panel="donate"><span class="ico">💖</span> Donate for Saky</button>
+      </div>
+      <!-- Nút toggle (vẫn giữ để tiện) -->
+      <div class="drawer-toggle" id="drawerToggle">☰</div>
     </div>
+
+    <!-- Vùng bắt sự kiện vuốt (mép phải) -->
+    <div class="drawer-swipe-area" id="swipeArea"></div>
 
     <main class="hero">
       <div class="headline-wrap">
@@ -957,16 +693,16 @@
     </main>
   </div>
 
+  <!-- MODAL -->
   <div class="modal-overlay" id="modalOverlay"></div>
   <div class="modal-panel" id="modalPanel">
     <div class="modal-inner" id="modalInner"></div>
     <div class="modal-close" id="modalClose">✕</div>
   </div>
 
-  <!-- ===== RECORD PLAYER – THANH NGANG ===== -->
+  <!-- RECORD PLAYER -->
   <div class="record-player" id="recordPlayer">
     <div class="record-box">
-      <!-- Đĩa nhỏ bên trái -->
       <div class="record-disc-wrap">
         <div class="record-disc" id="recordDisc">
           <div class="label">🎵</div>
@@ -975,8 +711,6 @@
           <div class="needle"></div>
         </div>
       </div>
-
-      <!-- Thông tin và điều khiển bên phải -->
       <div class="record-info">
         <div class="record-title" id="recordTitle">Bunny Girl Senpai</div>
         <div class="record-controls">
@@ -991,13 +725,12 @@
     </div>
   </div>
 
-  <!-- Album panel (danh sách bài hát) -->
   <div class="album-panel" id="albumPanel">
     <h4>📀 Danh sách phát</h4>
     <div id="songList"></div>
   </div>
 
-  <!-- Audio (đã sửa link đúng) -->
+  <!-- Audio -->
   <audio id="audio1" preload="auto">
     <source src="https://sakybaka.github.io/saky-website/YTSave_YouTube_bunny-girl-senpai-lofi-fukashigi-no-cart_Media_lCOeLfkY4P0_009_128k.mp3" type="audio/mpeg">
   </audio>
@@ -1037,14 +770,14 @@
       resizeCanvas();
 
       const heartPixels = [
-        [0, 0, 1, 0, 0, 1, 0, 0],
-        [0, 1, 1, 1, 1, 1, 1, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-        [0, 1, 1, 1, 1, 1, 1, 0],
-        [0, 0, 1, 1, 1, 1, 0, 0],
-        [0, 0, 0, 1, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
+        [0,0,1,0,0,1,0,0],
+        [0,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1],
+        [0,1,1,1,1,1,1,0],
+        [0,0,1,1,1,1,0,0],
+        [0,0,0,1,1,0,0,0],
+        [0,0,0,0,0,0,0,0]
       ];
 
       function drawHeart(ctx, x, y, size, color) {
@@ -1075,9 +808,7 @@
       }
 
       class MCParticle {
-        constructor() {
-          this.reset();
-        }
+        constructor() { this.reset(); }
         reset() {
           this.type = Math.random() < 0.5 ? 'heart' : 'bubble';
           this.x = Math.random() * W;
@@ -1086,7 +817,7 @@
           this.speedY = 0.6 + Math.random() * 0.8;
           this.speedX = (Math.random() - 0.5) * 0.6;
           this.opacity = 0.7 + Math.random() * 0.3;
-          this.color = ['#ff4d6d', '#ff6b8a', '#ff8fa3', '#ffb3c1'][Math.floor(Math.random() * 4)];
+          this.color = ['#ff4d6d','#ff6b8a','#ff8fa3','#ffb3c1'][Math.floor(Math.random() * 4)];
           this.phase = Math.random() * Math.PI * 2;
         }
         update() {
@@ -1100,7 +831,7 @@
         draw(ctx) {
           ctx.globalAlpha = this.opacity;
           if (this.type === 'heart') {
-            drawHeart(ctx, this.x - this.size / 2, this.y - this.size / 2, this.size, this.color);
+            drawHeart(ctx, this.x - this.size/2, this.y - this.size/2, this.size, this.color);
           } else {
             drawMinecraftBubble(ctx, this.x, this.y, this.size);
           }
@@ -1127,9 +858,7 @@
         ctx.clearRect(0, 0, W, H);
         for (const p of particles) {
           let spd = p.speedY;
-          if (speedBoostTimer > 0) {
-            spd *= 2.5;
-          }
+          if (speedBoostTimer > 0) spd *= 2.5;
           p.y += spd;
           p.x += p.speedX + Math.sin(p.phase) * 0.15;
           p.phase += 0.02;
@@ -1152,17 +881,14 @@
         let hit = false;
         for (const p of particles) {
           if (p.type === 'heart') {
-            const hx = p.x - p.size / 2;
-            const hy = p.y - p.size / 2;
+            const hx = p.x - p.size/2;
+            const hy = p.y - p.size/2;
             if (mx >= hx && mx <= hx + p.size && my >= hy && my <= hy + p.size) {
-              hit = true;
-              break;
+              hit = true; break;
             }
           }
         }
-        if (hit) {
-          speedBoostTimer = 1.2;
-        }
+        if (hit) speedBoostTimer = 1.2;
       });
 
       // ===== ĐẾM NGƯỢC =====
@@ -1180,10 +906,8 @@
       function updateCountdown() {
         const diff = TARGET - new Date();
         if (diff <= 0) {
-          cdDays.textContent = '00';
-          cdHours.textContent = '00';
-          cdMins.textContent = '00';
-          cdSecs.textContent = '00';
+          cdDays.textContent = '00'; cdHours.textContent = '00';
+          cdMins.textContent = '00'; cdSecs.textContent = '00';
           cdTarget.textContent = '🎉 Chúc mừng sinh nhật! 🎉';
           if (!countdownReachedZero) {
             countdownReachedZero = true;
@@ -1207,13 +931,12 @@
       let fireworkParticles = [];
 
       function spawnFirework(x, y) {
-        const colors = ['#ff0', '#f0f', '#0ff', '#f44', '#4f4', '#44f', '#ff8', '#f8f', '#8ff'];
+        const colors = ['#ff0','#f0f','#0ff','#f44','#4f4','#44f','#ff8','#f8f','#8ff'];
         for (let i = 0; i < 60; i++) {
           const angle = Math.random() * Math.PI * 2;
           const speed = 2 + Math.random() * 6;
           fireworkParticles.push({
-            x,
-            y,
+            x, y,
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed - 1,
             life: 1,
@@ -1233,20 +956,14 @@
           }, i * 250);
         }
         let fwInterval = setInterval(() => {
-          if (fireworkParticles.length === 0) {
-            clearInterval(fwInterval);
-            return;
-          }
+          if (fireworkParticles.length === 0) { clearInterval(fwInterval); return; }
           for (let i = fireworkParticles.length - 1; i >= 0; i--) {
             const fp = fireworkParticles[i];
             fp.x += fp.vx;
             fp.y += fp.vy;
             fp.vy += 0.04;
             fp.life -= fp.decay;
-            if (fp.life <= 0) {
-              fireworkParticles.splice(i, 1);
-              continue;
-            }
+            if (fp.life <= 0) { fireworkParticles.splice(i, 1); continue; }
             ctx.globalAlpha = fp.life;
             ctx.fillStyle = fp.color;
             ctx.shadowColor = fp.color;
@@ -1258,9 +975,7 @@
           }
           ctx.globalAlpha = 1;
         }, 30);
-        setTimeout(() => {
-          clearInterval(fwInterval);
-        }, 7000);
+        setTimeout(() => { clearInterval(fwInterval); }, 7000);
       }
 
       // ===== LỜI CHÚC =====
@@ -1379,8 +1094,8 @@
             const h = Math.min(560, window.innerHeight * 0.82);
             modalPanel.style.transition =
               'left .6s cubic-bezier(0.34, 1.56, 0.64, 1), top .6s cubic-bezier(0.34, 1.56, 0.64, 1), width .6s cubic-bezier(0.34, 1.56, 0.64, 1), height .6s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius .5s ease';
-            modalPanel.style.left = (window.innerWidth / 2 - w / 2) + 'px';
-            modalPanel.style.top = (window.innerHeight / 2 - h / 2) + 'px';
+            modalPanel.style.left = (window.innerWidth/2 - w/2) + 'px';
+            modalPanel.style.top = (window.innerHeight/2 - h/2) + 'px';
             modalPanel.style.width = w + 'px';
             modalPanel.style.height = h + 'px';
             modalPanel.style.borderRadius = '26px';
@@ -1391,7 +1106,7 @@
       function closePanel() {
         if (!originRect) return;
         modalPanel.style.transition =
-          'left .5s cubic-bezier(0.4, 0, 0.2, 1), top .5s cubic-bezier(0.4, 0, 0.2, 1), width .5s cubic-bezier(0.4, 0, 0.2, 1), height .5s cubic-bezier(0.4, 0, 0.2, 1), border-radius .4s ease, opacity .4s ease';
+          'left .5s cubic-bezier(0.4,0,0.2,1), top .5s cubic-bezier(0.4,0,0.2,1), width .5s cubic-bezier(0.4,0,0.2,1), height .5s cubic-bezier(0.4,0,0.2,1), border-radius .4s ease, opacity .4s ease';
         modalPanel.style.left = originRect.left + 'px';
         modalPanel.style.top = originRect.top + 'px';
         modalPanel.style.width = originRect.width + 'px';
@@ -1411,10 +1126,127 @@
       modalClose.addEventListener('click', closePanel);
       document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
-      document.querySelectorAll('.stack-btn').forEach(btn => {
-        btn.addEventListener('click', () => openPanel(btn.dataset.panel, btn));
+      // ===== DRAWER: vuốt từ phải =====
+      const drawer = document.getElementById('drawer');
+      const drawerToggle = document.getElementById('drawerToggle');
+      const drawerBtns = document.querySelectorAll('.drawer-btn');
+
+      // Nút toggle
+      drawerToggle.addEventListener('click', () => {
+        drawer.classList.toggle('open');
       });
 
+      // Sự kiện cho các nút bên trong drawer
+      drawerBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const panel = this.dataset.panel;
+          openPanel(panel, this);
+          drawer.classList.remove('open'); // tự động đóng drawer
+        });
+      });
+
+      // ---- XỬ LÝ VUỐT ----
+      const swipeArea = document.getElementById('swipeArea');
+      let startX = 0;
+      let isDragging = false;
+      let isOpen = false;
+
+      // Hàm mở/đóng drawer
+      function toggleDrawer(open) {
+        if (open !== undefined) {
+          if (open) drawer.classList.add('open');
+          else drawer.classList.remove('open');
+        } else {
+          drawer.classList.toggle('open');
+        }
+        isOpen = drawer.classList.contains('open');
+      }
+
+      // Sự kiện trên vùng swipe (cả touch và mouse)
+      function handleStart(e) {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        // Chỉ bắt nếu vuốt từ mép phải (trong vòng 40px)
+        const rect = swipeArea.getBoundingClientRect();
+        if (clientX < rect.left) return; // không phải mép phải
+        startX = clientX;
+        isDragging = true;
+        // Khởi tạo transition tạm thời để kéo mượt
+        drawer.style.transition = 'none';
+        const content = drawer.querySelector('.drawer-content');
+        content.style.transition = 'none';
+        // Lưu vị trí hiện tại
+        const currentOffset = isOpen ? 0 : 220; // 220 là chiều rộng drawer
+        content.style.transform = `translateX(${currentOffset}px)`;
+        content.style.opacity = isOpen ? 1 : 0;
+      }
+
+      function handleMove(e) {
+        if (!isDragging) return;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const deltaX = clientX - startX; // âm khi kéo sang trái
+        const content = drawer.querySelector('.drawer-content');
+        const width = 220; // chiều rộng drawer
+        let newOffset = isOpen ? 0 : width;
+        newOffset = newOffset + deltaX;
+        // Giới hạn
+        newOffset = Math.min(width, Math.max(0, newOffset));
+        content.style.transform = `translateX(${newOffset}px)`;
+        // Opacity dựa trên độ dịch chuyển
+        const opacity = 1 - (newOffset / width);
+        content.style.opacity = Math.max(0, Math.min(1, opacity * 1.2));
+      }
+
+      function handleEnd(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        const content = drawer.querySelector('.drawer-content');
+        // Reset transition
+        drawer.style.transition = '';
+        content.style.transition = '';
+        // Xác định dựa trên vị trí cuối
+        const computedStyle = window.getComputedStyle(content);
+        const transform = computedStyle.transform;
+        let offset = 220;
+        if (transform !== 'none') {
+          const matrix = transform.match(/matrix.*\((.+)\)/);
+          if (matrix) {
+            const values = matrix[1].split(', ');
+            const tx = parseFloat(values[4] || 0);
+            offset = tx > 0 ? tx : 0;
+          }
+        }
+        // Nếu offset < 110 (một nửa) -> mở, ngược lại đóng
+        const shouldOpen = offset < 110;
+        toggleDrawer(shouldOpen);
+        // Reset lại transform về đúng trạng thái
+        if (!shouldOpen) {
+          content.style.transform = `translateX(220px)`;
+          content.style.opacity = 0;
+        } else {
+          content.style.transform = `translateX(0)`;
+          content.style.opacity = 1;
+        }
+        startX = 0;
+      }
+
+      // Touch events
+      swipeArea.addEventListener('touchstart', handleStart, { passive: true });
+      swipeArea.addEventListener('touchmove', handleMove, { passive: true });
+      swipeArea.addEventListener('touchend', handleEnd, { passive: true });
+
+      // Mouse events (cho desktop)
+      swipeArea.addEventListener('mousedown', handleStart);
+      document.addEventListener('mousemove', handleMove);
+      document.addEventListener('mouseup', handleEnd);
+
+      // Đóng drawer khi click ra ngoài
+      document.addEventListener('click', (e) => {
+        if (!drawer.contains(e.target) && isOpen) {
+          toggleDrawer(false);
+        }
+      });
+
+      // ===== BÁNH KEM =====
       document.getElementById('cakeBtn').addEventListener('click', function() {
         openPanel('cake', this);
       });
@@ -1436,7 +1268,7 @@
         });
       }
 
-      // ===== RECORD PLAYER – THANH NGANG =====
+      // ===== RECORD PLAYER =====
       const audio1 = document.getElementById('audio1');
       const audio2 = document.getElementById('audio2');
       const songs = [
@@ -1533,30 +1365,20 @@
         songs.forEach(s => s.src.load());
         playSong();
 
-        // Sự kiện nút
-        playBtn.addEventListener('click', (e) => { e.stopPropagation();
-          togglePlayPause(); });
-        prevBtn.addEventListener('click', (e) => { e.stopPropagation();
-          prevSong(); });
-        nextBtn.addEventListener('click', (e) => { e.stopPropagation();
-          nextSong(); });
-        muteBtn.addEventListener('click', (e) => { e.stopPropagation();
-          toggleMute(); });
-        albumToggleBtn.addEventListener('click', (e) => { e.stopPropagation();
-          albumPanel.classList.toggle('open'); });
+        playBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlayPause(); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevSong(); });
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextSong(); });
+        muteBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleMute(); });
+        albumToggleBtn.addEventListener('click', (e) => { e.stopPropagation(); albumPanel.classList.toggle('open'); });
 
-        // Double click lên toàn bộ record-box để mute (giữ nguyên tính năng)
         const player = document.getElementById('recordPlayer');
-        let clickCount = 0;
-        let clickTimer = null;
+        let clickCount = 0, clickTimer = null;
         player.addEventListener('click', (e) => {
-          // Bỏ qua nếu click vào các nút con đã xử lý riêng
           if (e.target.closest('button')) return;
           clickCount++;
           if (clickCount === 1) {
             clickTimer = setTimeout(() => {
               clickCount = 0;
-              // Click đơn: mở/đóng album
               albumPanel.classList.toggle('open');
             }, 250);
           } else if (clickCount >= 2) {
@@ -1566,7 +1388,6 @@
           }
         });
 
-        // Đóng album khi click ra ngoài
         document.addEventListener('click', (e) => {
           if (!albumPanel.contains(e.target) && e.target !== player && !player.contains(e.target) && e.target !== albumToggleBtn) {
             albumPanel.classList.remove('open');
