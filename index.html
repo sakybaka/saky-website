@@ -219,18 +219,23 @@
       align-items: center;
       justify-content: center;
     }
-    .stack {
+
+    /* ===== MENU ACCORDION – PHONG CÁCH iOS 26 ===== */
+    .menu-group {
       position: fixed;
       top: 26px;
       right: 26px;
       z-index: 30;
       display: flex;
       flex-direction: column;
-      gap: 14px;
       align-items: flex-end;
+      gap: 0;
+      min-width: 200px;
+      max-width: 220px;
     }
-    .stack-btn {
-      width: 220px;
+
+    .menu-header {
+      width: 100%;
       padding: 15px 20px;
       border-radius: 18px;
       display: flex;
@@ -242,24 +247,115 @@
       color: var(--text-dark);
       text-align: left;
       cursor: pointer;
-      transform: translateX(calc(var(--i) * 6px)) rotate(calc(var(--i) * -1.6deg));
-      transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease, opacity .3s ease;
       background: var(--glass);
       backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
       border: 1px solid var(--glass-border);
       box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.3s ease,
+                  border-radius 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
-    .stack-btn:hover {
-      transform: translateY(-4px) translateX(calc(var(--i) * 6px)) rotate(0deg) scale(1.03);
+    .menu-header:hover {
+      transform: translateY(-2px) scale(1.02);
       box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
     }
-    .stack-btn .ico {
+    .menu-header .ico {
       font-size: 18px;
     }
-    .stack-btn.launching {
+    .menu-header .arrow {
+      font-size: 14px;
+      margin-left: auto;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .menu-header .arrow.open {
+      transform: rotate(180deg);
+    }
+    /* Khi mở, bo tròn góc dưới biến mất */
+    .menu-header.open {
+      border-radius: 18px 18px 0 0;
+    }
+
+    .menu-items {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow: hidden;
+      max-height: 0;
       opacity: 0;
+      padding: 0 6px;
+      background: var(--glass);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border: 1px solid var(--glass-border);
+      border-top: none;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      transition: max-height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  opacity 0.5s ease,
+                  padding 0.4s ease,
+                  margin 0.4s ease;
+      margin-top: -1px;
+      pointer-events: none;
+      transform: translateY(-6px) scale(0.96);
+      transform-origin: top center;
+    }
+    .menu-items.open {
+      max-height: 300px;
+      opacity: 1;
+      padding: 12px 6px;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .menu-item {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: inherit;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--text-dark);
+      text-align: left;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      transform: translateX(8px);
+      opacity: 0.7;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  background 0.2s ease,
+                  box-shadow 0.2s ease,
+                  opacity 0.3s ease;
+    }
+    .menu-items.open .menu-item {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .menu-items.open .menu-item:nth-child(1) { transition-delay: 0.05s; }
+    .menu-items.open .menu-item:nth-child(2) { transition-delay: 0.10s; }
+    .menu-items.open .menu-item:nth-child(3) { transition-delay: 0.15s; }
+
+    .menu-item:hover {
+      transform: translateX(-4px) scale(1.02);
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: var(--shadow-soft);
+    }
+    .menu-item .ico {
+      font-size: 16px;
+    }
+    .menu-item.launching {
+      opacity: 0.4;
       pointer-events: none;
     }
+
     .hero {
       display: flex;
       flex-direction: column;
@@ -589,7 +685,6 @@
     .record-box:hover {
       transform: scale(1.02);
     }
-    /* Đĩa nhỏ bên trái */
     .record-disc-wrap {
       position: relative;
       width: 70px;
@@ -681,8 +776,6 @@
         transform: rotate(360deg);
       }
     }
-
-    /* Phần thông tin & điều khiển bên phải */
     .record-info {
       display: flex;
       flex-direction: column;
@@ -741,7 +834,6 @@
       text-overflow: ellipsis;
       max-width: 80px;
     }
-    /* Nút mở album (danh sách bài hát) */
     .record-album-btn {
       background: rgba(255, 255, 255, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.6);
@@ -757,8 +849,6 @@
     .record-album-btn:hover {
       background: rgba(255, 255, 255, 0.7);
     }
-
-    /* Album panel (popup danh sách) */
     .album-panel {
       position: fixed;
       bottom: 120px;
@@ -824,14 +914,19 @@
     }
 
     @media (max-width: 640px) {
-      .stack {
+      .menu-group {
         top: 16px;
         right: 16px;
+        min-width: 160px;
+        max-width: 180px;
       }
-      .stack-btn {
-        width: 180px;
+      .menu-header {
         padding: 12px 16px;
         font-size: 13px;
+      }
+      .menu-item {
+        padding: 10px 14px;
+        font-size: 12px;
       }
       .cd-box {
         width: 64px;
@@ -929,11 +1024,19 @@
   </div>
 
   <div class="app" id="app">
-    <div class="stack" id="stack">
-      <button class="stack-btn" data-panel="profile" style="--i:0"><span class="ico">👤</span> Hồ Sơ Của Tớ</button>
-      <button class="stack-btn" data-panel="wishes" style="--i:1"><span class="ico">💌</span> Lời Chúc</button>
-      <button class="stack-btn" data-panel="gallery" style="--i:2"><span class="ico">📸</span> Khoảnh Khắc</button>
-      <button class="stack-btn" data-panel="donate" style="--i:3"><span class="ico">💖</span> Donate for Saky</button>
+    <!-- ===== MENU ACCORDION iOS 26 ===== -->
+    <div class="menu-group" id="menuGroup">
+      <div class="menu-header" id="menuHeader">
+        <span class="ico">👤</span>
+        <span>Hồ Sơ Của Tớ</span>
+        <span class="arrow" id="menuArrow">▼</span>
+      </div>
+      <div class="menu-items" id="menuItems">
+        <div class="menu-item" data-panel="profile"><span class="ico">👤</span> Hồ Sơ</div>
+        <div class="menu-item" data-panel="wishes"><span class="ico">💌</span> Lời Chúc</div>
+        <div class="menu-item" data-panel="gallery"><span class="ico">📸</span> Khoảnh Khắc</div>
+        <div class="menu-item" data-panel="donate"><span class="ico">💖</span> Donate for Saky</div>
+      </div>
     </div>
 
     <main class="hero">
@@ -966,7 +1069,6 @@
   <!-- ===== RECORD PLAYER – THANH NGANG ===== -->
   <div class="record-player" id="recordPlayer">
     <div class="record-box">
-      <!-- Đĩa nhỏ bên trái -->
       <div class="record-disc-wrap">
         <div class="record-disc" id="recordDisc">
           <div class="label">🎵</div>
@@ -975,8 +1077,6 @@
           <div class="needle"></div>
         </div>
       </div>
-
-      <!-- Thông tin và điều khiển bên phải -->
       <div class="record-info">
         <div class="record-title" id="recordTitle">Bunny Girl Senpai</div>
         <div class="record-controls">
@@ -991,13 +1091,13 @@
     </div>
   </div>
 
-  <!-- Album panel (danh sách bài hát) -->
+  <!-- Album panel -->
   <div class="album-panel" id="albumPanel">
     <h4>📀 Danh sách phát</h4>
     <div id="songList"></div>
   </div>
 
-  <!-- Audio (đã sửa link đúng) -->
+  <!-- Audio -->
   <audio id="audio1" preload="auto">
     <source src="https://sakybaka.github.io/saky-website/YTSave_YouTube_bunny-girl-senpai-lofi-fukashigi-no-cart_Media_lCOeLfkY4P0_009_128k.mp3" type="audio/mpeg">
   </audio>
@@ -1316,7 +1416,7 @@
             <h3 style="margin-bottom:10px;">💖 Donate for Saky</h3>
             <p style="font-size:14px;color:var(--text-soft);margin-bottom:14px;">Cảm ơn bạn đã ủng hộ!</p>
             <div style="background:var(--glass);border-radius:20px;padding:12px;border:1px solid var(--glass-border);">
-             <img src="Donate.png" alt="donate" style="width:100%;border-radius:16px;display:block;" />
+              <img src="Donate.png" alt="donate" style="width:100%;border-radius:16px;display:block;" />
               <p style="margin-top:10px;font-size:13px;color:var(--text-soft);">(ảnh thẻ ngân hàng)</p>
             </div>
           </div>
@@ -1411,10 +1511,46 @@
       modalClose.addEventListener('click', closePanel);
       document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
 
-      document.querySelectorAll('.stack-btn').forEach(btn => {
-        btn.addEventListener('click', () => openPanel(btn.dataset.panel, btn));
+      // ===== SỰ KIỆN CHO MENU ACCORDION =====
+      const menuHeader = document.getElementById('menuHeader');
+      const menuItems = document.getElementById('menuItems');
+      const menuArrow = document.getElementById('menuArrow');
+      let isOpen = false;
+
+      menuHeader.addEventListener('click', function(e) {
+        e.stopPropagation();
+        isOpen = !isOpen;
+        menuItems.classList.toggle('open', isOpen);
+        menuArrow.classList.toggle('open', isOpen);
+        menuHeader.classList.toggle('open', isOpen);
       });
 
+      // Các mục con -> mở modal
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+          const panel = this.dataset.panel;
+          openPanel(panel, this);
+          // Đóng accordion sau khi chọn (tuỳ chọn)
+          // Nếu muốn giữ mở thì bỏ 2 dòng dưới
+          isOpen = false;
+          menuItems.classList.remove('open');
+          menuArrow.classList.remove('open');
+          menuHeader.classList.remove('open');
+        });
+      });
+
+      // Đóng menu khi click ra ngoài (tuỳ chọn)
+      document.addEventListener('click', (e) => {
+        const menuGroup = document.getElementById('menuGroup');
+        if (!menuGroup.contains(e.target) && isOpen) {
+          isOpen = false;
+          menuItems.classList.remove('open');
+          menuArrow.classList.remove('open');
+          menuHeader.classList.remove('open');
+        }
+      });
+
+      // ===== BÁNH KEM =====
       document.getElementById('cakeBtn').addEventListener('click', function() {
         openPanel('cake', this);
       });
@@ -1436,7 +1572,7 @@
         });
       }
 
-      // ===== RECORD PLAYER – THANH NGANG =====
+      // ===== RECORD PLAYER =====
       const audio1 = document.getElementById('audio1');
       const audio2 = document.getElementById('audio2');
       const songs = [
@@ -1533,7 +1669,6 @@
         songs.forEach(s => s.src.load());
         playSong();
 
-        // Sự kiện nút
         playBtn.addEventListener('click', (e) => { e.stopPropagation();
           togglePlayPause(); });
         prevBtn.addEventListener('click', (e) => { e.stopPropagation();
@@ -1545,18 +1680,15 @@
         albumToggleBtn.addEventListener('click', (e) => { e.stopPropagation();
           albumPanel.classList.toggle('open'); });
 
-        // Double click lên toàn bộ record-box để mute (giữ nguyên tính năng)
         const player = document.getElementById('recordPlayer');
         let clickCount = 0;
         let clickTimer = null;
         player.addEventListener('click', (e) => {
-          // Bỏ qua nếu click vào các nút con đã xử lý riêng
           if (e.target.closest('button')) return;
           clickCount++;
           if (clickCount === 1) {
             clickTimer = setTimeout(() => {
               clickCount = 0;
-              // Click đơn: mở/đóng album
               albumPanel.classList.toggle('open');
             }, 250);
           } else if (clickCount >= 2) {
@@ -1566,7 +1698,6 @@
           }
         });
 
-        // Đóng album khi click ra ngoài
         document.addEventListener('click', (e) => {
           if (!albumPanel.contains(e.target) && e.target !== player && !player.contains(e.target) && e.target !== albumToggleBtn) {
             albumPanel.classList.remove('open');
