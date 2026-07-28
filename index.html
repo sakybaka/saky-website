@@ -8,2677 +8,342 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent !important;
-            -webkit-touch-callout: none !important;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-            -webkit-user-drag: none !important;
-            user-drag: none !important;
-        }
-        :root {
-            --glass: rgba(255, 255, 255, 0.45);
-            --glass-strong: rgba(255, 255, 255, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.85);
-            --text-dark: #2a2530;
-            --text-soft: #6b6470;
-            --gold-1: #fdf1c8;
-            --gold-2: #f7c948;
-            --gold-3: #c99a2e;
-            --shadow-soft: 0 8px 32px rgba(140, 120, 160, 0.18);
-            --shadow-strong: 0 20px 60px rgba(140, 120, 160, 0.30);
-            --radius-lg: 28px;
-            --radius-md: 20px;
-            --spring-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
-            --smooth-ease: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        html,
-        body {
-            height: 100%;
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: var(--text-dark);
-            overflow-x: hidden;
-            background: #fbf5f0;
-            -webkit-tap-highlight-color: transparent !important;
-            -webkit-touch-callout: none !important;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        body {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .bg {
-            position: fixed;
-            inset: 0;
-            z-index: -3;
-            background: linear-gradient(135deg, #fffaf5 0%, #fff0f5 45%, #f2f0ff 100%);
-            pointer-events: none;
-        }
-        .blob {
-            position: fixed;
-            z-index: -2;
-            border-radius: 50%;
-            filter: blur(70px);
-            opacity: .55;
-            pointer-events: none;
-            animation: drift 22s ease-in-out infinite;
-        }
-        .blob1 {
-            width: 520px;
-            height: 520px;
-            top: -160px;
-            left: -140px;
-            background: #ffd6e8;
-            animation-delay: 0s;
-        }
-        .blob2 {
-            width: 480px;
-            height: 480px;
-            bottom: -180px;
-            right: -140px;
-            background: #d8e8ff;
-            animation-delay: -6s;
-        }
-        .blob3 {
-            width: 420px;
-            height: 420px;
-            top: 30%;
-            right: 10%;
-            background: #fff2cf;
-            animation-delay: -12s;
-        }
-        .blob4 {
-            width: 360px;
-            height: 360px;
-            bottom: 10%;
-            left: 5%;
-            background: #e8dcff;
-            animation-delay: -18s;
-        }
-        @keyframes drift {
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(40px, -30px) scale(1.08);
-            }
-            66% {
-                transform: translate(-30px, 25px) scale(0.95);
-            }
-        }
-        .glass {
-            background: var(--glass);
-            backdrop-filter: blur(24px) saturate(200%);
-            -webkit-backdrop-filter: blur(24px) saturate(200%);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 -1px 12px rgba(255, 255, 255, 0.4);
-        }
-        .glass-strong {
-            background: var(--glass-strong);
-            backdrop-filter: blur(30px) saturate(220%);
-            -webkit-backdrop-filter: blur(30px) saturate(220%);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 16px rgba(255, 255, 255, 0.5);
-        }
-
-        .gate {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.20);
-            backdrop-filter: blur(30px) saturate(150%);
-            -webkit-backdrop-filter: blur(30px) saturate(150%);
-            transition: opacity .6s ease, visibility .6s ease;
-        }
-        .gate.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .gate-card {
-            width: min(420px, 88vw);
-            padding: 48px 36px 38px;
-            border-radius: var(--radius-lg);
-            text-align: center;
-            animation: pop-in .7s cubic-bezier(0.2, 0.9, 0.25, 1.2);
-        }
-        @keyframes pop-in {
-            from {
-                opacity: 0;
-                transform: translateY(24px) scale(.94);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        .gate-emoji {
-            font-size: 52px;
-            margin-bottom: 6px;
-        }
-        .gate-card h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--text-dark);
-        }
-        .gate-card p {
-            font-size: 14px;
-            color: var(--text-soft);
-            margin-bottom: 22px;
-        }
-        .field {
-            width: 100%;
-            padding: 14px 18px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(10px);
-            font-family: inherit;
-            font-size: 15px;
-            color: var(--text-dark);
-            outline: none;
-            transition: box-shadow .25s ease, border-color .25s ease;
-            margin-bottom: 16px;
-            -webkit-user-select: text !important;
-            -moz-user-select: text !important;
-            -ms-user-select: text !important;
-            user-select: text !important;
-        }
-        .field::placeholder {
-            color: #a49dab;
-        }
-        .field:focus {
-            border-color: var(--gold-2);
-            box-shadow: 0 0 0 4px rgba(247, 201, 72, 0.25);
-        }
-        .field.error {
-            border-color: #e74c3c;
-            box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.2);
-        }
-        .error-msg {
-            color: #e74c3c;
-            font-size: 13px;
-            display: block;
-            margin-top: -10px;
-            margin-bottom: 14px;
-            text-align: left;
-            padding-left: 4px;
-            min-height: 20px;
-        }
-        textarea.field {
-            resize: none;
-            min-height: 96px;
-            font-family: inherit;
-            -webkit-user-select: text !important;
-            -moz-user-select: text !important;
-            -ms-user-select: text !important;
-            user-select: text !important;
-        }
-        .btn-primary {
-            width: 100%;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 16px;
-            font-family: inherit;
-            font-weight: 600;
-            font-size: 15px;
-            color: #4a3a1a;
-            cursor: pointer;
-            background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
-            box-shadow: 0 10px 24px rgba(247, 201, 72, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-            transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 16px 32px rgba(247, 201, 72, 0.5);
-        }
-        .btn-primary:active {
-            transform: translateY(0px) scale(.98);
-        }
-
-        .app {
-            position: relative;
-            z-index: 5;
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-
-        .top-right-wrapper {
-            position: fixed;
-            top: 26px;
-            right: 26px;
-            z-index: 30;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        @media (max-width: 640px) {
-            .top-right-wrapper {
-                top: 16px;
-                right: 16px;
-                gap: 8px;
-            }
-        }
-
-        .bell-box {
-            position: relative;
-            flex-shrink: 0;
-            height: 52px;
-            width: 52px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            background: var(--glass);
-            backdrop-filter: blur(24px) saturate(200%);
-            -webkit-backdrop-filter: blur(24px) saturate(200%);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .bell-box:hover {
-            transform: translateY(-2px) scale(1.04);
-            box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-        }
-        .bell-box:active {
-            transform: scale(0.94);
-        }
-        .bell-box .bell-icon {
-            font-size: 22px;
-            line-height: 1;
-            position: relative;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .bell-box .bell-badge {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            background: #e74c3c;
-            color: #fff;
-            font-size: 10px;
-            font-weight: 700;
-            min-width: 20px;
-            height: 20px;
-            border-radius: 999px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 0 5px;
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4);
-            font-family: 'Poppins', sans-serif;
-            transition: transform 0.3s ease;
-            pointer-events: none;
-        }
-        .bell-box .bell-badge.pop {
-            animation: bell-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes bell-pop {
-            0% {
-                transform: scale(0.5);
-            }
-            60% {
-                transform: scale(1.4);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .menu-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 0;
-            min-width: 200px;
-            max-width: 220px;
-            position: relative;
-            flex-shrink: 0;
-        }
-        @media (max-width: 640px) {
-            .menu-group {
-                min-width: 160px;
-                max-width: 180px;
-            }
-        }
-        .menu-header {
-            width: 100%;
-            padding: 15px 20px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: inherit;
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-dark);
-            text-align: left;
-            cursor: pointer;
-            background: var(--glass);
-            backdrop-filter: blur(24px) saturate(200%);
-            -webkit-backdrop-filter: blur(24px) saturate(200%);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-soft), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-radius 0.3s ease;
-            position: relative;
-            z-index: 2;
-            height: 52px;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .menu-header:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-        }
-        .menu-header .ico {
-            font-size: 18px;
-            pointer-events: none;
-        }
-        .menu-header .arrow {
-            font-size: 14px;
-            margin-left: auto;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            pointer-events: none;
-        }
-        .menu-header .arrow.open {
-            transform: rotate(180deg);
-        }
-        .menu-header.open {
-            border-radius: 18px 18px 0 0;
-        }
-        .menu-items {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            padding: 0 6px;
-            background: var(--glass);
-            backdrop-filter: blur(24px) saturate(200%);
-            -webkit-backdrop-filter: blur(24px) saturate(200%);
-            border: 1px solid var(--glass-border);
-            border-top: none;
-            border-radius: 0 0 18px 18px;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-            transition: max-height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease, padding 0.4s ease, margin 0.4s ease;
-            margin-top: -1px;
-            pointer-events: none;
-            transform: translateY(-6px) scale(0.96);
-            transform-origin: top center;
-        }
-        .menu-items.open {
-            max-height: 300px;
-            opacity: 1;
-            padding: 12px 6px;
-            pointer-events: auto;
-            transform: translateY(0) scale(1);
-        }
-        .menu-item {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: inherit;
-            font-weight: 500;
-            font-size: 13px;
-            color: var(--text-dark);
-            text-align: left;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transform: translateX(8px);
-            opacity: 0.7;
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .menu-items.open .menu-item {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        .menu-items.open .menu-item:nth-child(1) {
-            transition-delay: 0.05s;
-        }
-        .menu-items.open .menu-item:nth-child(2) {
-            transition-delay: 0.10s;
-        }
-        .menu-items.open .menu-item:nth-child(3) {
-            transition-delay: 0.15s;
-        }
-        .menu-items.open .menu-item:nth-child(4) {
-            transition-delay: 0.20s;
-        }
-        .menu-item:hover {
-            transform: translateX(-4px) scale(1.02);
-            background: rgba(255, 255, 255, 0.6);
-            box-shadow: var(--shadow-soft);
-        }
-        .menu-item .ico {
-            font-size: 16px;
-            pointer-events: none;
-        }
-        .menu-item.viewed {
-            opacity: 0.5;
-        }
-        .menu-item.viewed .ico {
-            opacity: 0.5;
-        }
-
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 26px;
-            padding: 20px 20px 60px;
-            text-align: center;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .headline-wrap {
-            overflow: visible;
-            perspective: 600px;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .gold-text {
-            font-family: 'Great Vibes', cursive;
-            font-weight: 400;
-            font-size: clamp(3.2rem, 10vw, 6.2rem);
-            line-height: 1.1;
-            background: linear-gradient(90deg, var(--gold-3), var(--gold-2) 25%, #fff6d8 50%, var(--gold-2) 75%, var(--gold-3));
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-            clip-path: inset(0 100% 0 0);
-            animation: draw 2.4s cubic-bezier(.65, 0, .35, 1) .3s forwards, shine 5s linear 2.7s infinite;
-            transform: rotateX(3deg) scale(1.02);
-            text-shadow: 0 2px 4px rgba(201, 154, 46, 0.2), 0 8px 20px rgba(201, 154, 46, 0.15), 0 -2px 6px rgba(255, 255, 255, 0.6);
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        @keyframes draw {
-            to {
-                clip-path: inset(0 0% 0 0);
-            }
-        }
-        @keyframes shine {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 300% 50%;
-            }
-        }
-        .subtitle {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-soft);
-            letter-spacing: .3px;
-            opacity: 0;
-            animation: fade-up .8s ease 2.6s forwards;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        @keyframes fade-up {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .cake-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            user-select: none;
-            position: relative;
-            z-index: 6;
-            -webkit-tap-highlight-color: transparent !important;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .cake {
-            font-size: clamp(64px, 14vw, 108px);
-            filter: drop-shadow(0 18px 30px rgba(160, 120, 90, 0.28));
-            animation: bob 3.2s ease-in-out infinite;
-            transition: transform .3s cubic-bezier(.2, .8, .2, 1);
-            pointer-events: none;
-        }
-        .cake-wrap:hover .cake {
-            transform: scale(1.08) rotate(-2deg);
-        }
-        .cake-wrap:active .cake {
-            transform: scale(.96);
-        }
-        @keyframes bob {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        .cake-hint {
-            font-size: 13px;
-            color: var(--text-soft);
-            padding: 8px 16px;
-            border-radius: 999px;
-            background: var(--glass);
-            backdrop-filter: blur(14px);
-            border: 1px solid var(--glass-border);
-            pointer-events: none;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .countdown {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .cd-box {
-            width: 76px;
-            padding: 14px 0 10px;
-            border-radius: 18px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-        }
-        .cd-num {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--text-dark);
-            font-variant-numeric: tabular-nums;
-        }
-        .cd-label {
-            font-size: 10px;
-            letter-spacing: .6px;
-            text-transform: uppercase;
-            color: var(--text-soft);
-        }
-        .cd-target {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-soft);
-            margin-top: 2px;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(120, 110, 140, 0.15);
-            backdrop-filter: blur(0px);
-            -webkit-backdrop-filter: blur(0px);
-            z-index: 40;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.7s ease, backdrop-filter 0.7s ease, -webkit-backdrop-filter 0.7s ease, visibility 0.7s ease;
-            will-change: backdrop-filter, opacity;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .modal-overlay.show {
-            opacity: 1;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            visibility: visible;
-        }
-
-        .modal-panel {
-            position: fixed;
-            z-index: 41;
-            border-radius: 18px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(0px) saturate(100%);
-            -webkit-backdrop-filter: blur(0px) saturate(100%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            opacity: 0;
-            visibility: hidden;
-            will-change: transform, left, top, width, height, border-radius, backdrop-filter, box-shadow, opacity;
-            transition: left 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
-                top 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
-                width 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
-                height 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
-                border-radius 0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
-                backdrop-filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-                -webkit-backdrop-filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-                box-shadow 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform: scale(1);
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .modal-panel.show {
-            opacity: 1;
-            visibility: visible;
-            background: var(--glass-strong);
-            backdrop-filter: blur(30px) saturate(220%);
-            -webkit-backdrop-filter: blur(30px) saturate(220%);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.95), inset 0 -1px 16px rgba(255, 255, 255, 0.5);
-            border-radius: 26px;
-        }
-
-        .modal-inner {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 28px 26px 22px;
-            overflow: hidden;
-            opacity: 0;
-            transition: opacity 0.25s ease 0.15s;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .modal-panel.show .modal-inner {
-            opacity: 1;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 16px;
-            color: var(--text-soft);
-            transition: transform .2s ease, background .2s ease;
-            z-index: 5;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .modal-close:hover {
-            transform: rotate(90deg);
-            background: rgba(255, 255, 255, 0.85);
-        }
-        .modal-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            flex-shrink: 0;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .modal-sub {
-            font-size: 13px;
-            color: var(--text-soft);
-            margin-bottom: 20px;
-            flex-shrink: 0;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-
-        .letter-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-        .letter-card {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            border-radius: 16px;
-            padding: 16px 18px;
-            cursor: pointer;
-            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.2s ease;
-            position: relative;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .letter-card:hover {
-            transform: translateX(4px) scale(1.01);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            background: rgba(255, 255, 255, 0.6);
-        }
-        .letter-card .letter-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4px;
-        }
-        .letter-card .letter-sender {
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-dark);
-        }
-        .letter-card .letter-badge {
-            font-size: 10px;
-            font-weight: 700;
-            color: #fff;
-            background: #e74c3c;
-            padding: 2px 10px;
-            border-radius: 999px;
-            letter-spacing: 0.3px;
-            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
-            flex-shrink: 0;
-        }
-        .letter-card .letter-badge.read {
-            background: #7f8c8d;
-            box-shadow: none;
-        }
-        .letter-card .letter-subject {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-soft);
-            margin-bottom: 2px;
-        }
-        .letter-card .letter-preview {
-            font-size: 12.5px;
-            color: var(--text-soft);
-            opacity: 0.8;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.5;
-        }
-        .letter-card .letter-date {
-            font-size: 10px;
-            color: var(--text-soft);
-            opacity: 0.5;
-            margin-top: 6px;
-            text-align: right;
-        }
-        .letter-card .letter-unread-dot {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #e74c3c;
-            animation: pulse-dot 1.6s ease-in-out infinite;
-        }
-        @keyframes pulse-dot {
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: scale(0.7);
-            }
-        }
-        .letter-card .letter-unread-dot.hidden {
-            display: none;
-        }
-
-        .letter-detail-scroll {
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 4px;
-            padding-bottom: 4px;
-        }
-        .letter-detail-scroll .detail-sender {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-        .letter-detail-scroll .detail-subject {
-            font-size: 13px;
-            color: var(--text-soft);
-            margin-bottom: 12px;
-        }
-        .letter-detail-scroll .detail-body {
-            font-size: 14px;
-            line-height: 1.8;
-            color: var(--text-dark);
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 14px;
-            padding: 16px 18px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            white-space: pre-wrap;
-            word-break: break-word;
-            overflow: visible;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .letter-detail-scroll .detail-body img {
-            max-width: 100%;
-            border-radius: 12px;
-            margin-top: 10px;
-            display: block;
-            pointer-events: none;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .letter-detail-scroll .detail-date {
-            font-size: 11px;
-            color: var(--text-soft);
-            opacity: 0.5;
-            margin-top: 10px;
-            text-align: right;
-        }
-        .letter-detail-footer {
-            flex-shrink: 0;
-            padding-top: 14px;
-            border-top: 1px solid rgba(0, 0, 0, 0.06);
-            margin-top: 6px;
-        }
-        .letter-detail-footer .btn-primary {
-            width: auto;
-            padding: 8px 20px;
-            font-size: 13px;
-        }
-
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 14px;
-            overflow: hidden;
-            box-shadow: 0 10px 24px rgba(247, 201, 72, 0.35);
-            flex-shrink: 0;
-            border: 3px solid var(--glass-border);
-            pointer-events: none;
-        }
-        .profile-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            pointer-events: none;
-        }
-        .profile-name {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .profile-role {
-            text-align: center;
-            font-size: 13px;
-            color: var(--text-soft);
-            margin-bottom: 14px;
-        }
-        .profile-line {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            font-size: 13.5px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-        }
-        .profile-line span:first-child {
-            color: var(--text-soft);
-        }
-        .profile-line span:last-child {
-            font-weight: 600;
-        }
-        .profile-line .highlight {
-            color: var(--gold-3);
-        }
-        .profile-bio {
-            margin-top: 12px;
-            padding: 12px 14px;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            font-size: 13px;
-            color: var(--text-dark);
-            line-height: 1.6;
-            text-align: center;
-            font-style: italic;
-        }
-        .profile-bio .quote-icon {
-            color: var(--gold-3);
-            font-size: 16px;
-        }
-
-        .wish-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 18px;
-        }
-        .wish-form .btn-primary {
-            margin-top: 4px;
-        }
-        .success-msg {
-            background: rgba(46, 204, 113, 0.15);
-            border: 1px solid #2ecc71;
-            border-radius: 12px;
-            padding: 12px 16px;
-            color: #27ae60;
-            font-size: 14px;
-            text-align: center;
-            display: none;
-        }
-        .success-msg.show {
-            display: block;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        .gallery-card {
-            aspect-ratio: 1;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            background: #f0f0f0;
-            transition: transform 0.25s cubic-bezier(.2, .9, .4, 1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .gallery-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
-        }
-        .gallery-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s ease;
-            pointer-events: none;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-        .gallery-card:hover img {
-            transform: scale(1.04);
-        }
-
-        .record-player {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            z-index: 25;
-            cursor: pointer;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .record-box {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.85);
-            border-radius: 24px;
-            padding: 12px 18px 12px 14px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 16px;
-            transition: transform 0.2s ease;
-            min-width: 300px;
-            max-width: 420px;
-        }
-        .record-box:hover {
-            transform: scale(1.02);
-        }
-        .record-disc-wrap {
-            position: relative;
-            width: 70px;
-            height: 70px;
-            flex-shrink: 0;
-        }
-        .record-disc {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #3a3a3a, #111 80%, #222);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), inset 0 -2px 8px rgba(0, 0, 0, 0.6);
-            animation: spin-disc 4s linear infinite;
-            position: relative;
-            border: 2px solid #888;
-            pointer-events: none;
-        }
-        .record-disc::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 16px;
-            height: 16px;
-            background: radial-gradient(circle, #d4c4a0, #a08870);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .record-disc .label {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #f7c948, #d4a830);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            color: #3a2a1a;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.6);
-            opacity: 0.9;
-            pointer-events: none;
-            font-family: 'Poppins', sans-serif;
-        }
-        .record-arm {
-            position: absolute;
-            top: -8px;
-            right: -12px;
-            width: 8px;
-            height: 40px;
-            background: linear-gradient(135deg, #c0a88a, #8a705a);
-            border-radius: 4px 4px 0 0;
-            transform-origin: bottom center;
-            transform: rotate(-25deg) translateX(6px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            border: 1px solid #d4b89a;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .record-arm::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            width: 16px;
-            height: 16px;
-            background: radial-gradient(circle, #d4b08a, #8a6a50);
-            border-radius: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-            border: 1px solid #b8956a;
-        }
-        .record-arm .needle {
-            position: absolute;
-            top: -2px;
-            left: 50%;
-            width: 2px;
-            height: 10px;
-            background: #d0c0b0;
-            transform: translateX(-50%) rotate(8deg);
-            border-radius: 2px;
-            box-shadow: 0 0 4px rgba(255, 215, 140, 0.3);
-        }
-        @keyframes spin-disc {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .record-info {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            min-width: 0;
-        }
-        .record-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-dark);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .record-controls {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 4px;
-        }
-        .record-controls button {
-            background: rgba(255, 255, 255, 0.5);
-            border: none;
-            border-radius: 30px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 14px;
-            color: var(--text-dark);
-            transition: background 0.2s, transform 0.2s;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .record-controls button:hover {
-            background: rgba(255, 255, 255, 0.8);
-            transform: scale(1.05);
-        }
-        .record-controls .play-btn {
-            width: 36px;
-            height: 36px;
-            font-size: 16px;
-            background: rgba(255, 255, 255, 0.7);
-        }
-        .record-controls .play-btn:hover {
-            background: rgba(255, 255, 255, 0.9);
-        }
-        .record-status-text {
-            font-size: 11px;
-            color: var(--text-soft);
-            margin-left: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 80px;
-        }
-        .record-album-btn {
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 30px;
-            padding: 2px 10px;
-            font-size: 12px;
-            cursor: pointer;
-            color: var(--text-soft);
-            backdrop-filter: blur(4px);
-            transition: background 0.2s;
-            white-space: nowrap;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .record-album-btn:hover {
-            background: rgba(255, 255, 255, 0.7);
-        }
-        .album-panel {
-            position: fixed;
-            bottom: 120px;
-            left: 30px;
-            z-index: 26;
-            width: 280px;
-            max-height: 300px;
-            background: var(--glass-strong);
-            backdrop-filter: blur(30px) saturate(200%);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            box-shadow: var(--shadow-strong), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-            padding: 16px 16px 12px;
-            transform: translateY(20px) scale(0.95);
-            opacity: 0;
-            visibility: hidden;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease, visibility 0.3s ease;
-            overflow-y: auto;
-            pointer-events: none;
-        }
-        .album-panel.open {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-        .album-panel h4 {
-            font-size: 15px;
-            margin-bottom: 10px;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .album-panel .song-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 4px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            font-size: 13px;
-            cursor: pointer;
-            transition: background 0.2s;
-            border-radius: 8px;
-            -webkit-tap-highlight-color: transparent !important;
-        }
-        .album-panel .song-item:hover {
-            background: rgba(255, 255, 255, 0.3);
-            padding-left: 8px;
-            padding-right: 8px;
-        }
-        .album-panel .song-item.active {
-            color: var(--gold-3);
-            font-weight: 600;
-        }
-
-        #mcCanvas {
-            position: fixed;
-            inset: 0;
-            z-index: 4;
-            pointer-events: auto;
-            width: 100vw;
-            height: 100vh;
-            -webkit-user-select: none !important;
-            -moz-user-select: none !important;
-            -ms-user-select: none !important;
-            user-select: none !important;
-        }
-
-        @media (max-width: 640px) {
-            .top-right-wrapper {
-                top: 16px;
-                right: 16px;
-                gap: 8px;
-            }
-            .bell-box {
-                height: 44px;
-                width: 44px;
-                border-radius: 14px;
-            }
-            .bell-box .bell-icon {
-                font-size: 18px;
-            }
-            .bell-box .bell-badge {
-                font-size: 9px;
-                min-width: 17px;
-                height: 17px;
-                top: -3px;
-                right: -3px;
-            }
-            .menu-group {
-                min-width: 160px;
-                max-width: 180px;
-            }
-            .menu-header {
-                padding: 12px 16px;
-                font-size: 13px;
-                height: 44px;
-            }
-            .menu-item {
-                padding: 10px 14px;
-                font-size: 12px;
-            }
-            .cd-box {
-                width: 64px;
-                padding: 10px 0 8px;
-            }
-            .cd-num {
-                font-size: 20px;
-            }
-            .gallery {
-                grid-template-columns: 1fr 1fr;
-            }
-            .modal-inner {
-                padding: 24px 18px 18px;
-            }
-            .modal-panel {
-                border-radius: 18px;
-            }
-            .modal-panel.show {
-                border-radius: 20px;
-            }
-            .record-player {
-                bottom: 16px;
-                left: 16px;
-                right: 16px;
-            }
-            .record-box {
-                min-width: unset;
-                width: 100%;
-                padding: 10px 12px;
-                gap: 12px;
-            }
-            .record-disc-wrap {
-                width: 56px;
-                height: 56px;
-            }
-            .record-disc {
-                width: 56px;
-                height: 56px;
-            }
-            .record-arm {
-                height: 32px;
-                right: -8px;
-                top: -6px;
-            }
-            .record-arm::after {
-                width: 12px;
-                height: 12px;
-                bottom: -4px;
-            }
-            .record-controls button {
-                width: 26px;
-                height: 26px;
-                font-size: 12px;
-            }
-            .record-controls .play-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 14px;
-            }
-            .record-title {
-                font-size: 12px;
-            }
-            .record-status-text {
-                max-width: 60px;
-                font-size: 10px;
-            }
-            .album-panel {
-                left: 16px;
-                right: 16px;
-                width: auto;
-                bottom: 100px;
-            }
-            .profile-avatar {
-                width: 80px;
-                height: 80px;
-            }
-            .letter-card .letter-sender {
-                font-size: 13px;
-            }
-            .letter-card .letter-subject {
-                font-size: 12px;
-            }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: .01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: .01ms !important;
-            }
-        }
-
-        img,
-        svg,
-        video,
-        canvas {
-            -webkit-user-drag: none !important;
-            user-drag: none !important;
-            -webkit-touch-callout: none !important;
-        }
-        a,
-        button,
-        input,
-        textarea {
-            -webkit-touch-callout: none !important;
-        }
-        ::selection {
-            background: transparent !important;
-            color: inherit !important;
-        }
-        ::-moz-selection {
-            background: transparent !important;
-            color: inherit !important;
-        }
+        *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent!important;-webkit-touch-callout:none!important;-webkit-user-select:none!important;-moz-user-select:none!important;-ms-user-select:none!important;user-select:none!important;-webkit-user-drag:none!important;user-drag:none!important}
+        :root{--glass:rgba(255,255,255,0.45);--glass-strong:rgba(255,255,255,0.75);--glass-border:rgba(255,255,255,0.85);--text-dark:#2a2530;--text-soft:#6b6470;--gold-1:#fdf1c8;--gold-2:#f7c948;--gold-3:#c99a2e;--shadow-soft:0 8px 32px rgba(140,120,160,0.18);--shadow-strong:0 20px 60px rgba(140,120,160,0.30);--radius-lg:28px;--radius-md:20px;--spring-ease:cubic-bezier(0.34,1.56,0.64,1);--smooth-ease:cubic-bezier(0.4,0,0.2,1)}
+        html,body{height:100%;font-family:'Poppins',-apple-system,sans-serif;color:var(--text-dark);overflow-x:hidden;background:#fbf5f0}
+        body{min-height:100vh;display:flex;align-items:center;justify-content:center}
+        .bg{position:fixed;inset:0;z-index:-3;background:linear-gradient(135deg,#fffaf5,#fff0f5 45%,#f2f0ff);pointer-events:none}
+        .blob{position:fixed;z-index:-2;border-radius:50%;filter:blur(70px);opacity:.55;pointer-events:none;animation:drift 22s ease-in-out infinite}
+        .blob1{width:520px;height:520px;top:-160px;left:-140px;background:#ffd6e8}
+        .blob2{width:480px;height:480px;bottom:-180px;right:-140px;background:#d8e8ff;animation-delay:-6s}
+        .blob3{width:420px;height:420px;top:30%;right:10%;background:#fff2cf;animation-delay:-12s}
+        .blob4{width:360px;height:360px;bottom:10%;left:5%;background:#e8dcff;animation-delay:-18s}
+        @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-30px,25px) scale(0.95)}}
+        .glass{background:var(--glass);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border:1px solid var(--glass-border);box-shadow:var(--shadow-soft),inset 0 1px 1px rgba(255,255,255,0.9),inset 0 -1px 12px rgba(255,255,255,0.4)}
+        .glass-strong{background:var(--glass-strong);backdrop-filter:blur(30px) saturate(220%);-webkit-backdrop-filter:blur(30px) saturate(220%);border:1px solid var(--glass-border);box-shadow:var(--shadow-strong),inset 0 1px 1px rgba(255,255,255,0.95),inset 0 -1px 16px rgba(255,255,255,0.5)}
+        .gate{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.20);backdrop-filter:blur(30px) saturate(150%);-webkit-backdrop-filter:blur(30px) saturate(150%);transition:opacity .6s ease,visibility .6s ease}
+        .gate.hidden{opacity:0;visibility:hidden;pointer-events:none}
+        .gate-card{width:min(420px,88vw);padding:48px 36px 38px;border-radius:var(--radius-lg);text-align:center;animation:pop-in .7s cubic-bezier(0.2,0.9,0.25,1.2)}
+        @keyframes pop-in{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+        .gate-emoji{font-size:52px;margin-bottom:6px}
+        .gate-card h1{font-size:22px;font-weight:700;margin-bottom:6px}
+        .gate-card p{font-size:14px;color:var(--text-soft);margin-bottom:22px}
+        .field{width:100%;padding:14px 18px;border-radius:16px;border:1px solid rgba(255,255,255,0.9);background:rgba(255,255,255,0.55);backdrop-filter:blur(10px);font-family:inherit;font-size:15px;color:var(--text-dark);outline:none;transition:box-shadow .25s ease,border-color .25s ease;margin-bottom:16px;-webkit-user-select:text!important;-moz-user-select:text!important;-ms-user-select:text!important;user-select:text!important}
+        .field::placeholder{color:#a49dab}
+        .field:focus{border-color:var(--gold-2);box-shadow:0 0 0 4px rgba(247,201,72,0.25)}
+        .field.error{border-color:#e74c3c;box-shadow:0 0 0 4px rgba(231,76,60,0.2)}
+        .error-msg{color:#e74c3c;font-size:13px;display:block;margin-top:-10px;margin-bottom:14px;text-align:left;padding-left:4px;min-height:20px}
+        textarea.field{resize:none;min-height:96px;-webkit-user-select:text!important;-moz-user-select:text!important;-ms-user-select:text!important;user-select:text!important}
+        .btn-primary{width:100%;padding:14px 20px;border:none;border-radius:16px;font-family:inherit;font-weight:600;font-size:15px;color:#4a3a1a;cursor:pointer;background:linear-gradient(135deg,var(--gold-1),var(--gold-2));box-shadow:0 10px 24px rgba(247,201,72,0.4),inset 0 1px 1px rgba(255,255,255,0.8);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(247,201,72,0.5)}
+        .btn-primary:active{transform:translateY(0) scale(.98)}
+        .app{position:relative;z-index:5;width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center}
+        .top-right-wrapper{position:fixed;top:26px;right:26px;z-index:30;display:flex;align-items:flex-start;gap:10px}
+        @media(max-width:640px){.top-right-wrapper{top:16px;right:16px;gap:8px}}
+        .bell-box{position:relative;flex-shrink:0;height:52px;width:52px;border-radius:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--glass);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border:1px solid var(--glass-border);box-shadow:var(--shadow-soft),inset 0 1px 1px rgba(255,255,255,0.9);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease}
+        .bell-box:hover{transform:translateY(-2px) scale(1.04);box-shadow:var(--shadow-strong),inset 0 1px 1px rgba(255,255,255,0.9)}
+        .bell-box:active{transform:scale(.94)}
+        .bell-box .bell-icon{font-size:22px;line-height:1;position:relative;z-index:1;pointer-events:none}
+        .bell-box .bell-badge{position:absolute;top:-4px;right:-4px;background:#e74c3c;color:#fff;font-size:10px;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:none;align-items:center;justify-content:center;padding:0 5px;border:2px solid rgba(255,255,255,0.9);box-shadow:0 2px 8px rgba(231,76,60,0.4);font-family:'Poppins',sans-serif;transition:transform .3s ease;pointer-events:none}
+        .bell-box .bell-badge.pop{animation:bell-pop .4s cubic-bezier(.34,1.56,.64,1)}
+        @keyframes bell-pop{0%{transform:scale(.5)}60%{transform:scale(1.4)}100%{transform:scale(1)}}
+        .menu-group{display:flex;flex-direction:column;align-items:flex-end;gap:0;min-width:200px;max-width:220px;position:relative;flex-shrink:0}
+        @media(max-width:640px){.menu-group{min-width:160px;max-width:180px}}
+        .menu-header{width:100%;padding:15px 20px;border-radius:18px;display:flex;align-items:center;gap:10px;font-family:inherit;font-weight:600;font-size:14px;color:var(--text-dark);text-align:left;cursor:pointer;background:var(--glass);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border:1px solid var(--glass-border);box-shadow:var(--shadow-soft),inset 0 1px 1px rgba(255,255,255,0.9);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,border-radius .3s ease;position:relative;z-index:2;height:52px}
+        .menu-header:hover{transform:translateY(-2px) scale(1.02);box-shadow:var(--shadow-strong),inset 0 1px 1px rgba(255,255,255,0.9)}
+        .menu-header .ico{font-size:18px;pointer-events:none}
+        .menu-header .arrow{font-size:14px;margin-left:auto;transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+        .menu-header .arrow.open{transform:rotate(180deg)}
+        .menu-header.open{border-radius:18px 18px 0 0}
+        .menu-items{width:100%;display:flex;flex-direction:column;gap:6px;overflow:hidden;max-height:0;opacity:0;padding:0 6px;background:var(--glass);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border:1px solid var(--glass-border);border-top:none;border-radius:0 0 18px 18px;box-shadow:0 12px 32px rgba(0,0,0,0.08),inset 0 1px 1px rgba(255,255,255,0.9);transition:max-height .6s cubic-bezier(.34,1.56,.64,1),opacity .5s ease,padding .4s ease,margin .4s ease;margin-top:-1px;pointer-events:none;transform:translateY(-6px) scale(.96);transform-origin:top center}
+        .menu-items.open{max-height:300px;opacity:1;padding:12px 6px;pointer-events:auto;transform:translateY(0) scale(1)}
+        .menu-item{width:100%;padding:12px 16px;border-radius:14px;display:flex;align-items:center;gap:10px;font-family:inherit;font-weight:500;font-size:13px;color:var(--text-dark);text-align:left;cursor:pointer;background:rgba(255,255,255,0.3);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.4);transform:translateX(8px);opacity:.7;transition:transform .3s cubic-bezier(.34,1.56,.64,1),background .2s ease,box-shadow .2s ease,opacity .3s ease}
+        .menu-items.open .menu-item{transform:translateX(0);opacity:1}
+        .menu-items.open .menu-item:nth-child(1){transition-delay:.05s}
+        .menu-items.open .menu-item:nth-child(2){transition-delay:.10s}
+        .menu-items.open .menu-item:nth-child(3){transition-delay:.15s}
+        .menu-items.open .menu-item:nth-child(4){transition-delay:.20s}
+        .menu-item:hover{transform:translateX(-4px) scale(1.02);background:rgba(255,255,255,0.6);box-shadow:var(--shadow-soft)}
+        .menu-item .ico{font-size:16px;pointer-events:none}
+        .menu-item.viewed{opacity:.5}
+        .menu-item.viewed .ico{opacity:.5}
+        .hero{display:flex;flex-direction:column;align-items:center;gap:26px;padding:20px 20px 60px;text-align:center}
+        .headline-wrap{overflow:visible;perspective:600px}
+        .gold-text{font-family:'Great Vibes',cursive;font-weight:400;font-size:clamp(3.2rem,10vw,6.2rem);line-height:1.1;background:linear-gradient(90deg,var(--gold-3),var(--gold-2)25%,#fff6d8 50%,var(--gold-2)75%,var(--gold-3));background-size:300%100%;-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;clip-path:inset(0 100% 0 0);animation:draw 2.4s cubic-bezier(.65,0,.35,1).3s forwards,shine 5s linear 2.7s infinite;transform:rotateX(3deg) scale(1.02);text-shadow:0 2px 4px rgba(201,154,46,0.2),0 8px 20px rgba(201,154,46,0.15),0 -2px 6px rgba(255,255,255,0.6)}
+        @keyframes draw{to{clip-path:inset(0 0% 0 0)}}
+        @keyframes shine{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+        .subtitle{font-size:16px;font-weight:500;color:var(--text-soft);letter-spacing:.3px;opacity:0;animation:fade-up .8s ease 2.6s forwards}
+        @keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        .cake-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;position:relative;z-index:6}
+        .cake{font-size:clamp(64px,14vw,108px);filter:drop-shadow(0 18px 30px rgba(160,120,90,0.28));animation:bob 3.2s ease-in-out infinite;transition:transform .3s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+        .cake-wrap:hover .cake{transform:scale(1.08) rotate(-2deg)}
+        .cake-wrap:active .cake{transform:scale(.96)}
+        @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        .cake-hint{font-size:13px;color:var(--text-soft);padding:8px 16px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);pointer-events:none}
+        .countdown{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+        .cd-box{width:76px;padding:14px 0 10px;border-radius:18px;display:flex;flex-direction:column;align-items:center;gap:2px}
+        .cd-num{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
+        .cd-label{font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:var(--text-soft)}
+        .cd-target{font-size:14px;font-weight:500;color:var(--text-soft);margin-top:2px}
+        .modal-overlay{position:fixed;inset:0;background:rgba(120,110,140,0.15);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);z-index:40;opacity:0;visibility:hidden;transition:opacity .7s ease,backdrop-filter .7s ease,visibility .7s ease}
+        .modal-overlay.show{opacity:1;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);visibility:visible}
+        .modal-panel{position:fixed;z-index:41;border-radius:18px;overflow:hidden;background:rgba(255,255,255,0.3);backdrop-filter:blur(0px) saturate(100%);-webkit-backdrop-filter:blur(0px) saturate(100%);border:1px solid rgba(255,255,255,0.2);box-shadow:0 4px 20px rgba(0,0,0,0.05);opacity:0;visibility:hidden;transition:left .75s cubic-bezier(.34,1.56,.64,1),top .75s cubic-bezier(.34,1.56,.64,1),width .75s cubic-bezier(.34,1.56,.64,1),height .75s cubic-bezier(.34,1.56,.64,1),border-radius .65s cubic-bezier(.34,1.56,.64,1),backdrop-filter .7s cubic-bezier(.34,1.56,.64,1),-webkit-backdrop-filter .7s cubic-bezier(.34,1.56,.64,1),box-shadow .7s cubic-bezier(.34,1.56,.64,1)}
+        .modal-panel.show{opacity:1;visibility:visible;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(220%);-webkit-backdrop-filter:blur(30px) saturate(220%);border:1px solid var(--glass-border);box-shadow:var(--shadow-strong),inset 0 1px 1px rgba(255,255,255,0.95),inset 0 -1px 16px rgba(255,255,255,0.5);border-radius:26px}
+        .modal-inner{height:100%;display:flex;flex-direction:column;padding:28px 26px 22px;overflow:hidden;opacity:0;transition:opacity .25s ease .15s}
+        .modal-panel.show .modal-inner{opacity:1}
+        .modal-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,0.4);background:rgba(255,255,255,0.4);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--text-soft);transition:transform .2s ease,background .2s ease;z-index:5}
+        .modal-close:hover{transform:rotate(90deg);background:rgba(255,255,255,0.85)}
+        .modal-title{font-size:20px;font-weight:700;margin-bottom:4px;flex-shrink:0}
+        .modal-sub{font-size:13px;color:var(--text-soft);margin-bottom:20px;flex-shrink:0}
+        .letter-list{display:flex;flex-direction:column;gap:14px;flex:1;overflow-y:auto;padding-right:4px}
+        .letter-card{background:rgba(255,255,255,0.4);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.7);border-radius:16px;padding:16px 18px;cursor:pointer;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease,background .2s ease;position:relative;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+        .letter-card:hover{transform:translateX(4px) scale(1.01);box-shadow:0 8px 24px rgba(0,0,0,0.08);background:rgba(255,255,255,0.6)}
+        .letter-card .letter-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+        .letter-card .letter-sender{font-weight:600;font-size:14px}
+        .letter-card .letter-badge{font-size:10px;font-weight:700;color:#fff;background:#e74c3c;padding:2px 10px;border-radius:999px;letter-spacing:.3px;box-shadow:0 2px 8px rgba(231,76,60,0.3);flex-shrink:0}
+        .letter-card .letter-badge.read{background:#7f8c8d;box-shadow:none}
+        .letter-card .letter-subject{font-size:13px;font-weight:500;color:var(--text-soft);margin-bottom:2px}
+        .letter-card .letter-preview{font-size:12.5px;color:var(--text-soft);opacity:.8;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5}
+        .letter-card .letter-date{font-size:10px;color:var(--text-soft);opacity:.5;margin-top:6px;text-align:right}
+        .letter-card .letter-unread-dot{position:absolute;top:16px;right:16px;width:8px;height:8px;border-radius:50%;background:#e74c3c;animation:pulse-dot 1.6s ease-in-out infinite}
+        @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+        .letter-card .letter-unread-dot.hidden{display:none}
+        .letter-detail-scroll{flex:1;overflow-y:auto;padding-right:4px;padding-bottom:4px}
+        .letter-detail-scroll .detail-sender{font-size:15px;font-weight:700}
+        .letter-detail-scroll .detail-subject{font-size:13px;color:var(--text-soft);margin-bottom:12px}
+        .letter-detail-scroll .detail-body{font-size:14px;line-height:1.8;background:rgba(255,255,255,0.3);border-radius:14px;padding:16px 18px;border:1px solid rgba(255,255,255,0.5);white-space:pre-wrap;word-break:break-word}
+        .letter-detail-scroll .detail-body img{max-width:100%;border-radius:12px;margin-top:10px;display:block;pointer-events:none}
+        .letter-detail-scroll .detail-date{font-size:11px;color:var(--text-soft);opacity:.5;margin-top:10px;text-align:right}
+        .letter-detail-footer{flex-shrink:0;padding-top:14px;border-top:1px solid rgba(0,0,0,0.06);margin-top:6px}
+        .letter-detail-footer .btn-primary{width:auto;padding:8px 20px;font-size:13px}
+        .profile-avatar{width:100px;height:100px;border-radius:50%;margin:0 auto 14px;overflow:hidden;box-shadow:0 10px 24px rgba(247,201,72,0.35);flex-shrink:0;border:3px solid var(--glass-border);pointer-events:none}
+        .profile-avatar img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+        .profile-name{text-align:center;font-size:18px;font-weight:700}
+        .profile-role{text-align:center;font-size:13px;color:var(--text-soft);margin-bottom:14px}
+        .profile-line{display:flex;justify-content:space-between;padding:10px 0;font-size:13.5px;border-bottom:1px solid rgba(0,0,0,0.06)}
+        .profile-line span:first-child{color:var(--text-soft)}
+        .profile-line span:last-child{font-weight:600}
+        .profile-line .highlight{color:var(--gold-3)}
+        .profile-bio{margin-top:12px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.6);font-size:13px;line-height:1.6;text-align:center;font-style:italic}
+        .profile-bio .quote-icon{color:var(--gold-3);font-size:16px}
+        .wish-form{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+        .wish-form .btn-primary{margin-top:4px}
+        .success-msg{background:rgba(46,204,113,0.15);border:1px solid #2ecc71;border-radius:12px;padding:12px 16px;color:#27ae60;font-size:14px;text-align:center;display:none}
+        .success-msg.show{display:block}
+        .gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .gallery-card{aspect-ratio:1;border-radius:16px;overflow:hidden;cursor:pointer;background:#f0f0f0;transition:transform .25s cubic-bezier(.2,.9,.4,1);box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+        .gallery-card:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,0.10)}
+        .gallery-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease;pointer-events:none}
+        .gallery-card:hover img{transform:scale(1.04)}
+        .record-player{position:fixed;bottom:30px;left:30px;z-index:25;cursor:pointer}
+        .record-box{background:rgba(255,255,255,0.6);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.85);border-radius:24px;padding:12px 18px 12px 14px;box-shadow:0 8px 32px rgba(0,0,0,0.10),inset 0 1px 1px rgba(255,255,255,0.9);display:flex;align-items:center;gap:16px;transition:transform .2s ease;min-width:300px;max-width:420px}
+        .record-box:hover{transform:scale(1.02)}
+        .record-disc-wrap{position:relative;width:70px;height:70px;flex-shrink:0}
+        .record-disc{width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#3a3a3a,#111 80%,#222);box-shadow:0 4px 16px rgba(0,0,0,0.4),inset 0 -2px 8px rgba(0,0,0,0.6);animation:spin-disc 4s linear infinite;position:relative;border:2px solid #888;pointer-events:none}
+        .record-disc::after{content:'';position:absolute;top:50%;left:50%;width:16px;height:16px;background:radial-gradient(circle,#d4c4a0,#a08870);border-radius:50%;transform:translate(-50%,-50%);box-shadow:inset 0 2px 4px rgba(0,0,0,0.5)}
+        .record-disc .label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,#f7c948,#d4a830);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#3a2a1a;box-shadow:inset 0 2px 4px rgba(255,255,255,0.6);opacity:.9;pointer-events:none;font-family:'Poppins',sans-serif}
+        .record-arm{position:absolute;top:-8px;right:-12px;width:8px;height:40px;background:linear-gradient(135deg,#c0a88a,#8a705a);border-radius:4px 4px 0 0;transform-origin:bottom center;transform:rotate(-25deg) translateX(6px);box-shadow:0 2px 8px rgba(0,0,0,0.3);border:1px solid #d4b89a;z-index:2;pointer-events:none}
+        .record-arm::after{content:'';position:absolute;bottom:-6px;left:50%;width:16px;height:16px;background:radial-gradient(circle,#d4b08a,#8a6a50);border-radius:50%;transform:translateX(-50%);box-shadow:0 2px 6px rgba(0,0,0,0.4);border:1px solid #b8956a}
+        .record-arm .needle{position:absolute;top:-2px;left:50%;width:2px;height:10px;background:#d0c0b0;transform:translateX(-50%) rotate(8deg);border-radius:2px;box-shadow:0 0 4px rgba(255,215,140,0.3)}
+        @keyframes spin-disc{to{transform:rotate(360deg)}}
+        .record-info{display:flex;flex-direction:column;flex:1;min-width:0}
+        .record-title{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .record-controls{display:flex;align-items:center;gap:6px;margin-top:4px}
+        .record-controls button{background:rgba(255,255,255,0.5);border:none;border-radius:30px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:background .2s,transform .2s;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.6)}
+        .record-controls button:hover{background:rgba(255,255,255,0.8);transform:scale(1.05)}
+        .record-controls .play-btn{width:36px;height:36px;font-size:16px;background:rgba(255,255,255,0.7)}
+        .record-controls .play-btn:hover{background:rgba(255,255,255,0.9)}
+        .record-status-text{font-size:11px;color:var(--text-soft);margin-left:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px}
+        .record-album-btn{background:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.6);border-radius:30px;padding:2px 10px;font-size:12px;cursor:pointer;color:var(--text-soft);backdrop-filter:blur(4px);transition:background .2s;white-space:nowrap}
+        .record-album-btn:hover{background:rgba(255,255,255,0.7)}
+        .album-panel{position:fixed;bottom:120px;left:30px;z-index:26;width:280px;max-height:300px;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(200%);border:1px solid var(--glass-border);border-radius:20px;box-shadow:var(--shadow-strong),inset 0 1px 1px rgba(255,255,255,0.9);padding:16px 16px 12px;transform:translateY(20px) scale(.95);opacity:0;visibility:hidden;transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s ease,visibility .3s ease;overflow-y:auto;pointer-events:none}
+        .album-panel.open{transform:translateY(0) scale(1);opacity:1;visibility:visible;pointer-events:auto}
+        .album-panel h4{font-size:15px;margin-bottom:10px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+        .album-panel .song-item{display:flex;justify-content:space-between;padding:8px 4px;border-bottom:1px solid rgba(0,0,0,0.05);font-size:13px;cursor:pointer;transition:background .2s;border-radius:8px}
+        .album-panel .song-item:hover{background:rgba(255,255,255,0.3);padding-left:8px;padding-right:8px}
+        .album-panel .song-item.active{color:var(--gold-3);font-weight:600}
+        #mcCanvas{position:fixed;inset:0;z-index:4;pointer-events:auto;width:100vw;height:100vh}
+        @media(max-width:640px){.top-right-wrapper{top:16px;right:16px;gap:8px}.bell-box{height:44px;width:44px;border-radius:14px}.bell-box .bell-icon{font-size:18px}.bell-box .bell-badge{font-size:9px;min-width:17px;height:17px;top:-3px;right:-3px}.menu-group{min-width:160px;max-width:180px}.menu-header{padding:12px 16px;font-size:13px;height:44px}.menu-item{padding:10px 14px;font-size:12px}.cd-box{width:64px;padding:10px 0 8px}.cd-num{font-size:20px}.gallery{grid-template-columns:1fr 1fr}.modal-inner{padding:24px 18px 18px}.modal-panel{border-radius:18px}.modal-panel.show{border-radius:20px}.record-player{bottom:16px;left:16px;right:16px}.record-box{min-width:unset;width:100%;padding:10px 12px;gap:12px}.record-disc-wrap{width:56px;height:56px}.record-disc{width:56px;height:56px}.record-arm{height:32px;right:-8px;top:-6px}.record-arm::after{width:12px;height:12px;bottom:-4px}.record-controls button{width:26px;height:26px;font-size:12px}.record-controls .play-btn{width:30px;height:30px;font-size:14px}.record-title{font-size:12px}.record-status-text{max-width:60px;font-size:10px}.album-panel{left:16px;right:16px;width:auto;bottom:100px}.profile-avatar{width:80px;height:80px}.letter-card .letter-sender{font-size:13px}.letter-card .letter-subject{font-size:12px}}
+        @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+        img,svg,video,canvas{-webkit-user-drag:none!important;user-drag:none!important;-webkit-touch-callout:none!important}
+        ::selection{background:transparent!important;color:inherit!important}
     </style>
 </head>
 <body>
 
-    <div class="bg"></div>
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
-    <div class="blob blob3"></div>
-    <div class="blob blob4"></div>
-    <canvas id="mcCanvas"></canvas>
+<div class="bg"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="blob blob3"></div>
+<div class="blob blob4"></div>
+<canvas id="mcCanvas"></canvas>
 
-    <div class="gate" id="gate">
-        <div class="gate-card glass-strong">
-            <div class="gate-emoji">🎉</div>
-            <h1>Chào mừng đến bữa tiệc!</h1>
-            <p>Nhập tên của bạn để bước vào nhé</p>
-            <input class="field" id="guestNameInput" type="text" placeholder="Tên của bạn..." maxlength="30" />
-            <span class="error-msg" id="nameError"></span>
-            <button class="btn-primary" id="enterBtn">Bước Vào Bữa Tiệc ✨</button>
+<div class="gate" id="gate">
+    <div class="gate-card glass-strong">
+        <div class="gate-emoji">🎉</div>
+        <h1>Chào mừng đến bữa tiệc!</h1>
+        <p>Nhập tên của bạn để bước vào nhé</p>
+        <input class="field" id="guestNameInput" type="text" placeholder="Tên của bạn..." maxlength="30" />
+        <span class="error-msg" id="nameError"></span>
+        <button class="btn-primary" id="enterBtn">Bước Vào Bữa Tiệc ✨</button>
+    </div>
+</div>
+
+<div class="app" id="app">
+    <div class="top-right-wrapper">
+        <div class="bell-box glass" id="bellBox" title="Thông báo">
+            <span class="bell-icon">🔔</span>
+            <span class="bell-badge" id="bellBadge">0</span>
         </div>
-    </div>
-
-    <div class="app" id="app">
-
-        <div class="top-right-wrapper">
-            <div class="bell-box glass" id="bellBox" title="Thông báo">
-                <span class="bell-icon">🔔</span>
-                <span class="bell-badge" id="bellBadge">0</span>
+        <div class="menu-group" id="menuGroup">
+            <div class="menu-header" id="menuHeader">
+                <span class="ico">👤</span>
+                <span>Hồ Sơ Của Tớ</span>
+                <span class="arrow" id="menuArrow">▼</span>
             </div>
-            <div class="menu-group" id="menuGroup">
-                <div class="menu-header" id="menuHeader">
-                    <span class="ico">👤</span>
-                    <span>Hồ Sơ Của Tớ</span>
-                    <span class="arrow" id="menuArrow">▼</span>
-                </div>
-                <div class="menu-items" id="menuItems">
-                    <div class="menu-item" data-panel="profile"><span class="ico">👤</span> Hồ Sơ</div>
-                    <div class="menu-item" data-panel="wishes"><span class="ico">💌</span> Gửi Lời Chúc</div>
-                    <div class="menu-item" data-panel="gallery"><span class="ico">📸</span> Khoảnh Khắc</div>
-                    <div class="menu-item" data-panel="donate"><span class="ico">💖</span> Donate for Saky</div>
-                </div>
-            </div>
-        </div>
-
-        <main class="hero">
-            <div class="headline-wrap">
-                <h1 class="gold-text">Happy Birthday</h1>
-            </div>
-            <p class="subtitle">🎈 Đếm ngược tới sinh nhật của Võ Thiên An 🎈</p>
-            <div class="cake-wrap" id="cakeBtn">
-                <div class="cake">🎂</div>
-                <div class="cake-hint">Chạm vào bánh để gửi lời chúc</div>
-            </div>
-            <div class="countdown" id="countdown">
-                <div class="cd-box glass"><div class="cd-num" id="cdDays">00</div><div class="cd-label">Ngày</div></div>
-                <div class="cd-box glass"><div class="cd-num" id="cdHours">00</div><div class="cd-label">Giờ</div></div>
-                <div class="cd-box glass"><div class="cd-num" id="cdMins">00</div><div class="cd-label">Phút</div></div>
-                <div class="cd-box glass"><div class="cd-num" id="cdSecs">00</div><div class="cd-label">Giây</div></div>
-            </div>
-            <div class="cd-target" id="cdTarget"></div>
-            <div style="margin-top: 12px;">
-                <button id="fireworkBtn" class="btn-primary" style="width: auto; padding: 10px 24px; display: inline-block; background: linear-gradient(135deg, #ff9a9e, #fad0c4); box-shadow: 0 8px 20px rgba(255, 100, 100, 0.3);">🎆 Xem pháo hoa</button>
-            </div>
-        </main>
-    </div>
-
-    <div class="modal-overlay" id="modalOverlay"></div>
-    <div class="modal-panel" id="modalPanel">
-        <div class="modal-inner" id="modalInner"></div>
-        <div class="modal-close" id="modalClose">✕</div>
-    </div>
-
-    <div class="record-player" id="recordPlayer">
-        <div class="record-box">
-            <div class="record-disc-wrap">
-                <div class="record-disc" id="recordDisc"><div class="label">🎵</div></div>
-                <div class="record-arm"><div class="needle"></div></div>
-            </div>
-            <div class="record-info">
-                <div class="record-title" id="recordTitle">Bunny Girl Senpai</div>
-                <div class="record-controls">
-                    <button id="prevBtn" title="Bài trước">⏮</button>
-                    <button class="play-btn" id="playBtn" title="Phát/Tạm dừng">⏸</button>
-                    <button id="nextBtn" title="Bài tiếp">⏭</button>
-                    <button id="muteBtn" title="Tắt/Bật âm thanh">🔊</button>
-                    <span class="record-status-text" id="recordStatus">Đang phát</span>
-                    <button class="record-album-btn" id="albumToggleBtn">📋</button>
-                </div>
+            <div class="menu-items" id="menuItems">
+                <div class="menu-item" data-panel="profile"><span class="ico">👤</span> Hồ Sơ</div>
+                <div class="menu-item" data-panel="wishes"><span class="ico">💌</span> Gửi Lời Chúc</div>
+                <div class="menu-item" data-panel="gallery"><span class="ico">📸</span> Khoảnh Khắc</div>
+                <div class="menu-item" data-panel="donate"><span class="ico">💖</span> Donate for Saky</div>
             </div>
         </div>
     </div>
 
-    <div class="album-panel" id="albumPanel">
-        <h4>📀 Danh sách phát</h4>
-        <div id="songList"></div>
+    <main class="hero">
+        <div class="headline-wrap"><h1 class="gold-text">Happy Birthday</h1></div>
+        <p class="subtitle">🎈 Đếm ngược tới sinh nhật của Võ Thiên An 🎈</p>
+        <div class="cake-wrap" id="cakeBtn">
+            <div class="cake">🎂</div>
+            <div class="cake-hint">Chạm vào bánh để gửi lời chúc</div>
+        </div>
+        <div class="countdown" id="countdown">
+            <div class="cd-box glass"><div class="cd-num" id="cdDays">00</div><div class="cd-label">Ngày</div></div>
+            <div class="cd-box glass"><div class="cd-num" id="cdHours">00</div><div class="cd-label">Giờ</div></div>
+            <div class="cd-box glass"><div class="cd-num" id="cdMins">00</div><div class="cd-label">Phút</div></div>
+            <div class="cd-box glass"><div class="cd-num" id="cdSecs">00</div><div class="cd-label">Giây</div></div>
+        </div>
+        <div class="cd-target" id="cdTarget"></div>
+        <div style="margin-top:12px;">
+            <button id="fireworkBtn" class="btn-primary" style="width:auto;padding:10px 24px;display:inline-block;background:linear-gradient(135deg,#ff9a9e,#fad0c4);box-shadow:0 8px 20px rgba(255,100,100,0.3);">🎆 Xem pháo hoa</button>
+        </div>
+    </main>
+</div>
+
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="modal-panel" id="modalPanel">
+    <div class="modal-inner" id="modalInner"></div>
+    <div class="modal-close" id="modalClose">✕</div>
+</div>
+
+<div class="record-player" id="recordPlayer">
+    <div class="record-box">
+        <div class="record-disc-wrap">
+            <div class="record-disc" id="recordDisc"><div class="label">🎵</div></div>
+            <div class="record-arm"><div class="needle"></div></div>
+        </div>
+        <div class="record-info">
+            <div class="record-title" id="recordTitle">Bunny Girl Senpai</div>
+            <div class="record-controls">
+                <button id="prevBtn" title="Bài trước">⏮</button>
+                <button class="play-btn" id="playBtn" title="Phát/Tạm dừng">⏸</button>
+                <button id="nextBtn" title="Bài tiếp">⏭</button>
+                <button id="muteBtn" title="Tắt/Bật âm thanh">🔊</button>
+                <span class="record-status-text" id="recordStatus">Đang phát</span>
+                <button class="record-album-btn" id="albumToggleBtn">📋</button>
+            </div>
+        </div>
     </div>
-
-    <audio id="audio1" preload="auto">
-        <source src="https://sakybaka.github.io/saky-website/YTSave_YouTube_bunny-girl-senpai-lofi-fukashigi-no-cart_Media_lCOeLfkY4P0_009_128k.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="audio2" preload="auto">
-        <source src="https://sakybaka.github.io/saky-website/YTSave_YouTube_KHUC-HAT-MUNG-SINH-NHAT-PHAN-DINH-TUNG-O_Media_Wu8NeFXaoOc_009_128k.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="audio3" preload="auto">
-        <source src="https://raw.githubusercontent.com/sakybaka/saky-website/main/tackmaker.mp4" type="audio/mp4">
-    </audio>
-
-    <audio id="tingSound" preload="auto">
-        <source src="https://github.com/sakybaka/saky-website/raw/main/ting.mp4" type="audio/mp4">
-    </audio>
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
-    </script>
-
-    <script>
-        (function() {
-            "use strict";
-
-            const EMAILJS_CONFIG = {
-                publicKey: "yS1EhtZwaBwEExYeJ",
-                serviceID: "service_wom0r2a",
-                templateID: "template_bba5blc"
-            };
-
-            const galleryImages = [
-                'https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true',
-                'https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true',
-                'https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true',
-                'https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true'
-            ];
-
-            let guestName = '';
-            let lettersData = [];
-            let wishSent = false;
-            let sakyLetterRead = false;
-            let secondLetterAdded = false;
-            let currentPanelKey = '';
-            let originRect = null;
-            let isModalOpen = false;
-            let birthdayMode = false;
-            let birthdayEndTimer = null;
-
-            const tingAudio = document.getElementById('tingSound');
-
-            function playTing() {
-                try {
-                    tingAudio.currentTime = 0;
-                    tingAudio.play().catch(() => {});
-                } catch (_) {}
-            }
-
-            function buildSakyLetter() {
-                const name = guestName || 'bạn';
-                return {
-                    id: Date.now() + 1,
-                    sender: '💌 Saky ❤️',
-                    subject: '💌 Gửi ' + name + ',',
-                    preview: 'Cảm ơn bạn đã dành thời gian tham gia sinh nhật của mình...',
-                    body: '💌 Gửi ' + name +
-                        ',\n\nCảm ơn bạn đã dành thời gian tham gia sinh nhật của mình. Sự có mặt của bạn đã làm ngày hôm nay vui và ý nghĩa hơn rất nhiều.\n\nChúc bạn luôn vui vẻ, gặp nhiều may mắn và hy vọng sẽ còn gặp nhau ở những dịp đặc biệt tiếp theo nhé! 🫶✨\n\n— From Saky ❤️',
-                    date: new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric',
-                        hour: '2-digit', minute: '2-digit' }),
-                    unread: true,
-                    isSaky: true
-                };
-            }
-
-            function buildSecondLetter() {
-                return {
-                    id: Date.now() + 2,
-                    sender: '💌 Saky ❤️',
-                    subject: 'Ước muốn của tôi',
-                    preview: 'Ước muốn của tôi là mua Iphone 15 pro 512GB!',
-                    body: 'Ước muốn của tôi là mua Iphone 15 pro 512GB!\nThanks\n\n<img src="https://github.com/sakybaka/saky-website/blob/main/Donate.png?raw=true" style="max-width:320px;width:90%;border-radius:12px;margin:10px auto;display:block;object-fit:contain;" />',
-                    date: new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric',
-                        hour: '2-digit', minute: '2-digit' }),
-                    unread: true,
-                    isSaky: false
-                };
-            }
-
-            const gate = document.getElementById('gate');
-            const guestNameInput = document.getElementById('guestNameInput');
-            const enterBtn = document.getElementById('enterBtn');
-            const nameError = document.getElementById('nameError');
-
-            function validateAndEnter() {
-                const name = guestNameInput.value.trim();
-                if (name === '') {
-                    guestNameInput.classList.add('error');
-                    nameError.textContent = '⚠️ Vui lòng nhập tên của bạn để tham gia bữa tiệc!';
-                    guestNameInput.focus();
-                    return false;
-                }
-                guestNameInput.classList.remove('error');
-                nameError.textContent = '';
-                guestName = name;
-                lettersData = [];
-                wishSent = false;
-                sakyLetterRead = false;
-                secondLetterAdded = false;
-                viewedItems = new Set();
-                updateBellBadge();
-                gate.classList.add('hidden');
-                startMinecraftParticles();
-                initRecordPlayer();
-                return true;
-            }
-
-            enterBtn.addEventListener('click', validateAndEnter);
-            guestNameInput.addEventListener('keydown', e => {
-                if (e.key === 'Enter') { e.preventDefault();
-                    validateAndEnter(); }
-            });
-            guestNameInput.addEventListener('input', function() {
-                this.classList.remove('error');
-                nameError.textContent = '';
-            });
-
-            const canvas = document.getElementById('mcCanvas');
-            const ctx = canvas.getContext('2d');
-            let W, H;
-
-            function resizeCanvas() { W = canvas.width = window.innerWidth;
-                H = canvas.height = window.innerHeight; }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            const heartPixels = [
-                [0, 0, 1, 0, 0, 1, 0, 0],
-                [0, 1, 1, 1, 1, 1, 1, 0],
-                [1, 1, 1, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 1, 1, 1, 1],
-                [0, 1, 1, 1, 1, 1, 1, 0],
-                [0, 0, 1, 1, 1, 1, 0, 0],
-                [0, 0, 0, 1, 1, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0]
-            ];
-
-            function drawHeart(ctx, x, y, size, color) {
-                const px = size / 8;
-                for (let row = 0; row < 8; row++) {
-                    for (let col = 0; col < 8; col++) {
-                        if (heartPixels[row][col]) {
-                            ctx.fillStyle = color;
-                            ctx.fillRect(x + col * px, y + row * px, px, px);
-                        }
-                    }
-                }
-            }
-
-            function drawMinecraftBubble(ctx, x, y, size) {
-                const half = size / 2;
-                ctx.shadowColor = 'rgba(255,255,255,0.6)';
-                ctx.shadowBlur = 10;
-                ctx.fillStyle = 'rgba(255,255,255,0.25)';
-                ctx.strokeStyle = 'rgba(255,255,255,0.8)';
-                ctx.lineWidth = 2;
-                ctx.fillRect(x - half, y - half, size, size);
-                ctx.strokeRect(x - half, y - half, size, size);
-                ctx.shadowBlur = 0;
-                ctx.fillStyle = 'rgba(255,255,255,0.4)';
-                ctx.fillRect(x - half + 4, y - half + 4, size * 0.3, size * 0.2);
-                ctx.shadowColor = 'transparent';
-            }
-
-            class MCParticle {
-                constructor() { this.reset(); }
-                reset() {
-                    this.type = Math.random() < 0.5 ? 'heart' : 'bubble';
-                    this.x = Math.random() * W;
-                    this.y = -40 - Math.random() * 120;
-                    this.size = 14 + Math.random() * 22;
-                    this.speedY = 0.6 + Math.random() * 0.8;
-                    this.speedX = (Math.random() - 0.5) * 0.6;
-                    this.opacity = 0.7 + Math.random() * 0.3;
-                    this.color = ['#ff4d6d', '#ff6b8a', '#ff8fa3', '#ffb3c1'][Math.floor(Math.random() * 4)];
-                    this.phase = Math.random() * Math.PI * 2;
-                }
-                update() {
-                    this.y += this.speedY;
-                    this.x += this.speedX + Math.sin(this.phase) * 0.15;
-                    this.phase += 0.02;
-                    if (this.y > H + 60) this.reset();
-                    if (this.x < -60) this.x = W + 40;
-                    if (this.x > W + 60) this.x = -40;
-                }
-                draw(ctx) {
-                    ctx.globalAlpha = this.opacity;
-                    if (this.type === 'heart') {
-                        drawHeart(ctx, this.x - this.size / 2, this.y - this.size / 2, this.size, this.color);
-                    } else {
-                        drawMinecraftBubble(ctx, this.x, this.y, this.size);
-                    }
-                    ctx.globalAlpha = 1;
-                }
-            }
-
-            let particles = [];
-            const MAX_PARTICLES = 45;
-            let speedBoostTimer = 0;
-            let fireworkParticles = [];
-
-            function spawnFirework(x, y) {
-                const colors = ['#ff0', '#f0f', '#0ff', '#f44', '#4f4', '#44f', '#ff8', '#f8f', '#8ff', '#ff6b6b', '#ffd93d',
-                    '#6bcbff', '#a66cff'
-                ];
-                for (let i = 0; i < 100; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const speed = 2 + Math.random() * 8;
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    const isStar = Math.random() < 0.3;
-                    fireworkParticles.push({
-                        x,
-                        y,
-                        vx: Math.cos(angle) * speed,
-                        vy: Math.sin(angle) * speed - 1,
-                        life: 1,
-                        decay: 0.006 + Math.random() * 0.018,
-                        color: color,
-                        size: isStar ? 5 + Math.random() * 6 : 2 + Math.random() * 4,
-                        isStar: isStar,
-                        trail: []
-                    });
-                }
-            }
-
-            function triggerFireworks() {
-                for (let i = 0; i < 14; i++) {
-                    setTimeout(() => {
-                        const x = W * (0.05 + Math.random() * 0.9);
-                        const y = H * (0.05 + Math.random() * 0.7);
-                        spawnFirework(x, y);
-                    }, i * 200 + Math.random() * 100);
-                }
-            }
-
-            document.getElementById('fireworkBtn').addEventListener('click', triggerFireworks);
-
-            function startMinecraftParticles() {
-                if (particles.length === 0) {
-                    for (let i = 0; i < MAX_PARTICLES; i++) {
-                        const p = new MCParticle();
-                        p.y = Math.random() * H;
-                        particles.push(p);
-                    }
-                }
-                drawFrame();
-            }
-
-            function drawFrame() {
-                ctx.clearRect(0, 0, W, H);
-                for (const p of particles) {
-                    let spd = p.speedY;
-                    if (speedBoostTimer > 0) spd *= 2.5;
-                    p.y += spd;
-                    p.x += p.speedX + Math.sin(p.phase) * 0.15;
-                    p.phase += 0.02;
-                    if (p.y > H + 60) p.reset();
-                    if (p.x < -60) p.x = W + 40;
-                    if (p.x > W + 60) p.x = -40;
-                    p.draw(ctx);
-                }
-                if (speedBoostTimer > 0) {
-                    speedBoostTimer -= 1 / 60;
-                    if (speedBoostTimer < 0) speedBoostTimer = 0;
-                }
-                for (let i = fireworkParticles.length - 1; i >= 0; i--) {
-                    const fp = fireworkParticles[i];
-                    fp.trail.push({ x: fp.x, y: fp.y, life: 0.3 });
-                    if (fp.trail.length > 8) fp.trail.shift();
-                    fp.x += fp.vx;
-                    fp.y += fp.vy;
-                    fp.vy += 0.03;
-                    fp.life -= fp.decay;
-                    if (fp.life <= 0) {
-                        fireworkParticles.splice(i, 1);
-                        continue;
-                    }
-                    for (const t of fp.trail) {
-                        ctx.globalAlpha = t.life * fp.life * 0.3;
-                        ctx.fillStyle = fp.color;
-                        ctx.beginPath();
-                        ctx.arc(t.x, t.y, fp.size * 0.4, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                    ctx.globalAlpha = fp.life;
-                    ctx.shadowColor = fp.color;
-                    ctx.shadowBlur = 20;
-                    ctx.fillStyle = fp.color;
-                    if (fp.isStar) {
-                        const s = fp.size * fp.life;
-                        ctx.beginPath();
-                        for (let j = 0; j < 5; j++) {
-                            const angle = (j * 4 * Math.PI / 5) - Math.PI / 2;
-                            const r = j === 0 ? s : s * 0.4;
-                            if (j === 0) ctx.moveTo(fp.x + r * Math.cos(angle), fp.y + r * Math.sin(angle));
-                            else ctx.lineTo(fp.x + r * Math.cos(angle), fp.y + r * Math.sin(angle));
-                        }
-                        ctx.closePath();
-                        ctx.fill();
-                    } else {
-                        ctx.beginPath();
-                        ctx.arc(fp.x, fp.y, fp.size * fp.life, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                    ctx.shadowBlur = 0;
-                }
-                ctx.globalAlpha = 1;
-                requestAnimationFrame(drawFrame);
-            }
-
-            canvas.addEventListener('click', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                const mx = e.clientX - rect.left;
-                const my = e.clientY - rect.top;
-                let hit = false;
-                for (const p of particles) {
-                    if (p.type === 'heart') {
-                        const hx = p.x - p.size / 2;
-                        const hy = p.y - p.size / 2;
-                        if (mx >= hx && mx <= hx + p.size && my >= hy && my <= hy + p.size) {
-                            hit = true;
-                            break;
-                        }
-                    }
-                }
-                if (hit) speedBoostTimer = 1.2;
-            });
-
-            const TARGET = new Date(2026, 6, 31, 0, 0, 0);
-            const cdDays = document.getElementById('cdDays');
-            const cdHours = document.getElementById('cdHours');
-            const cdMins = document.getElementById('cdMins');
-            const cdSecs = document.getElementById('cdSecs');
-            const cdTarget = document.getElementById('cdTarget');
-            cdTarget.textContent = '🎯 31/07/' + TARGET.getFullYear();
-
-            function pad(n) { return String(n).padStart(2, '0'); }
-            let countdownReachedZero = false;
-
-            function updateCountdown() {
-                const now = new Date();
-                const diff = TARGET - now;
-
-                if (diff <= 0) {
-                    if (!birthdayMode) {
-                        birthdayMode = true;
-                        cdTarget.textContent = '🎉 Chúc mừng sinh nhật! 🎉';
-                        triggerFireworks();
-                        setTimeout(triggerFireworks, 1000);
-                        setTimeout(triggerFireworks, 2000);
-                        if (birthdayEndTimer) clearTimeout(birthdayEndTimer);
-                        birthdayEndTimer = setTimeout(() => {
-                            birthdayMode = false;
-                            const endTarget = new Date(now);
-                            endTarget.setDate(now.getDate() + 1);
-                            TARGET.setTime(endTarget.getTime());
-                            countdownReachedZero = false;
-                            updateCountdown();
-                        }, 86400000);
-                    }
-                    cdDays.textContent = '00';
-                    cdHours.textContent = '00';
-                    cdMins.textContent = '00';
-                    cdSecs.textContent = '00';
-                    return;
-                }
-
-                const d = Math.floor(diff / 86400000);
-                const h = Math.floor((diff % 86400000) / 3600000);
-                const m = Math.floor((diff % 3600000) / 60000);
-                const s = Math.floor((diff % 60000) / 1000);
-                cdDays.textContent = pad(d);
-                cdHours.textContent = pad(h);
-                cdMins.textContent = pad(m);
-                cdSecs.textContent = pad(s);
-            }
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-
-            function sendWishEmail(senderName, message) {
-                return new Promise((resolve, reject) => {
-                    if (EMAILJS_CONFIG.publicKey === "YOUR_PUBLIC_KEY" ||
-                        EMAILJS_CONFIG.serviceID === "YOUR_SERVICE_ID" ||
-                        EMAILJS_CONFIG.templateID === "YOUR_TEMPLATE_ID") {
-                        reject(new Error("⚠️ Bạn chưa cấu hình EmailJS. Vui lòng điền thông tin trong biến EMAILJS_CONFIG."));
-                        return;
-                    }
-                    emailjs.init(EMAILJS_CONFIG.publicKey);
-                    const templateParams = {
-                        from_name: senderName || 'Ẩn danh',
-                        message: message,
-                        to_name: "Võ Thiên An",
-                        subject: `💌 Lời chúc từ ${senderName || 'Ẩn danh'}`
-                    };
-                    emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams)
-                        .then((response) => resolve(response))
-                        .catch((error) => reject(error));
-                });
-            }
-
-            function profileContent() {
-                const birthDate = new Date(2010, 6, 31);
-                const now = new Date();
-                let age = now.getFullYear() - birthDate.getFullYear();
-                const m = now.getMonth() - birthDate.getMonth();
-                if (m < 0 || (m === 0 && now.getDate() < birthDate.getDate())) age--;
-                return `
-              <div class="profile-avatar"><img src="https://github.com/sakybaka/saky-website/blob/main/ZD.png?raw=true" alt="Avatar" /></div>
-              <div class="profile-name">Võ Thiên An</div>
-              <div class="profile-role">⭐ Nhân vật chính của bữa tiệc hôm nay</div>
-              <div class="profile-line"><span>🎂 Ngày sinh</span><span class="highlight">31 · 07 · 2010</span></div>
-              <div class="profile-line"><span>🎈 Tuổi</span><span>${age}</span></div>
-              <div class="profile-line"><span>♌ Cung hoàng đạo</span><span>Sư Tử (Leo)</span></div>
-              <div class="profile-line"><span>👤 Khách đang xem</span><span>${escapeHtml(guestName)}</span></div>
-              <div class="profile-bio"><span class="quote-icon">💬</span> "Sống là để tỏa sáng, và hôm nay là ngày của tớ!"<br><span style="font-size:12px;color:var(--text-soft);">✨ Sở thích: Nghe nhạc, chơi game, du lịch & khám phá những điều mới mẻ ✨</span></div>
-              <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
-                <span style="background:rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,0.5);">🎮 Gamer</span>
-                <span style="background:rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,0.5);">🎵 Music Lover</span>
-                <span style="background:rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,0.5);">📸 Travel</span>
-              </div>
-            `;
-            }
-
-            function wishesContent() {
-                return `
-              <div class="wish-form">
-                <p style="font-size:14px;color:var(--text-soft);margin-bottom:4px;">
-                  💌 Lời chúc của bạn sẽ được gửi riêng đến Võ Thiên An qua email.
-                </p>
-                <input class="field" id="wishSenderName" type="text" placeholder="Tên của bạn" value="${escapeHtml(guestName)}" maxlength="30" style="margin-bottom:0;" />
-                <textarea class="field" id="wishMessage" placeholder="Viết lời chúc của bạn..." maxlength="500" style="margin-bottom:0;min-height:120px;"></textarea>
-                <button class="btn-primary" id="sendWishBtn">💌 Gửi Lời Chúc</button>
-                <div class="success-msg" id="wishSuccessMsg">✅ Lời chúc của bạn đã được gửi thành công! Cảm ơn bạn rất nhiều! 🎉</div>
-                <div class="error-msg" id="wishErrorMsg" style="text-align:center;margin-top:0;"></div>
-              </div>
-            `;
-            }
-
-            function galleryContent() {
-                let html = '<div class="gallery">';
-                galleryImages.forEach((src, index) => {
-                    html += `<div class="gallery-card" data-index="${index}">
-                          <img src="${src}" alt="Kỷ niệm ${index+1}" loading="lazy" />
-                        </div>`;
-                });
-                html += '</div>';
-                html += '<p style="margin-top:16px;font-size:12.5px;color:var(--text-soft);text-align:center;">📷 Bấm vào ảnh để xem toàn màn hình</p>';
-                return html;
-            }
-
-            function donateContent() {
-                return `
-              <div style="text-align:center;padding:10px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
-                <div style="background:var(--glass);border-radius:20px;padding:12px;border:1px solid var(--glass-border);width:100%;max-width:400px;margin:auto;">
-                  <img src="https://github.com/sakybaka/saky-website/blob/main/Donate.png?raw=true" alt="donate" style="width:100%;border-radius:16px;display:block;object-fit:contain;max-height:70vh;" />
-                  <p style="margin-top:10px;font-size:13px;color:var(--text-soft);">(ảnh thẻ ngân hàng)</p>
-                </div>
-              </div>
-            `;
-            }
-
-            function cakeFormContent() { return wishesContent(); }
-
-            function escapeHtml(str) {
-                const div = document.createElement('div');
-                div.textContent = str;
-                return div.innerHTML;
-            }
-
-            function lettersContent() {
-                let html = `<div class="letter-list">`;
-                if (lettersData.length === 0) {
-                    html += `<p style="text-align:center;color:var(--text-soft);padding:20px 0;">Không có thông báo mới.</p>`;
-                } else {
-                    lettersData.forEach((letter, idx) => {
-                        const isUnread = letter.unread;
-                        html += `
-                    <div class="letter-card" data-letter-idx="${idx}">
-                      <div class="letter-top">
-                        <span class="letter-sender">${letter.sender}</span>
-                        <span class="letter-badge ${isUnread ? '' : 'read'}">${isUnread ? '📩 Chưa đọc' : '✅ Đã đọc'}</span>
-                      </div>
-                      <div class="letter-subject">${letter.subject}</div>
-                      <div class="letter-preview">${letter.preview}</div>
-                      <div class="letter-date">${letter.date}</div>
-                      ${isUnread ? '<div class="letter-unread-dot"></div>' : '<div class="letter-unread-dot hidden"></div>'}
-                    </div>
-                  `;
-                    });
-                }
-                html += '</div>';
-                return html;
-            }
-
-            const modalOverlay = document.getElementById('modalOverlay');
-            const modalPanel = document.getElementById('modalPanel');
-            const modalInner = document.getElementById('modalInner');
-            const modalClose = document.getElementById('modalClose');
-
-            const PANELS = {
-                profile: { title: 'Hồ Sơ Của Tớ', sub: 'Vài điều nho nhỏ về nhân vật chính hôm nay', render: profileContent },
-                wishes: { title: '💌 Gửi Lời Chúc', sub: 'Gửi những lời chúc tốt đẹp nhất đến Võ Thiên An', render: wishesContent },
-                gallery: { title: 'Khoảnh Khắc Đáng Nhớ', sub: 'Những kỷ niệm đẹp nhất', render: galleryContent },
-                donate: { title: '💖 Donate for Saky', sub: 'Cảm ơn bạn đã ủng hộ mua Iphone 15 Pro!', render: donateContent },
-                cake: { title: '💌 Gửi Lời Chúc', sub: 'Gửi những lời chúc tốt đẹp nhất đến Võ Thiên An', render: cakeFormContent },
-                letters: { title: '📬 Thông Báo', sub: '', render: lettersContent }
-            };
-
-            let viewedItems = new Set();
-            const totalMenuItems = 4;
-
-            function markItemViewed(panelKey) {
-                if (!viewedItems.has(panelKey)) {
-                    viewedItems.add(panelKey);
-                    document.querySelectorAll('.menu-item').forEach(el => {
-                        if (el.dataset.panel === panelKey) {
-                            el.classList.add('viewed');
-                        }
-                    });
-                    if (viewedItems.size === totalMenuItems) {
-                        setTimeout(() => {
-                            closeMenu();
-                        }, 600);
-                    }
-                }
-            }
-
-            function resetViewedState() {
-                viewedItems.clear();
-                document.querySelectorAll('.menu-item').forEach(el => {
-                    el.classList.remove('viewed');
-                });
-            }
-
-            function closeMenu() {
-                isMenuOpen = false;
-                menuItems.classList.remove('open');
-                menuArrow.classList.remove('open');
-                menuHeader.classList.remove('open');
-                resetViewedState();
-            }
-
-            function openPanel(key, triggerEl) {
-                const panel = PANELS[key];
-                if (!panel) return;
-                currentPanelKey = key;
-
-                markItemViewed(key);
-
-                const rect = triggerEl.getBoundingClientRect();
-                originRect = rect;
-
-                const modalWidth = Math.min(480, window.innerWidth * 0.9);
-                const modalHeight = Math.min(580, window.innerHeight * 0.82);
-                const centerX = (window.innerWidth - modalWidth) / 2;
-                const centerY = (window.innerHeight - modalHeight) / 2;
-
-                const startX = rect.left;
-                const startY = rect.top;
-                const startW = rect.width;
-                const startH = rect.height;
-
-                modalPanel.style.transition = 'none';
-                modalPanel.style.left = startX + 'px';
-                modalPanel.style.top = startY + 'px';
-                modalPanel.style.width = startW + 'px';
-                modalPanel.style.height = startH + 'px';
-                modalPanel.style.borderRadius = '14px';
-                modalPanel.style.opacity = '0';
-                modalPanel.style.visibility = 'hidden';
-
-                void modalPanel.offsetHeight;
-
-                let content = panel.render();
-                modalInner.innerHTML =
-                    `<div class="modal-title">${panel.title}</div>${panel.sub ? `<div class="modal-sub">${panel.sub}</div>` : ''}${content}`;
-                if (key === 'wishes' || key === 'cake') wireWishForm();
-                if (key === 'gallery') wireGalleryEvents();
-                if (key === 'letters') wireLetterEvents();
-
-                modalOverlay.classList.add('show');
-
-                modalPanel.style.transition =
-                    'left 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'top 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'width 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'height 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'border-radius 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'opacity 0.3s ease, ' +
-                    'backdrop-filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    '-webkit-backdrop-filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'box-shadow 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
-
-                modalPanel.style.left = centerX + 'px';
-                modalPanel.style.top = centerY + 'px';
-                modalPanel.style.width = modalWidth + 'px';
-                modalPanel.style.height = modalHeight + 'px';
-                modalPanel.style.borderRadius = '26px';
-                modalPanel.style.opacity = '1';
-                modalPanel.style.visibility = 'visible';
-                modalPanel.classList.add('show');
-
-                isModalOpen = true;
-            }
-
-            function openImageModal(src) {
-                const rect = modalPanel.getBoundingClientRect();
-                originRect = rect;
-
-                const modalWidth = Math.min(480, window.innerWidth * 0.9);
-                const modalHeight = Math.min(600, window.innerHeight * 0.85);
-                const centerX = (window.innerWidth - modalWidth) / 2;
-                const centerY = (window.innerHeight - modalHeight) / 2;
-
-                const startX = rect.left;
-                const startY = rect.top;
-                const startW = rect.width;
-                const startH = rect.height;
-
-                modalPanel.style.transition = 'none';
-                modalPanel.style.left = startX + 'px';
-                modalPanel.style.top = startY + 'px';
-                modalPanel.style.width = startW + 'px';
-                modalPanel.style.height = startH + 'px';
-                modalPanel.style.borderRadius = '18px';
-                void modalPanel.offsetHeight;
-
-                modalInner.innerHTML = `
-              <div style="display:flex;flex-direction:column;height:100%;justify-content:center;align-items:center;padding:0;">
-                <img src="${src}" alt="Kỷ niệm" style="width:100%;height:auto;max-height:70vh;object-fit:contain;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.15);" />
-              </div>
-            `;
-
-                modalPanel.style.transition =
-                    'left 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'top 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'width 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'height 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'border-radius 0.55s cubic-bezier(0.34, 1.56, 0.64, 1)';
-
-                modalPanel.style.left = centerX + 'px';
-                modalPanel.style.top = centerY + 'px';
-                modalPanel.style.width = modalWidth + 'px';
-                modalPanel.style.height = modalHeight + 'px';
-                modalPanel.style.borderRadius = '26px';
-                modalPanel.classList.add('show');
-                modalOverlay.classList.add('show');
-            }
-
-            function closePanel() {
-                if (!originRect) return;
-
-                if (sakyLetterRead && !secondLetterAdded) {
-                    const second = buildSecondLetter();
-                    const saky = lettersData.find(l => l.isSaky);
-                    if (saky) saky.unread = false;
-                    lettersData.push(second);
-                    secondLetterAdded = true;
-                    playTing();
-                    updateBellBadge();
-                    sakyLetterRead = false;
-                }
-
-                const startX = originRect.left;
-                const startY = originRect.top;
-                const startW = originRect.width;
-                const startH = originRect.height;
-
-                modalPanel.style.transition =
-                    'left 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'top 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'width 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'height 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'border-radius 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'opacity 0.3s ease, ' +
-                    'backdrop-filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    '-webkit-backdrop-filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'box-shadow 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
-
-                modalPanel.style.left = startX + 'px';
-                modalPanel.style.top = startY + 'px';
-                modalPanel.style.width = startW + 'px';
-                modalPanel.style.height = startH + 'px';
-                modalPanel.style.borderRadius = '14px';
-                modalPanel.style.opacity = '0';
-                modalPanel.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
-                modalPanel.style.backdropFilter = 'blur(0px) saturate(100%)';
-                modalPanel.style.webkitBackdropFilter = 'blur(0px) saturate(100%)';
-                modalPanel.classList.remove('show');
-
-                modalOverlay.classList.remove('show');
-                isModalOpen = false;
-
-                setTimeout(() => {
-                    modalPanel.style.visibility = 'hidden';
-                }, 800);
-            }
-
-            modalOverlay.addEventListener('click', closePanel);
-            modalClose.addEventListener('click', closePanel);
-            document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
-
-            function wireLetterEvents() {
-                document.querySelectorAll('.letter-card').forEach(card => {
-                    card.addEventListener('click', function() {
-                        const idx = parseInt(this.dataset.letterIdx);
-                        const letter = lettersData[idx];
-                        if (!letter) return;
-
-                        if (letter.isSaky && letter.unread) {
-                            letter.unread = false;
-                            const badge = this.querySelector('.letter-badge');
-                            if (badge) {
-                                badge.textContent = '✅ Đã đọc';
-                                badge.classList.add('read');
-                            }
-                            const dot = this.querySelector('.letter-unread-dot');
-                            if (dot) dot.classList.add('hidden');
-                            sakyLetterRead = true;
-                        } else if (!letter.isSaky && letter.unread) {
-                            letter.unread = false;
-                            const badge = this.querySelector('.letter-badge');
-                            if (badge) {
-                                badge.textContent = '✅ Đã đọc';
-                                badge.classList.add('read');
-                            }
-                            const dot = this.querySelector('.letter-unread-dot');
-                            if (dot) dot.classList.add('hidden');
-                            updateBellBadge();
-                        }
-
-                        showLetterDetail(letter);
-                    });
-                });
-            }
-
-            function showLetterDetail(letter) {
-                const rect = modalPanel.getBoundingClientRect();
-                originRect = rect;
-
-                const modalWidth = Math.min(480, window.innerWidth * 0.9);
-                const modalHeight = Math.min(600, window.innerHeight * 0.85);
-                const centerX = (window.innerWidth - modalWidth) / 2;
-                const centerY = (window.innerHeight - modalHeight) / 2;
-
-                const startX = rect.left;
-                const startY = rect.top;
-                const startW = rect.width;
-                const startH = rect.height;
-
-                modalPanel.style.transition = 'none';
-                modalPanel.style.left = startX + 'px';
-                modalPanel.style.top = startY + 'px';
-                modalPanel.style.width = startW + 'px';
-                modalPanel.style.height = startH + 'px';
-                modalPanel.style.borderRadius = '18px';
-                void modalPanel.offsetHeight;
-
-                modalInner.innerHTML = `
-              <div class="letter-detail-scroll">
-                <div class="detail-sender">${letter.sender}</div>
-                <div class="detail-subject">📌 ${letter.subject}</div>
-                <div class="detail-body">${letter.body}</div>
-                <div class="detail-date">${letter.date}</div>
-              </div>
-              <div class="letter-detail-footer">
-                <button class="btn-primary" id="letterBackBtn">⬅ Quay lại</button>
-              </div>
-            `;
-
-                modalPanel.style.transition =
-                    'left 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'top 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'width 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'height 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                    'border-radius 0.55s cubic-bezier(0.34, 1.56, 0.64, 1)';
-
-                modalPanel.style.left = centerX + 'px';
-                modalPanel.style.top = centerY + 'px';
-                modalPanel.style.width = modalWidth + 'px';
-                modalPanel.style.height = modalHeight + 'px';
-                modalPanel.style.borderRadius = '26px';
-
-                document.getElementById('letterBackBtn').addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const panel = PANELS['letters'];
-                    const rect2 = modalPanel.getBoundingClientRect();
-                    originRect = rect2;
-
-                    const w2 = Math.min(480, window.innerWidth * 0.9);
-                    const h2 = Math.min(580, window.innerHeight * 0.82);
-                    const cx2 = (window.innerWidth - w2) / 2;
-                    const cy2 = (window.innerHeight - h2) / 2;
-
-                    modalPanel.style.transition = 'none';
-                    modalPanel.style.left = rect2.left + 'px';
-                    modalPanel.style.top = rect2.top + 'px';
-                    modalPanel.style.width = rect2.width + 'px';
-                    modalPanel.style.height = rect2.height + 'px';
-                    void modalPanel.offsetHeight;
-
-                    modalInner.innerHTML =
-                        `<div class="modal-title">${panel.title}</div>${panel.sub ? `<div class="modal-sub">${panel.sub}</div>` : ''}${panel.render()}`;
-                    wireLetterEvents();
-
-                    modalPanel.style.transition =
-                        'left 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                        'top 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                        'width 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                        'height 0.65s cubic-bezier(0.34, 1.56, 0.64, 1), ' +
-                        'border-radius 0.55s cubic-bezier(0.34, 1.56, 0.64, 1)';
-
-                    modalPanel.style.left = cx2 + 'px';
-                    modalPanel.style.top = cy2 + 'px';
-                    modalPanel.style.width = w2 + 'px';
-                    modalPanel.style.height = h2 + 'px';
-                    modalPanel.style.borderRadius = '26px';
-                    updateBellBadge();
-                });
-
-                modalClose.onclick = function() { closePanel(); };
-                modalOverlay.onclick = function() { closePanel(); };
-            }
-
-            function updateBellBadge() {
-                const unreadCount = lettersData.filter(l => l.unread).length;
-                const badge = document.getElementById('bellBadge');
-                if (badge) {
-                    if (unreadCount === 0) {
-                        badge.style.display = 'none';
-                    } else {
-                        badge.style.display = 'flex';
-                        badge.textContent = unreadCount;
-                        badge.classList.remove('pop');
-                        void badge.offsetWidth;
-                        badge.classList.add('pop');
-                    }
-                }
-            }
-
-            document.getElementById('bellBox').addEventListener('click', function(e) {
-                e.stopPropagation();
-                openPanel('letters', this);
-            });
-
-            function wireGalleryEvents() {
-                document.querySelectorAll('.gallery-card').forEach(card => {
-                    card.addEventListener('click', function(e) {
-                        const img = this.querySelector('img');
-                        if (img && img.src) {
-                            e.stopPropagation();
-                            openImageModal(img.src);
-                        }
-                    });
-                });
-            }
-
-            const menuHeader = document.getElementById('menuHeader');
-            const menuItems = document.getElementById('menuItems');
-            const menuArrow = document.getElementById('menuArrow');
-            let isMenuOpen = false;
-
-            menuHeader.addEventListener('click', function(e) {
-                e.stopPropagation();
-                isMenuOpen = !isMenuOpen;
-                menuItems.classList.toggle('open', isMenuOpen);
-                menuArrow.classList.toggle('open', isMenuOpen);
-                menuHeader.classList.toggle('open', isMenuOpen);
-                if (!isMenuOpen) {
-                    resetViewedState();
-                }
-            });
-
-            document.querySelectorAll('.menu-item').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    const panel = this.dataset.panel;
-                    openPanel(panel, this);
-                });
-            });
-
-            document.getElementById('cakeBtn').addEventListener('click', function() {
-                openPanel('cake', this);
-            });
-
-            function wireWishForm() {
-                const sendBtn = document.getElementById('sendWishBtn');
-                const nameInput = document.getElementById('wishSenderName');
-                const msgInput = document.getElementById('wishMessage');
-                const successMsg = document.getElementById('wishSuccessMsg');
-                const errorMsg = document.getElementById('wishErrorMsg');
-                if (!sendBtn) return;
-                const newBtn = sendBtn.cloneNode(true);
-                sendBtn.parentNode.replaceChild(newBtn, sendBtn);
-                newBtn.addEventListener('click', function() {
-                    const sender = nameInput.value.trim() || 'Ẩn danh';
-                    const message = msgInput.value.trim();
-                    if (!message) {
-                        msgInput.focus();
-                        msgInput.classList.add('error');
-                        errorMsg.textContent = '⚠️ Vui lòng viết lời chúc của bạn.';
-                        return;
-                    }
-                    msgInput.classList.remove('error');
-                    errorMsg.textContent = '';
-                    newBtn.disabled = true;
-                    newBtn.textContent = '⏳ Đang gửi...';
-                    sendWishEmail(sender, message)
-                        .then(() => {
-                            successMsg.classList.add('show');
-                            msgInput.value = '';
-                            nameInput.value = sender;
-                            newBtn.textContent = '💌 Gửi Lời Chúc';
-                            newBtn.disabled = false;
-                            setTimeout(() => successMsg.classList.remove('show'), 5000);
-
-                            if (!wishSent) {
-                                wishSent = true;
-                                const saky = buildSakyLetter();
-                                lettersData.push(saky);
-                                playTing();
-                                updateBellBadge();
-                                if (currentPanelKey === 'letters') {
-                                    const panel = PANELS['letters'];
-                                    const rect = modalPanel.getBoundingClientRect();
-                                    originRect = rect;
-                                    modalInner.innerHTML =
-                                        `<div class="modal-title">${panel.title}</div>${panel.sub ? `<div class="modal-sub">${panel.sub}</div>` : ''}${panel.render()}`;
-                                    wireLetterEvents();
-                                }
-                            }
-                        })
-                        .catch((error) => {
-                            console.error('Lỗi gửi email:', error);
-                            errorMsg.textContent = '❌ Có lỗi xảy ra khi gửi lời chúc. Vui lòng thử lại sau.';
-                            newBtn.textContent = '💌 Gửi Lời Chúc';
-                            newBtn.disabled = false;
-                        });
-                });
-                msgInput.addEventListener('input', function() {
-                    this.classList.remove('error');
-                    const err = document.getElementById('wishErrorMsg');
-                    if (err) err.textContent = '';
-                });
-            }
-
-            const audio1 = document.getElementById('audio1');
-            const audio2 = document.getElementById('audio2');
-            const audio3 = document.getElementById('audio3');
-
-            const songs = [
-                { name: 'Bunny Girl Senpai', src: audio1 },
-                { name: 'Khúc Hát Mừng Sinh Nhật', src: audio2 },
-                { name: 'Tackmaker', src: audio3 }
-            ];
-
-            let currentSongIndex = 0;
-            let isPlaying = false;
-            let isMuted = false;
-            let recordPlayerInitialized = false;
-
-            const recordDisc = document.getElementById('recordDisc');
-            const recordTitle = document.getElementById('recordTitle');
-            const recordStatus = document.getElementById('recordStatus');
-            const playBtn = document.getElementById('playBtn');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const muteBtn = document.getElementById('muteBtn');
-            const albumToggleBtn = document.getElementById('albumToggleBtn');
-            const albumPanel = document.getElementById('albumPanel');
-            const songListEl = document.getElementById('songList');
-
-            function renderSongList() {
-                songListEl.innerHTML = songs.map((s, idx) =>
-                    `<div class="song-item ${idx === currentSongIndex ? 'active' : ''}" data-index="${idx}">
-                <span>${s.name}</span>
-                <span>${idx === currentSongIndex ? '▶' : ''}</span>
-              </div>`
-                ).join('');
-                document.querySelectorAll('.song-item').forEach(el => {
-                    el.addEventListener('click', () => {
-                        const idx = parseInt(el.dataset.index);
-                        if (idx !== currentSongIndex) {
-                            currentSongIndex = idx;
-                            playSong();
-                            albumPanel.classList.remove('open');
-                        }
-                    });
-                });
-            }
-
-            function playSong() {
-                const song = songs[currentSongIndex];
-                songs.forEach(s => s.src.pause());
-                song.src.currentTime = 0;
-                song.src.volume = isMuted ? 0 : 1;
-                song.src.play().catch(() => {});
-                isPlaying = true;
-                updateUI();
-            }
-
-            function togglePlayPause() {
-                const song = songs[currentSongIndex];
-                if (isPlaying) {
-                    song.src.pause();
-                    isPlaying = false;
-                } else {
-                    song.src.play().catch(() => {});
-                    isPlaying = true;
-                }
-                updateUI();
-            }
-
-            function nextSong() {
-                currentSongIndex = (currentSongIndex + 1) % songs.length;
-                playSong();
-            }
-
-            function prevSong() {
-                currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-                playSong();
-            }
-
-            function toggleMute() {
-                isMuted = !isMuted;
-                const song = songs[currentSongIndex];
-                song.src.volume = isMuted ? 0 : 1;
-                muteBtn.textContent = isMuted ? '🔇' : '🔊';
-                updateUI();
-            }
-
-            function updateUI() {
-                const song = songs[currentSongIndex];
-                recordTitle.textContent = song.name;
-                recordStatus.textContent = isPlaying ? 'Đang phát' : 'Tạm dừng';
-                playBtn.textContent = isPlaying ? '⏸' : '▶';
-                recordDisc.style.animationPlayState = isPlaying ? 'running' : 'paused';
-                renderSongList();
-            }
-
-            function initRecordPlayer() {
-                if (recordPlayerInitialized) return;
-                recordPlayerInitialized = true;
-                songs.forEach(s => s.src.load());
-                playSong();
-
-                playBtn.addEventListener('click', (e) => { e.stopPropagation();
-                    togglePlayPause(); });
-                prevBtn.addEventListener('click', (e) => { e.stopPropagation();
-                    prevSong(); });
-                nextBtn.addEventListener('click', (e) => { e.stopPropagation();
-                    nextSong(); });
-                muteBtn.addEventListener('click', (e) => { e.stopPropagation();
-                    toggleMute(); });
-                albumToggleBtn.addEventListener('click', (e) => { e.stopPropagation();
-                    albumPanel.classList.toggle('open'); });
-
-                const player = document.getElementById('recordPlayer');
-                let clickCount = 0;
-                let clickTimer = null;
-                player.addEventListener('click', (e) => {
-                    if (e.target.closest('button')) return;
-                    clickCount++;
-                    if (clickCount === 1) {
-                        clickTimer = setTimeout(() => {
-                            clickCount = 0;
-                            albumPanel.classList.toggle('open');
-                        }, 250);
-                    } else if (clickCount >= 2) {
-                        clearTimeout(clickTimer);
-                        clickCount = 0;
-                        toggleMute();
-                    }
-                });
-
-                document.addEventListener('click', (e) => {
-                    if (!albumPanel.contains(e.target) && e.target !== player && !player.contains(e.target) && e
-                        .target !== albumToggleBtn) {
-                        albumPanel.classList.remove('open');
-                    }
-                });
-
-                songs.forEach(s => s.src.addEventListener('ended', nextSong));
-                updateUI();
-            }
-
-            lettersData = [];
-            updateBellBadge();
-
-            if (gate.classList.contains('hidden')) {
-                startMinecraftParticles();
-                initRecordPlayer();
-            }
-
-            window.addEventListener('resize', resizeCanvas);
-            tingAudio.addEventListener('error', () => { console.log('Ting audio load error, continuing...'); });
-
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                return false;
-            });
-
-            document.addEventListener('dragstart', function(e) {
-                e.preventDefault();
-                return false;
-            });
-
-            document.addEventListener('touchstart', function() {}, { passive: true });
-
-        })();
-    </script>
+</div>
+
+<div class="album-panel" id="albumPanel">
+    <h4>📀 Danh sách phát</h4>
+    <div id="songList"></div>
+</div>
+
+<audio id="audio1" preload="auto"><source src="https://sakybaka.github.io/saky-website/YTSave_YouTube_bunny-girl-senpai-lofi-fukashigi-no-cart_Media_lCOeLfkY4P0_009_128k.mp3" type="audio/mpeg"></audio>
+<audio id="audio2" preload="auto"><source src="https://sakybaka.github.io/saky-website/YTSave_YouTube_KHUC-HAT-MUNG-SINH-NHAT-PHAN-DINH-TUNG-O_Media_Wu8NeFXaoOc_009_128k.mp3" type="audio/mpeg"></audio>
+<audio id="audio3" preload="auto"><source src="https://raw.githubusercontent.com/sakybaka/saky-website/main/tackmaker.mp4" type="audio/mp4"></audio>
+<audio id="tingSound" preload="auto"><source src="https://github.com/sakybaka/saky-website/raw/main/ting.mp4" type="audio/mp4"></audio>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+(function(){
+"use strict";
+const EMAILJS_CONFIG={publicKey:"yS1EhtZwaBwEExYeJ",serviceID:"service_wom0r2a",templateID:"template_bba5blc"};
+const galleryImages=['https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true','https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true','https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true','https://github.com/sakybaka/saky-website/blob/main/1.png?raw=true'];
+let guestName='',lettersData=[],wishSent=!1,sakyLetterRead=!1,secondLetterAdded=!1,currentPanelKey='',originRect=null,isModalOpen=!1,birthdayMode=!1,birthdayEndTimer=null;
+const tingAudio=document.getElementById('tingSound');
+function playTing(){try{tingAudio.currentTime=0;tingAudio.play().catch(()=>{})}catch(_){}}
+function buildSakyLetter(){const n=guestName||'bạn';return{id:Date.now()+1,sender:'💌 Saky ❤️',subject:'💌 Gửi '+n+',',preview:'Cảm ơn bạn đã dành thời gian tham gia sinh nhật của mình...',body:'💌 Gửi '+n+',\n\nCảm ơn bạn đã dành thời gian tham gia sinh nhật của mình. Sự có mặt của bạn đã làm ngày hôm nay vui và ý nghĩa hơn rất nhiều.\n\nChúc bạn luôn vui vẻ, gặp nhiều may mắn và hy vọng sẽ còn gặp nhau ở những dịp đặc biệt tiếp theo nhé! 🫶✨\n\n— From Saky ❤️',date:new Date().toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),unread:!0,isSaky:!0}}
+function buildSecondLetter(){return{id:Date.now()+2,sender:'💌 Saky ❤️',subject:'Ước muốn của tôi',preview:'Ước muốn của tôi là mua Iphone 15 pro 512GB!',body:'Ước muốn của tôi là mua Iphone 15 pro 512GB!\nThanks\n\n<img src="https://github.com/sakybaka/saky-website/blob/main/Donate.png?raw=true" style="max-width:320px;width:90%;border-radius:12px;margin:10px auto;display:block;object-fit:contain;" />',date:new Date().toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),unread:!0,isSaky:!1}}
+const gate=document.getElementById('gate'),guestNameInput=document.getElementById('guestNameInput'),enterBtn=document.getElementById('enterBtn'),nameError=document.getElementById('nameError');
+function validateAndEnter(){const n=guestNameInput.value.trim();if(n===''){guestNameInput.classList.add('error');nameError.textContent='⚠️ Vui lòng nhập tên của bạn để tham gia bữa tiệc!';guestNameInput.focus();return!1}guestNameInput.classList.remove('error');nameError.textContent='';guestName=n;lettersData=[];wishSent=!1;sakyLetterRead=!1;secondLetterAdded=!1;viewedItems=new Set;updateBellBadge();gate.classList.add('hidden');startMinecraftParticles();initRecordPlayer();return!0}
+enterBtn.addEventListener('click',validateAndEnter);
+guestNameInput.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();validateAndEnter()}});
+guestNameInput.addEventListener('input',function(){this.classList.remove('error');nameError.textContent=''});
+const canvas=document.getElementById('mcCanvas'),ctx=canvas.getContext('2d');let W,H;
+function resizeCanvas(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+window.addEventListener('resize',resizeCanvas);resizeCanvas();
+const heartPixels=[[0,0,1,0,0,1,0,0],[0,1,1,1,1,1,1,0],[1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,0],[0,0,1,1,1,1,0,0],[0,0,0,1,1,0,0,0],[0,0,0,0,0,0,0,0]];
+function drawHeart(c,x,y,s,color){const p=s/8;for(let r=0;r<8;r++)for(let col=0;col<8;col++)if(heartPixels[r][col]){c.fillStyle=color;c.fillRect(x+col*p,y+r*p,p,p)}}
+function drawMinecraftBubble(c,x,y,s){const h=s/2;c.shadowColor='rgba(255,255,255,0.6)';c.shadowBlur=10;c.fillStyle='rgba(255,255,255,0.25)';c.strokeStyle='rgba(255,255,255,0.8)';c.lineWidth=2;c.fillRect(x-h,y-h,s,s);c.strokeRect(x-h,y-h,s,s);c.shadowBlur=0;c.fillStyle='rgba(255,255,255,0.4)';c.fillRect(x-h+4,y-h+4,s*0.3,s*0.2);c.shadowColor='transparent'}
+class MCParticle{constructor(){this.reset()}reset(){this.type=Math.random()<.5?'heart':'bubble';this.x=Math.random()*W;this.y=-40-Math.random()*120;this.size=14+Math.random()*22;this.speedY=.6+Math.random()*.8;this.speedX=(Math.random()-.5)*.6;this.opacity=.7+Math.random()*.3;this.color=['#ff4d6d','#ff6b8a','#ff8fa3','#ffb3c1'][Math.floor(Math.random()*4)];this.phase=Math.random()*Math.PI*2}update(){this.y+=this.speedY;this.x+=this.speedX+Math.sin(this.phase)*.15;this.phase+=.02;if(this.y>H+60)this.reset();if(this.x<-60)this.x=W+40;if(this.x>W+60)this.x=-40}draw(c){c.globalAlpha=this.opacity;if(this.type==='heart')drawHeart(c,this.x-this.size/2,this.y-this.size/2,this.size,this.color);else drawMinecraftBubble(c,this.x,this.y,this.size);c.globalAlpha=1}}
+let particles=[],MAX_PARTICLES=45,speedBoostTimer=0,fireworkParticles=[];
+function spawnFirework(x,y){const colors=['#ff0','#f0f','#0ff','#f44','#4f4','#44f','#ff8','#f8f','#8ff','#ff6b6b','#ffd93d','#6bcbff','#a66cff'];for(let i=0;i<100;i++){const a=Math.random()*Math.PI*2,s=2+Math.random()*8,c=colors[Math.floor(Math.random()*colors.length)],isStar=Math.random()<.3;fireworkParticles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-1,life:1,decay:.006+Math.random()*.018,color:c,size:isStar?5+Math.random()*6:2+Math.random()*4,isStar:isStar,trail:[]})}}
+function triggerFireworks(){for(let i=0;i<14;i++)setTimeout(()=>{const x=W*(.05+Math.random()*.9),y=H*(.05+Math.random()*.7);spawnFirework(x,y)},i*200+Math.random()*100)}
+document.getElementById('fireworkBtn').addEventListener('click',triggerFireworks);
+function startMinecraftParticles(){if(particles.length===0){for(let i=0;i<MAX_PARTICLES;i++){const p=new MCParticle;p.y=Math.random()*H;particles.push(p)}}drawFrame()}
+function drawFrame(){ctx.clearRect(0,0,W,H);for(const p of particles){let spd=p.speedY;if(speedBoostTimer>0)spd*=2.5;p.y+=spd;p.x+=p.speedX+Math.sin(p.phase)*.15;p.phase+=.02;if(p.y>H+60)p.reset();if(p.x<-60)p.x=W+40;if(p.x>W+60)p.x=-40;p.draw(ctx)}if(speedBoostTimer>0){speedBoostTimer-=1/60;if(speedBoostTimer<0)speedBoostTimer=0}for(let i=fireworkParticles.length-1;i>=0;i--){const fp=fireworkParticles[i];fp.trail.push({x:fp.x,y:fp.y,life:.3});if(fp.trail.length>8)fp.trail.shift();fp.x+=fp.vx;fp.y+=fp.vy;fp.vy+=.03;fp.life-=fp.decay;if(fp.life<=0){fireworkParticles.splice(i,1);continue}for(const t of fp.trail){ctx.globalAlpha=t.life*fp.life*.3;ctx.fillStyle=fp.color;ctx.beginPath();ctx.arc(t.x,t.y,fp.size*.4,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=fp.life;ctx.shadowColor=fp.color;ctx.shadowBlur=20;ctx.fillStyle=fp.color;if(fp.isStar){const s=fp.size*fp.life;ctx.beginPath();for(let j=0;j<5;j++){const a=(j*4*Math.PI/5)-Math.PI/2,r=j===0?s:s*.4;if(j===0)ctx.moveTo(fp.x+r*Math.cos(a),fp.y+r*Math.sin(a));else ctx.lineTo(fp.x+r*Math.cos(a),fp.y+r*Math.sin(a))}ctx.closePath();ctx.fill()}else{ctx.beginPath();ctx.arc(fp.x,fp.y,fp.size*fp.life,0,Math.PI*2);ctx.fill()}ctx.shadowBlur=0}ctx.globalAlpha=1;requestAnimationFrame(drawFrame)}
+canvas.addEventListener('click',(e)=>{const rect=canvas.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;let hit=!1;for(const p of particles)if(p.type==='heart'){const hx=p.x-p.size/2,hy=p.y-p.size/2;if(mx>=hx&&mx<=hx+p.size&&my>=hy&&my<=hy+p.size){hit=!0;break}}if(hit)speedBoostTimer=1.2});
+const TARGET=new Date(2026,6,31,0,0,0),cdDays=document.getElementById('cdDays'),cdHours=document.getElementById('cdHours'),cdMins=document.getElementById('cdMins'),cdSecs=document.getElementById('cdSecs'),cdTarget=document.getElementById('cdTarget');cdTarget.textContent='🎯 31/07/'+TARGET.getFullYear();
+function pad(n){return String(n).padStart(2,'0')}
+let countdownReachedZero=!1;
+function updateCountdown(){const now=new Date(),diff=TARGET-now;if(diff<=0){if(!birthdayMode){birthdayMode=!0;cdTarget.textContent='🎉 Chúc mừng sinh nhật! 🎉';triggerFireworks();setTimeout(triggerFireworks,1e3);setTimeout(triggerFireworks,2e3);if(birthdayEndTimer)clearTimeout(birthdayEndTimer);birthdayEndTimer=setTimeout(()=>{birthdayMode=!1;const endTarget=new Date(now);endTarget.setDate(now.getDate()+1);TARGET.setTime(endTarget.getTime());countdownReachedZero=!1;updateCountdown()},864e5)}cdDays.textContent='00';cdHours.textContent='00';cdMins.textContent='00';cdSecs.textContent='00';return}const d=Math.floor(diff/864e5),h=Math.floor((diff%864e5)/36e5),m=Math.floor((diff%36e5)/6e4),s=Math.floor((diff%6e4)/1e3);cdDays.textContent=pad(d);cdHours.textContent=pad(h);cdMins.textContent=pad(m);cdSecs.textContent=pad(s)}
+updateCountdown();setInterval(updateCountdown,1e3);
+function sendWishEmail(senderName,message){return new Promise((resolve,reject)=>{if(EMAILJS_CONFIG.publicKey==="YOUR_PUBLIC_KEY"||EMAILJS_CONFIG.serviceID==="YOUR_SERVICE_ID"||EMAILJS_CONFIG.templateID==="YOUR_TEMPLATE_ID"){reject(new Error("⚠️ Bạn chưa cấu hình EmailJS. Vui lòng điền thông tin trong biến EMAILJS_CONFIG."));return}emailjs.init(EMAILJS_CONFIG.publicKey);emailjs.send(EMAILJS_CONFIG.serviceID,EMAILJS_CONFIG.templateID,{from_name:senderName||'Ẩn danh',message:message,to_name:"Võ Thiên An",subject:`💌 Lời chúc từ ${senderName||'Ẩn danh'}`}).then(r=>resolve(r)).catch(e=>reject(e))})}
+function profileContent(){const birthDate=new Date(2010,6,31),now=new Date();let age=now.getFullYear()-birthDate.getFullYear();const m=now.getMonth()-birthDate.getMonth();if(m<0||(m===0&&now.getDate()<birthDate.getDate()))age--;return'<div class="profile-avatar"><img src="https://github.com/sakybaka/saky-website/blob/main/ZD.png?raw=true" alt="Avatar" /></div><div class="profile-name">Võ Thiên An</div><div class="profile-role">⭐ Nhân vật chính của bữa tiệc hôm nay</div><div class="profile-line"><span>🎂 Ngày sinh</span><span class="highlight">31 · 07 · 2010</span></div><div class="profile-line"><span>🎈 Tuổi</span><span>'+age+'</span></div><div class="profile-line"><span>♌ Cung hoàng đạo</span><span>Sư Tử (Leo)</span></div><div class="profile-line"><span>👤 Khách đang xem</span><span>'+escapeHtml(guestName)+'</span></div><div class="profile-bio"><span class="quote-icon">💬</span> "Sống là để tỏa sáng, và hôm nay là ngày của tớ!"<br><span style="font-size:12px;color:var(--text-soft);">✨ Sở thích: Nghe nhạc, chơi game, du lịch & khám phá những điều mới mẻ ✨</span></div><div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;"><span style="background:rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,0.5);">🎮 Gamer</span><span style="background:rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,0.5);">🎵 Music Lover</span><span style="background:rgba(255,255,255,0.3);padding:4px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,0.5);">📸 Travel</span></div>'}
+function wishesContent(){return'<div class="wish-form"><p style="font-size:14px;color:var(--text-soft);margin-bottom:4px;">💌 Lời chúc của bạn sẽ được gửi riêng đến Võ Thiên An qua email.</p><input class="field" id="wishSenderName" type="text" placeholder="Tên của bạn" value="'+escapeHtml(guestName)+'" maxlength="30" style="margin-bottom:0;" /><textarea class="field" id="wishMessage" placeholder="Viết lời chúc của bạn..." maxlength="500" style="margin-bottom:0;min-height:120px;"></textarea><button class="btn-primary" id="sendWishBtn">💌 Gửi Lời Chúc</button><div class="success-msg" id="wishSuccessMsg">✅ Lời chúc của bạn đã được gửi thành công! Cảm ơn bạn rất nhiều! 🎉</div><div class="error-msg" id="wishErrorMsg" style="text-align:center;margin-top:0;"></div></div>'}
+function galleryContent(){let h='<div class="gallery">';galleryImages.forEach((s,i)=>{h+='<div class="gallery-card" data-index="'+i+'"><img src="'+s+'" alt="Kỷ niệm '+(i+1)+'" loading="lazy" /></div>'});h+='</div><p style="margin-top:16px;font-size:12.5px;color:var(--text-soft);text-align:center;">📷 Bấm vào ảnh để xem toàn màn hình</p>';return h}
+function donateContent(){return'<div style="text-align:center;padding:10px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;"><div style="background:var(--glass);border-radius:20px;padding:12px;border:1px solid var(--glass-border);width:100%;max-width:400px;margin:auto;"><img src="https://github.com/sakybaka/saky-website/blob/main/Donate.png?raw=true" alt="donate" style="width:100%;border-radius:16px;display:block;object-fit:contain;max-height:70vh;" /><p style="margin-top:10px;font-size:13px;color:var(--text-soft);">(ảnh thẻ ngân hàng)</p></div></div>'}
+function cakeFormContent(){return wishesContent()}
+function escapeHtml(str){const d=document.createElement('div');d.textContent=str;return d.innerHTML}
+function lettersContent(){let h='<div class="letter-list">';if(lettersData.length===0)h+='<p style="text-align:center;color:var(--text-soft);padding:20px 0;">Không có thông báo mới.</p>';else lettersData.forEach((l,i)=>{const u=l.unread;h+='<div class="letter-card" data-letter-idx="'+i+'"><div class="letter-top"><span class="letter-sender">'+l.sender+'</span><span class="letter-badge '+(u?'':'read')+'">'+(u?'📩 Chưa đọc':'✅ Đã đọc')+'</span></div><div class="letter-subject">'+l.subject+'</div><div class="letter-preview">'+l.preview+'</div><div class="letter-date">'+l.date+'</div>'+(u?'<div class="letter-unread-dot"></div>':'<div class="letter-unread-dot hidden"></div>')+'</div>'});h+='</div>';return h}
+const modalOverlay=document.getElementById('modalOverlay'),modalPanel=document.getElementById('modalPanel'),modalInner=document.getElementById('modalInner'),modalClose=document.getElementById('modalClose');
+const PANELS={profile:{title:'Hồ Sơ Của Tớ',sub:'Vài điều nho nhỏ về nhân vật chính hôm nay',render:profileContent},wishes:{title:'💌 Gửi Lời Chúc',sub:'Gửi những lời chúc tốt đẹp nhất đến Võ Thiên An',render:wishesContent},gallery:{title:'Khoảnh Khắc Đáng Nhớ',sub:'Những kỷ niệm đẹp nhất',render:galleryContent},donate:{title:'💖 Donate for Saky',sub:'Cảm ơn bạn đã ủng hộ mua Iphone 15 Pro!',render:donateContent},cake:{title:'💌 Gửi Lời Chúc',sub:'Gửi những lời chúc tốt đẹp nhất đến Võ Thiên An',render:cakeFormContent},letters:{title:'📬 Thông Báo',sub:'',render:lettersContent}};
+let viewedItems=new Set,totalMenuItems=4;
+function markItemViewed(key){if(!viewedItems.has(key)){viewedItems.add(key);document.querySelectorAll('.menu-item').forEach(el=>{if(el.dataset.panel===key)el.classList.add('viewed')});if(viewedItems.size===totalMenuItems)setTimeout(()=>{closeMenu()},600)}}
+function resetViewedState(){viewedItems.clear();document.querySelectorAll('.menu-item').forEach(el=>el.classList.remove('viewed'))}
+function closeMenu(){isMenuOpen=!1;menuItems.classList.remove('open');menuArrow.classList.remove('open');menuHeader.classList.remove('open');resetViewedState()}
+function openPanel(key,triggerEl){const panel=PANELS[key];if(!panel)return;currentPanelKey=key;markItemViewed(key);const rect=triggerEl.getBoundingClientRect();originRect=rect;const modalWidth=Math.min(480,window.innerWidth*.9),modalHeight=Math.min(580,window.innerHeight*.82),centerX=(window.innerWidth-modalWidth)/2,centerY=(window.innerHeight-modalHeight)/2,startX=rect.left,startY=rect.top,startW=rect.width,startH=rect.height;modalPanel.style.transition='none';modalPanel.style.left=startX+'px';modalPanel.style.top=startY+'px';modalPanel.style.width=startW+'px';modalPanel.style.height=startH+'px';modalPanel.style.borderRadius='14px';modalPanel.style.opacity='0';modalPanel.style.visibility='hidden';void modalPanel.offsetHeight;let content=panel.render();modalInner.innerHTML='<div class="modal-title">'+panel.title+'</div>'+(panel.sub?'<div class="modal-sub">'+panel.sub+'</div>':'')+content;if(key==='wishes'||key==='cake')wireWishForm();if(key==='gallery')wireGalleryEvents();if(key==='letters')wireLetterEvents();modalOverlay.classList.add('show');modalPanel.style.transition='left .75s cubic-bezier(.34,1.56,.64,1), top .75s cubic-bezier(.34,1.56,.64,1), width .75s cubic-bezier(.34,1.56,.64,1), height .75s cubic-bezier(.34,1.56,.64,1), border-radius .65s cubic-bezier(.34,1.56,.64,1), opacity .3s ease, backdrop-filter .7s cubic-bezier(.34,1.56,.64,1), -webkit-backdrop-filter .7s cubic-bezier(.34,1.56,.64,1), box-shadow .7s cubic-bezier(.34,1.56,.64,1)';modalPanel.style.left=centerX+'px';modalPanel.style.top=centerY+'px';modalPanel.style.width=modalWidth+'px';modalPanel.style.height=modalHeight+'px';modalPanel.style.borderRadius='26px';modalPanel.style.opacity='1';modalPanel.style.visibility='visible';modalPanel.classList.add('show');isModalOpen=!0}
+function openImageModal(src){const rect=modalPanel.getBoundingClientRect();originRect=rect;const modalWidth=Math.min(480,window.innerWidth*.9),modalHeight=Math.min(600,window.innerHeight*.85),centerX=(window.innerWidth-modalWidth)/2,centerY=(window.innerHeight-modalHeight)/2,startX=rect.left,startY=rect.top,startW=rect.width,startH=rect.height;modalPanel.style.transition='none';modalPanel.style.left=startX+'px';modalPanel.style.top=startY+'px';modalPanel.style.width=startW+'px';modalPanel.style.height=startH+'px';modalPanel.style.borderRadius='18px';void modalPanel.offsetHeight;modalInner.innerHTML='<div style="display:flex;flex-direction:column;height:100%;justify-content:center;align-items:center;padding:0;"><img src="'+src+'" alt="Kỷ niệm" style="width:100%;height:auto;max-height:70vh;object-fit:contain;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.15);" /></div>';modalPanel.style.transition='left .65s cubic-bezier(.34,1.56,.64,1), top .65s cubic-bezier(.34,1.56,.64,1), width .65s cubic-bezier(.34,1.56,.64,1), height .65s cubic-bezier(.34,1.56,.64,1), border-radius .55s cubic-bezier(.34,1.56,.64,1)';modalPanel.style.left=centerX+'px';modalPanel.style.top=centerY+'px';modalPanel.style.width=modalWidth+'px';modalPanel.style.height=modalHeight+'px';modalPanel.style.borderRadius='26px';modalPanel.classList.add('show');modalOverlay.classList.add('show')}
+function closePanel(){if(!originRect)return;if(sakyLetterRead&&!secondLetterAdded){const second=buildSecondLetter(),saky=lettersData.find(l=>l.isSaky);if(saky)saky.unread=!1;lettersData.push(second);secondLetterAdded=!0;playTing();updateBellBadge();sakyLetterRead=!1}const startX=originRect.left,startY=originRect.top,startW=originRect.width,startH=originRect.height;modalPanel.style.transition='left .75s cubic-bezier(.34,1.56,.64,1), top .75s cubic-bezier(.34,1.56,.64,1), width .75s cubic-bezier(.34,1.56,.64,1), height .75s cubic-bezier(.34,1.56,.64,1), border-radius .65s cubic-bezier(.34,1.56,.64,1), opacity .3s ease, backdrop-filter .7s cubic-bezier(.34,1.56,.64,1), -webkit-backdrop-filter .7s cubic-bezier(.34,1.56,.64,1), box-shadow .7s cubic-bezier(.34,1.56,.64,1)';modalPanel.style.left=startX+'px';modalPanel.style.top=startY+'px';modalPanel.style.width=startW+'px';modalPanel.style.height=startH+'px';modalPanel.style.borderRadius='14px';modalPanel.style.opacity='0';modalPanel.style.boxShadow='0 4px 20px rgba(0,0,0,0.05)';modalPanel.style.backdropFilter='blur(0px) saturate(100%)';modalPanel.style.webkitBackdropFilter='blur(0px) saturate(100%)';modalPanel.classList.remove('show');modalOverlay.classList.remove('show');isModalOpen=!1;setTimeout(()=>{modalPanel.style.visibility='hidden'},800)}
+modalOverlay.addEventListener('click',closePanel);
+modalClose.addEventListener('click',closePanel);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});
+function wireLetterEvents(){document.querySelectorAll('.letter-card').forEach(card=>{card.addEventListener('click',function(){const idx=parseInt(this.dataset.letterIdx),letter=lettersData[idx];if(!letter)return;if(letter.isSaky&&letter.unread){letter.unread=!1;const badge=this.querySelector('.letter-badge');if(badge){badge.textContent='✅ Đã đọc';badge.classList.add('read')}const dot=this.querySelector('.letter-unread-dot');if(dot)dot.classList.add('hidden');sakyLetterRead=!0}else if(!letter.isSaky&&letter.unread){letter.unread=!1;const badge=this.querySelector('.letter-badge');if(badge){badge.textContent='✅ Đã đọc';badge.classList.add('read')}const dot=this.querySelector('.letter-unread-dot');if(dot)dot.classList.add('hidden');updateBellBadge()}showLetterDetail(letter)})})}
+function showLetterDetail(letter){const rect=modalPanel.getBoundingClientRect();originRect=rect;const modalWidth=Math.min(480,window.innerWidth*.9),modalHeight=Math.min(600,window.innerHeight*.85),centerX=(window.innerWidth-modalWidth)/2,centerY=(window.innerHeight-modalHeight)/2,startX=rect.left,startY=rect.top,startW=rect.width,startH=rect.height;modalPanel.style.transition='none';modalPanel.style.left=startX+'px';modalPanel.style.top=startY+'px';modalPanel.style.width=startW+'px';modalPanel.style.height=startH+'px';modalPanel.style.borderRadius='18px';void modalPanel.offsetHeight;modalInner.innerHTML='<div class="letter-detail-scroll"><div class="detail-sender">'+letter.sender+'</div><div class="detail-subject">📌 '+letter.subject+'</div><div class="detail-body">'+letter.body+'</div><div class="detail-date">'+letter.date+'</div></div><div class="letter-detail-footer"><button class="btn-primary" id="letterBackBtn">⬅ Quay lại</button></div>';modalPanel.style.transition='left .65s cubic-bezier(.34,1.56,.64,1), top .65s cubic-bezier(.34,1.56,.64,1), width .65s cubic-bezier(.34,1.56,.64,1), height .65s cubic-bezier(.34,1.56,.64,1), border-radius .55s cubic-bezier(.34,1.56,.64,1)';modalPanel.style.left=centerX+'px';modalPanel.style.top=centerY+'px';modalPanel.style.width=modalWidth+'px';modalPanel.style.height=modalHeight+'px';modalPanel.style.borderRadius='26px';document.getElementById('letterBackBtn').addEventListener('click',function(e){e.stopPropagation();const panel=PANELS.letters,rect2=modalPanel.getBoundingClientRect();originRect=rect2;const w2=Math.min(480,window.innerWidth*.9),h2=Math.min(580,window.innerHeight*.82),cx2=(window.innerWidth-w2)/2,cy2=(window.innerHeight-h2)/2;modalPanel.style.transition='none';modalPanel.style.left=rect2.left+'px';modalPanel.style.top=rect2.top+'px';modalPanel.style.width=rect2.width+'px';modalPanel.style.height=rect2.height+'px';void modalPanel.offsetHeight;modalInner.innerHTML='<div class="modal-title">'+panel.title+'</div>'+(panel.sub?'<div class="modal-sub">'+panel.sub+'</div>':'')+panel.render();wireLetterEvents();modalPanel.style.transition='left .65s cubic-bezier(.34,1.56,.64,1), top .65s cubic-bezier(.34,1.56,.64,1), width .65s cubic-bezier(.34,1.56,.64,1), height .65s cubic-bezier(.34,1.56,.64,1), border-radius .55s cubic-bezier(.34,1.56,.64,1)';modalPanel.style.left=cx2+'px';modalPanel.style.top=cy2+'px';modalPanel.style.width=w2+'px';modalPanel.style.height=h2+'px';modalPanel.style.borderRadius='26px';updateBellBadge()});modalClose.onclick=function(){closePanel()};modalOverlay.onclick=function(){closePanel()}}
+function updateBellBadge(){const count=lettersData.filter(l=>l.unread).length,badge=document.getElementById('bellBadge');if(badge){if(count===0)badge.style.display='none';else{badge.style.display='flex';badge.textContent=count;badge.classList.remove('pop');void badge.offsetWidth;badge.classList.add('pop')}}}
+document.getElementById('bellBox').addEventListener('click',function(e){e.stopPropagation();openPanel('letters',this)});
+function wireGalleryEvents(){document.querySelectorAll('.gallery-card').forEach(card=>{card.addEventListener('click',function(e){const img=this.querySelector('img');if(img&&img.src){e.stopPropagation();openImageModal(img.src)}})})}
+const menuHeader=document.getElementById('menuHeader'),menuItems=document.getElementById('menuItems'),menuArrow=document.getElementById('menuArrow');let isMenuOpen=!1;
+menuHeader.addEventListener('click',function(e){e.stopPropagation();isMenuOpen=!isMenuOpen;menuItems.classList.toggle('open',isMenuOpen);menuArrow.classList.toggle('open',isMenuOpen);menuHeader.classList.toggle('open',isMenuOpen);if(!isMenuOpen)resetViewedState()});
+document.querySelectorAll('.menu-item').forEach(item=>{item.addEventListener('click',function(e){openPanel(this.dataset.panel,this)})});
+document.getElementById('cakeBtn').addEventListener('click',function(){openPanel('cake',this)});
+function wireWishForm(){const sendBtn=document.getElementById('sendWishBtn'),nameInput=document.getElementById('wishSenderName'),msgInput=document.getElementById('wishMessage'),successMsg=document.getElementById('wishSuccessMsg'),errorMsg=document.getElementById('wishErrorMsg');if(!sendBtn)return;const newBtn=sendBtn.cloneNode(!0);sendBtn.parentNode.replaceChild(newBtn,sendBtn);newBtn.addEventListener('click',function(){const sender=nameInput.value.trim()||'Ẩn danh',message=msgInput.value.trim();if(!message){msgInput.focus();msgInput.classList.add('error');errorMsg.textContent='⚠️ Vui lòng viết lời chúc của bạn.';return}msgInput.classList.remove('error');errorMsg.textContent='';newBtn.disabled=!0;newBtn.textContent='⏳ Đang gửi...';sendWishEmail(sender,message).then(()=>{successMsg.classList.add('show');msgInput.value='';nameInput.value=sender;newBtn.textContent='💌 Gửi Lời Chúc';newBtn.disabled=!1;setTimeout(()=>successMsg.classList.remove('show'),5e3);if(!wishSent){wishSent=!0;const saky=buildSakyLetter();lettersData.push(saky);playTing();updateBellBadge();if(currentPanelKey==='letters'){const panel=PANELS.letters,rect=modalPanel.getBoundingClientRect();originRect=rect;modalInner.innerHTML='<div class="modal-title">'+panel.title+'</div>'+(panel.sub?'<div class="modal-sub">'+panel.sub+'</div>':'')+panel.render();wireLetterEvents()}}}).catch(e=>{console.error('Lỗi gửi email:',e);errorMsg.textContent='❌ Có lỗi xảy ra khi gửi lời chúc. Vui lòng thử lại sau.';newBtn.textContent='💌 Gửi Lời Chúc';newBtn.disabled=!1})});msgInput.addEventListener('input',function(){this.classList.remove('error');const err=document.getElementById('wishErrorMsg');if(err)err.textContent=''})}
+const audio1=document.getElementById('audio1'),audio2=document.getElementById('audio2'),audio3=document.getElementById('audio3');
+const songs=[{name:'Bunny Girl Senpai',src:audio1},{name:'Khúc Hát Mừng Sinh Nhật',src:audio2},{name:'Tackmaker',src:audio3}];
+let currentSongIndex=0,isPlaying=!1,isMuted=!1,recordPlayerInitialized=!1;
+const recordDisc=document.getElementById('recordDisc'),recordTitle=document.getElementById('recordTitle'),recordStatus=document.getElementById('recordStatus'),playBtn=document.getElementById('playBtn'),prevBtn=document.getElementById('prevBtn'),nextBtn=document.getElementById('nextBtn'),muteBtn=document.getElementById('muteBtn'),albumToggleBtn=document.getElementById('albumToggleBtn'),albumPanel=document.getElementById('albumPanel'),songListEl=document.getElementById('songList');
+function renderSongList(){songListEl.innerHTML=songs.map((s,i)=>'<div class="song-item '+(i===currentSongIndex?'active':'')+'" data-index="'+i+'"><span>'+s.name+'</span><span>'+(i===currentSongIndex?'▶':'')+'</span></div>').join('');document.querySelectorAll('.song-item').forEach(el=>{el.addEventListener('click',()=>{const idx=parseInt(el.dataset.index);if(idx!==currentSongIndex){currentSongIndex=idx;playSong();albumPanel.classList.remove('open')}})})}
+function playSong(){const song=songs[currentSongIndex];songs.forEach(s=>s.src.pause());song.src.currentTime=0;song.src.volume=isMuted?0:1;song.src.play().catch(()=>{});isPlaying=!0;updateUI()}
+function togglePlayPause(){const song=songs[currentSongIndex];if(isPlaying){song.src.pause();isPlaying=!1}else{song.src.play().catch(()=>{});isPlaying=!0}updateUI()}
+function nextSong(){currentSongIndex=(currentSongIndex+1)%songs.length;playSong()}
+function prevSong(){currentSongIndex=(currentSongIndex-1+songs.length)%songs.length;playSong()}
+function toggleMute(){isMuted=!isMuted;const song=songs[currentSongIndex];song.src.volume=isMuted?0:1;muteBtn.textContent=isMuted?'🔇':'🔊';updateUI()}
+function updateUI(){const song=songs[currentSongIndex];recordTitle.textContent=song.name;recordStatus.textContent=isPlaying?'Đang phát':'Tạm dừng';playBtn.textContent=isPlaying?'⏸':'▶';recordDisc.style.animationPlayState=isPlaying?'running':'paused';renderSongList()}
+function initRecordPlayer(){if(recordPlayerInitialized)return;recordPlayerInitialized=!0;songs.forEach(s=>s.src.load());playSong();playBtn.addEventListener('click',e=>{e.stopPropagation();togglePlayPause()});prevBtn.addEventListener('click',e=>{e.stopPropagation();prevSong()});nextBtn.addEventListener('click',e=>{e.stopPropagation();nextSong()});muteBtn.addEventListener('click',e=>{e.stopPropagation();toggleMute()});albumToggleBtn.addEventListener('click',e=>{e.stopPropagation();albumPanel.classList.toggle('open')});const player=document.getElementById('recordPlayer');let clickCount=0,clickTimer=null;player.addEventListener('click',e=>{if(e.target.closest('button'))return;clickCount++;if(clickCount===1){clickTimer=setTimeout(()=>{clickCount=0;albumPanel.classList.toggle('open')},250)}else if(clickCount>=2){clearTimeout(clickTimer);clickCount=0;toggleMute()}});document.addEventListener('click',e=>{if(!albumPanel.contains(e.target)&&e.target!==player&&!player.contains(e.target)&&e.target!==albumToggleBtn)albumPanel.classList.remove('open')});songs.forEach(s=>s.src.addEventListener('ended',nextSong));updateUI()}
+lettersData=[];updateBellBadge();if(gate.classList.contains('hidden')){startMinecraftParticles();initRecordPlayer()}window.addEventListener('resize',resizeCanvas);tingAudio.addEventListener('error',()=>{});document.addEventListener('contextmenu',e=>{e.preventDefault();return!1});document.addEventListener('dragstart',e=>{e.preventDefault();return!1});document.addEventListener('touchstart',()=>{},{passive:!0})})();
+</script>
 </body>
 </html>
