@@ -660,34 +660,23 @@
       gap: 10px;
       margin-bottom: 18px;
     }
-    .wish-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .wish-form .btn-primary {
+      margin-top: 4px;
     }
-    .wish-item {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-    }
-    .wish-name {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: var(--gold-3);
-    }
-    .wish-msg {
-      font-size: 13.5px;
-      color: var(--text-dark);
-      line-height: 1.5;
-    }
-    .wish-empty {
+    .success-msg {
+      background: rgba(46, 204, 113, 0.15);
+      border: 1px solid #2ecc71;
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #27ae60;
+      font-size: 14px;
       text-align: center;
-      color: var(--text-soft);
-      font-size: 13px;
-      padding: 20px 0;
+      display: none;
     }
+    .success-msg.show {
+      display: block;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1098,7 +1087,7 @@
       </div>
       <div class="menu-items" id="menuItems">
         <div class="menu-item" data-panel="profile"><span class="ico">👤</span> Hồ Sơ</div>
-        <div class="menu-item" data-panel="wishes"><span class="ico">💌</span> Lời Chúc</div>
+        <div class="menu-item" data-panel="wishes"><span class="ico">💌</span> Gửi Lời Chúc</div>
         <div class="menu-item" data-panel="gallery"><span class="ico">📸</span> Khoảnh Khắc</div>
         <div class="menu-item" data-panel="donate"><span class="ico">💖</span> Donate for Saky</div>
       </div>
@@ -1170,9 +1159,24 @@
     <source src="https://sakybaka.github.io/saky-website/YTSave_YouTube_KHUC-HAT-MUNG-SINH-NHAT-PHAN-DINH-TUNG-O_Media_Wu8NeFXaoOc_009_128k.mp3" type="audio/mpeg">
   </audio>
 
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
   <script>
     (function() {
       "use strict";
+
+      // ============================================================
+      // CẤU HÌNH EMAILJS – BẠN PHẢI ĐIỀN THÔNG TIN CỦA MÌNH
+      // ============================================================
+      const EMAILJS_CONFIG = {
+        publicKey: "YOUR_PUBLIC_KEY", // Lấy từ EmailJS Dashboard
+        serviceID: "YOUR_SERVICE_ID", // Ví dụ: "service_abc123"
+        templateID: "YOUR_TEMPLATE_ID" // Ví dụ: "template_xyz789"
+      };
+
+      // ============================================================
+      // KẾT THÚC CẤU HÌNH
+      // ============================================================
 
       // ===== CỔNG VÀO =====
       const gate = document.getElementById('gate');
@@ -1189,7 +1193,6 @@
           guestNameInput.focus();
           return false;
         }
-        // Xóa lỗi nếu hợp lệ
         guestNameInput.classList.remove('error');
         nameError.textContent = '';
         guestName = name;
@@ -1199,19 +1202,13 @@
         return true;
       }
 
-      function enterParty() {
-        validateAndEnter();
-      }
-
-      enterBtn.addEventListener('click', enterParty);
+      enterBtn.addEventListener('click', validateAndEnter);
       guestNameInput.addEventListener('keydown', e => {
         if (e.key === 'Enter') {
           e.preventDefault();
           validateAndEnter();
         }
       });
-
-      // Xóa lỗi khi người dùng bắt đầu nhập
       guestNameInput.addEventListener('input', function() {
         this.classList.remove('error');
         nameError.textContent = '';
@@ -1456,22 +1453,34 @@
         }, 7000);
       }
 
-      // ===== LỜI CHÚC =====
-      let wishes = [
-        { name: 'Ban Tổ Chức', msg: 'Chúc bạn một tuổi mới thật nhiều niềm vui và may mắn! 🎉' }
-      ];
+      // ===== HÀM GỬI EMAIL QUA EMAILJS =====
+      function sendWishEmail(senderName, message) {
+        return new Promise((resolve, reject) => {
+          // Kiểm tra cấu hình
+          if (EMAILJS_CONFIG.publicKey === "YOUR_PUBLIC_KEY" ||
+            EMAILJS_CONFIG.serviceID === "YOUR_SERVICE_ID" ||
+            EMAILJS_CONFIG.templateID === "YOUR_TEMPLATE_ID") {
+            reject(new Error("⚠️ Bạn chưa cấu hình EmailJS. Vui lòng điền thông tin trong biến EMAILJS_CONFIG."));
+            return;
+          }
 
-      function renderWishList() {
-        if (wishes.length === 0) return '<div class="wish-empty">Chưa có lời chúc nào — hãy là người đầu tiên! 💌</div>';
-        return wishes.map(w =>
-          `<div class="wish-item"><div class="wish-name">${escapeHtml(w.name)}</div><div class="wish-msg">${escapeHtml(w.msg)}</div></div>`
-        ).join('');
-      }
+          emailjs.init(EMAILJS_CONFIG.publicKey);
 
-      function escapeHtml(str) {
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
+          const templateParams = {
+            from_name: senderName,
+            message: message,
+            to_name: "Võ Thiên An",
+            // Bạn có thể thêm các trường khác nếu cần
+          };
+
+          emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams)
+            .then((response) => {
+              resolve(response);
+            })
+            .catch((error) => {
+              reject(error);
+            });
+        });
       }
 
       // ===== NỘI DUNG PANEL =====
@@ -1492,7 +1501,6 @@
           <div class="profile-line"><span>🎂 Ngày sinh</span><span class="highlight">31 · 07 · 2010</span></div>
           <div class="profile-line"><span>🎈 Tuổi</span><span>${age}</span></div>
           <div class="profile-line"><span>♌ Cung hoàng đạo</span><span>Sư Tử (Leo)</span></div>
-          <div class="profile-line"><span>💌 Lời chúc đã nhận</span><span id="wishCountStat">${wishes.length}</span></div>
           <div class="profile-line"><span>👤 Khách đang xem</span><span>${escapeHtml(guestName)}</span></div>
 
           <div class="profile-bio">
@@ -1507,8 +1515,20 @@
         `;
       }
 
+      // ===== FORM GỬI LỜI CHÚC (KHÔNG HIỂN THỊ CÔNG KHAI) =====
       function wishesContent() {
-        return `<div class="wish-list" id="wishListView">${renderWishList()}</div>`;
+        return `
+          <div class="wish-form">
+            <p style="font-size:14px;color:var(--text-soft);margin-bottom:4px;">
+              💌 Lời chúc của bạn sẽ được gửi riêng đến Võ Thiên An qua email.
+            </p>
+            <input class="field" id="wishSenderName" type="text" placeholder="Tên của bạn" value="${escapeHtml(guestName)}" maxlength="30" style="margin-bottom:0;" />
+            <textarea class="field" id="wishMessage" placeholder="Viết lời chúc của bạn..." maxlength="500" style="margin-bottom:0;min-height:120px;"></textarea>
+            <button class="btn-primary" id="sendWishBtn">💌 Gửi Lời Chúc</button>
+            <div class="success-msg" id="wishSuccessMsg">✅ Lời chúc của bạn đã được gửi thành công! Cảm ơn bạn rất nhiều! 🎉</div>
+            <div class="error-msg" id="wishErrorMsg" style="text-align:center;margin-top:0;"></div>
+          </div>
+        `;
       }
 
       function galleryContent() {
@@ -1535,22 +1555,22 @@
       }
 
       function cakeFormContent() {
-        return `
-          <div class="wish-form">
-            <input class="field" id="cakeNameInput" type="text" placeholder="Tên của bạn" value="${escapeHtml(guestName)}" maxlength="30" style="margin-bottom:0;" />
-            <textarea class="field" id="cakeMsgInput" placeholder="Viết lời chúc của bạn..." maxlength="200" style="margin-bottom:0;"></textarea>
-            <button class="btn-primary" id="cakeSubmitBtn">Gửi Lời Chúc 🎂</button>
-          </div>
-          <div class="wish-list" id="cakeWishList">${renderWishList()}</div>
-        `;
+        // Khi chạm bánh, mở form gửi lời chúc (giống wishes)
+        return wishesContent();
+      }
+
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
       }
 
       const PANELS = {
         profile: { title: 'Hồ Sơ Của Tớ', sub: 'Vài điều nho nhỏ về nhân vật chính hôm nay', render: profileContent },
-        wishes: { title: 'Lời Chúc Từ Mọi Người', sub: `${wishes.length} lời chúc đã gửi đến`, render: wishesContent },
+        wishes: { title: '💌 Gửi Lời Chúc', sub: 'Gửi những lời chúc tốt đẹp nhất đến Võ Thiên An', render: wishesContent },
         gallery: { title: 'Khoảnh Khắc Đáng Nhớ', sub: 'Những kỷ niệm đẹp nhất', render: galleryContent },
         donate: { title: '💖 Donate for Saky', sub: 'Cảm ơn bạn đã ủng hộ!', render: donateContent },
-        cake: { title: 'Gửi Lời Chúc 💌', sub: 'Viết vài dòng thật ấm áp nhé', render: cakeFormContent }
+        cake: { title: '💌 Gửi Lời Chúc', sub: 'Gửi những lời chúc tốt đẹp nhất đến Võ Thiên An', render: cakeFormContent }
       };
 
       // ===== MODAL =====
@@ -1572,7 +1592,7 @@
           ${panel.render()}
         `;
 
-        if (key === 'cake') wireCakeForm();
+        if (key === 'wishes' || key === 'cake') wireWishForm();
 
         modalPanel.style.transition = 'none';
         modalPanel.style.left = originRect.left + 'px';
@@ -1662,20 +1682,61 @@
         openPanel('cake', this);
       });
 
-      function wireCakeForm() {
-        const btn = document.getElementById('cakeSubmitBtn');
-        if (!btn) return;
-        btn.addEventListener('click', () => {
-          const nameInput = document.getElementById('cakeNameInput');
-          const msgInput = document.getElementById('cakeMsgInput');
-          const name = nameInput.value.trim() || 'Ẩn danh';
-          const msg = msgInput.value.trim();
-          if (!msg) { msgInput.focus(); return; }
-          wishes.unshift({ name, msg });
-          msgInput.value = '';
-          document.getElementById('cakeWishList').innerHTML = renderWishList();
-          const stat = document.getElementById('wishCountStat');
-          if (stat) stat.textContent = wishes.length;
+      // ===== WIRE FORM GỬI LỜI CHÚC =====
+      function wireWishForm() {
+        const sendBtn = document.getElementById('sendWishBtn');
+        const nameInput = document.getElementById('wishSenderName');
+        const msgInput = document.getElementById('wishMessage');
+        const successMsg = document.getElementById('wishSuccessMsg');
+        const errorMsg = document.getElementById('wishErrorMsg');
+
+        if (!sendBtn) return;
+
+        // Xóa sự kiện cũ để tránh trùng lặp
+        const newBtn = sendBtn.cloneNode(true);
+        sendBtn.parentNode.replaceChild(newBtn, sendBtn);
+
+        newBtn.addEventListener('click', function() {
+          const sender = nameInput.value.trim() || 'Ẩn danh';
+          const message = msgInput.value.trim();
+
+          if (!message) {
+            msgInput.focus();
+            msgInput.classList.add('error');
+            errorMsg.textContent = '⚠️ Vui lòng viết lời chúc của bạn.';
+            return;
+          }
+          msgInput.classList.remove('error');
+          errorMsg.textContent = '';
+
+          // Vô hiệu hóa nút để tránh spam
+          newBtn.disabled = true;
+          newBtn.textContent = '⏳ Đang gửi...';
+
+          sendWishEmail(sender, message)
+            .then(() => {
+              successMsg.classList.add('show');
+              msgInput.value = '';
+              nameInput.value = sender;
+              newBtn.textContent = '💌 Gửi Lời Chúc';
+              newBtn.disabled = false;
+              // Ẩn thông báo thành công sau 5 giây
+              setTimeout(() => {
+                successMsg.classList.remove('show');
+              }, 5000);
+            })
+            .catch((error) => {
+              console.error('Lỗi gửi email:', error);
+              errorMsg.textContent = '❌ Có lỗi xảy ra khi gửi lời chúc. Vui lòng thử lại sau.';
+              newBtn.textContent = '💌 Gửi Lời Chúc';
+              newBtn.disabled = false;
+            });
+        });
+
+        // Xóa lỗi khi nhập
+        msgInput.addEventListener('input', function() {
+          this.classList.remove('error');
+          document.getElementById('wishErrorMsg').textContent = '';
         });
       }
 
@@ -1817,7 +1878,6 @@
 
       window.initRecordPlayer = initRecordPlayer;
 
-      // Nếu gate đã ẩn (trường hợp hiếm) thì khởi chạy luôn
       if (gate.classList.contains('hidden')) {
         startMinecraftParticles();
         initRecordPlayer();
