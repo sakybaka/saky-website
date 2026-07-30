@@ -1324,7 +1324,6 @@
             user-select: none !important;
         }
 
-        /* Toast Notification - Liquid Glass iOS 26 style */
         .toast-container {
             position: fixed;
             top: 26px;
@@ -1620,7 +1619,7 @@
             <div class="headline-wrap">
                 <h1 class="gold-text">Happy Birthday</h1>
             </div>
-            <p class="subtitle">🎈 Đếm ngược tới sinh nhật của Võ Thiên An 🎈</p>
+            <!-- ĐÃ XÓA: dòng subtitle "Đếm ngược tới sinh nhật của Võ Thiên An" -->
             <div class="cake-wrap" id="cakeBtn">
                 <div class="cake">🎂</div>
                 <div class="cake-hint">Chạm vào bánh để gửi lời chúc</div>
@@ -1721,6 +1720,7 @@
             let birthdayEndTimer = null;
             let toastQueue = [];
             let activeToast = null;
+            let gateOpenTime = 0; // Thời điểm người dùng nhập tên và vào trang
 
             const tingAudio = document.getElementById('tingSound');
 
@@ -1892,6 +1892,7 @@
                 viewedItems = new Set();
                 updateBellBadge();
                 gate.classList.add('hidden');
+                gateOpenTime = Date.now(); // Ghi lại thời điểm vào trang
                 startMinecraftParticles();
                 initRecordPlayer();
                 preloadCriticalImages();
@@ -1996,7 +1997,8 @@
                 const colors = ['#ff0', '#f0f', '#0ff', '#f44', '#4f4', '#44f', '#ff8', '#f8f', '#8ff', '#ff6b6b', '#ffd93d',
                     '#6bcbff', '#a66cff'
                 ];
-                for (let i = 0; i < 100; i++) {
+                // GIẢM số hạt từ 100 xuống 50 để giảm lag
+                for (let i = 0; i < 50; i++) {
                     const angle = Math.random() * Math.PI * 2;
                     const speed = 2 + Math.random() * 8;
                     const color = colors[Math.floor(Math.random() * colors.length)];
@@ -2017,7 +2019,8 @@
             }
 
             function triggerFireworks() {
-                for (let i = 0; i < 14; i++) {
+                // GIẢM số lần bắn pháo hoa từ 14 xuống 6
+                for (let i = 0; i < 6; i++) {
                     setTimeout(() => {
                         const x = W * (0.05 + Math.random() * 0.9);
                         const y = H * (0.05 + Math.random() * 0.7);
@@ -2026,7 +2029,14 @@
                 }
             }
 
-            document.getElementById('fireworkBtn').addEventListener('click', triggerFireworks);
+            // Nút pháo hoa - chỉ cho bắn sau khi đã vào trang được 1 giây
+            document.getElementById('fireworkBtn').addEventListener('click', () => {
+                if (gateOpenTime === 0 || Date.now() - gateOpenTime < 1000) {
+                    showToast('⏳ Chờ chút', 'Hãy đợi 1 giây sau khi vào trang nhé!', '⏰', 2000);
+                    return;
+                }
+                triggerFireworks();
+            });
 
             function startMinecraftParticles() {
                 if (particles.length === 0) {
@@ -2119,13 +2129,14 @@
                 if (hit) speedBoostTimer = 1.2;
             });
 
-            const TARGET = new Date(2026, 6, 31, 0, 0, 0);
+            // ĐẾM NGƯỢC ĐẾN HẾT NGÀY 31/7 (tức 0h ngày 1/8)
+            const TARGET = new Date(2026, 7, 1, 0, 0, 0); // 1/8/2026 = hết ngày 31/7
             const cdDays = document.getElementById('cdDays');
             const cdHours = document.getElementById('cdHours');
             const cdMins = document.getElementById('cdMins');
             const cdSecs = document.getElementById('cdSecs');
             const cdTarget = document.getElementById('cdTarget');
-            cdTarget.textContent = '🎯 31/07/' + TARGET.getFullYear();
+            cdTarget.textContent = '🎯 Đếm ngược đến hết ngày 31/07/' + TARGET.getFullYear();
 
             function pad(n) { return String(n).padStart(2, '0'); }
             let countdownReachedZero = false;
@@ -2480,7 +2491,6 @@
                     secondLetterAdded = true;
                     playTing();
                     updateBellBadge();
-                    // Hiển thị thông báo cho bức thư thứ hai giống như thư đầu tiên
                     showToast('📬 Thư mới', 'Bạn nhận được 1 bức thư, hãy check ở chiếc chuông nhé!', '💌', 4500);
                     sakyLetterRead = false;
                 }
@@ -2935,6 +2945,7 @@
             updateBellBadge();
 
             if (gate.classList.contains('hidden')) {
+                gateOpenTime = Date.now();
                 startMinecraftParticles();
                 initRecordPlayer();
                 preloadCriticalImages();
